@@ -1,8 +1,8 @@
 'use strict';
 
-describe('myApp.view2 module', function() {
+describe('oriApp.view2 module', function() {
 
-  beforeEach(module('myApp.view2'));
+  beforeEach(module('oriApp.view2'));
 
   describe('view2 controller', function(){
 
