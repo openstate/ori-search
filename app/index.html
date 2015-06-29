@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
+  <title>Open Raads Informatie - Zoeken in stukken van de raad</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -23,7 +23,34 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-  <div ng-view></div>
+  <nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="NavbarCtrl">
+     <div class="container">
+       <div class="navbar-header">
+         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+           <span class="sr-only">Toggle navigation</span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+         </button>
+         <a class="navbar-brand" href="./">Open Raads Informatie</a>
+       </div>
+       <div id="navbar" class="collapse navbar-collapse">
+         <form class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Zoek iets, bv. Amsterdam">
+          </div>
+          <button type="submit"  ng-click="search(q)" class="btn btn-default">Zoeken</button>
+         </form>
+         <ul class="nav navbar-nav navbar-right">
+           <li><a href="http://www.openstate.eu/contact/">Contact</a></li>
+         </ul>
+       </div><!--/.nav-collapse -->
+     </div>
+   </nav>
+
+  <div id="wrapper" class="container">
+    <div ng-view></div>
+  </div>
 
   <div>Angular seed app: v<span app-version></span></div>
 
@@ -37,6 +64,7 @@
   <script src="app.js"></script>
   <script src="view1/view1.js"></script>
   <script src="view2/view2.js"></script>
+  <script src="navbar/navbar.js"></script>
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>

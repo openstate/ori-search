@@ -5,6 +5,7 @@ angular.module('oriApp', [
   'ngRoute',
   'oriApp.view1',
   'oriApp.view2',
+  'oriApp.navbar',
   'oriApp.version'
 ]).
 config(['$routeProvider', function($routeProvider) {
