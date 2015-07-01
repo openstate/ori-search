@@ -50,6 +50,19 @@ angular.module('oriApp.search', ['ngRoute'])
   };
 })
 
+.filter("from_iso8601", function () {
+  return function (val) {
+    var info = val.split('T');
+    return info[0] + ' ' + info[1];
+  };
+})
+
+.filter('unsafe', function($sce) {
+    return function(val) {
+        return $sce.trustAsHtml(val);
+    };
+})
+
 .controller('SearchCtrl', ['$scope', '$location', 'ORIAPIService', 'ResultsService',
 function($scope, $location, ORIAPIService, ResultsService) {
   $scope.query = ResultsService.get_query();
