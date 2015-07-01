@@ -52,15 +52,26 @@ angular.module('oriApp.search', ['ngRoute'])
 
 .filter("from_iso8601", function () {
   return function (val) {
-    var info = val.split('T');
-    return info[0] + ' ' + info[1];
+    if (val) {
+      var info = val.split('T');
+      return info[0] + ' ' + info[1];
+    }
   };
 })
 
 .filter('unsafe', function($sce) {
-    return function(val) {
-        return $sce.trustAsHtml(val);
-    };
+  return function(val) {
+    return $sce.trustAsHtml(val);
+  };
+})
+
+.filter('format_date', function() {
+  return function(val) {
+    if (val) {
+      var d = new Date(val);
+      return d.toDateString() + ' ' + d.toTimeString();
+    }
+  };
 })
 
 .controller('SearchCtrl', ['$scope', '$location', 'ORIAPIService', 'ResultsService',
