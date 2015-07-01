@@ -42,8 +42,8 @@ angular.module('oriApp.search', ['ngRoute'])
 .filter("event_type", function () {
   var allowed = ["event", "meeting"];
   return function (val) {
-    if (val in allowed) {
-      return val
+    if (allowed.indexOf(val) >= 0) {
+      return val;
     } else {
       return allowed[0];
     }
