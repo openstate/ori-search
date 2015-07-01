@@ -35,9 +35,9 @@
          <a class="navbar-brand" href="./">Open Raads Informatie</a>
        </div>
        <div id="navbar" class="collapse navbar-collapse">
-         <form class="navbar-form navbar-left" role="search">
+         <form class="navbar-form navbar-left" role="search" ng-controller="SearchCtrl">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Zoek iets, bv. Amsterdam">
+            <input type="text" class="form-control" name="q" ng-model="query" placeholder="Zoek iets, bv. Amsterdam">
           </div>
           <button type="submit"  ng-click="search(q)" class="btn btn-default">Zoeken</button>
          </form>
