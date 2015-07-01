@@ -1,13 +1,11 @@
 <div id="results">
-  <ul ng-repeat="type_results in results">
-    <li>
-      <ul>
-        <li ng-repeat="result in type_results">
-          <div class="result">
-            <h2>{{ result }}</h2>
-          </div>
-        </li>
-      </ul>
+  <p>Gezocht naar {{ query }}, {{ results.meta.total }} resultaten gevonden.</p>
+  <ul ng-repeat="type_results in results" class="list-unstyled">
+    <li ng-repeat="result in type_results">
+      <div class="result" ng-class="result.meta._type" ng-if="result.meta._type" ng-include="'search/' + result.meta._type + '.html'">
+        <h2>{{ result.name }}</h2>
+        <p>{{ result.description }}</p>
+      </div>
     </li>
   </ul>
 </div>

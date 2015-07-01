@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-xs-4 col-md-2 col-lg-2">
+    <img src="images/{{ result.gender }}.svg" alt="..." class="img-thumbnail" width="140">
+  </div>
+  <div class="col-xs-8 col-md-10 col-lg-10">
+    <h2>{{ result.name }}</h2>
+    <p>{{ result.description }}</p>
+    <ul ng-repeat="member in result.memberships" ng-if="member.organisation.classification != 'Council'" class="list-unstyled">
+      <li>{{ member.role }} {{ member.organisation.name }}</li>
+    </dl>
+  </div>
+</div>
