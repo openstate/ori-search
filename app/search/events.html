@@ -1,0 +1,9 @@
+<div class="row">
+  <div class="col-xs-4 col-md-2 col-lg-2">
+    <img src="images/{{ result.classification |first_word |lowercase |event_type }}.png" alt="..." class="img-thumbnail" width="140">
+  </div>
+  <div class="col-xs-8 col-md-10 col-lg-10">
+    <h2>{{ result.name }}</h2>
+    <p>{{ result.description }}</p>
+  </div>
+</div>

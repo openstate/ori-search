@@ -33,6 +33,23 @@ angular.module('oriApp.search', ['ngRoute'])
   });
 }])
 
+.filter("first_word", function() {
+  return function (val) {
+    return val.split(/\s+/)[0];
+  };
+})
+
+.filter("event_type", function () {
+  var allowed = ["event", "meeting"];
+  return function (val) {
+    if (val in allowed) {
+      return val
+    } else {
+      return allowed[0];
+    }
+  };
+})
+
 .controller('SearchCtrl', ['$scope', '$location', 'ORIAPIService', 'ResultsService',
 function($scope, $location, ORIAPIService, ResultsService) {
   $scope.query = ResultsService.get_query();
