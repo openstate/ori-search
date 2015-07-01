@@ -18,6 +18,7 @@ angular.module('oriApp.search', ['ngRoute'])
         var defer = $q.defer();
         var query = $route.current.params.q;
         var page = $route.current.params.page;
+        ResultsService.set_query(query);
         ORIAPIService.simple_search(query).then(function (result) {
           console.log('Got data for ' + query);
           ResultsService.set_results(result.data);
@@ -34,7 +35,7 @@ angular.module('oriApp.search', ['ngRoute'])
 
 .controller('SearchCtrl', ['$scope', '$location', 'ORIAPIService', 'ResultsService',
 function($scope, $location, ORIAPIService, ResultsService) {
-  $scope.query = "";
+  $scope.query = ResultsService.get_query();
   $scope.results = ResultsService.get_results();
 
   $scope.search = function() {
