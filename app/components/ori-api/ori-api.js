@@ -3,7 +3,23 @@ angular.module('oriApp').factory("ORIAPIService", ['$http', function ($http) {
   var base_url = 'http://api.openraadsinformatie.nl/v0';
 
   svc.simple_search = function(q) {
-    return $http.get(base_url + "/search?query=" + q);
+    return $http({
+      url: base_url + "/search",
+      method: "POST",
+      data: {
+        query: q,
+        facets: {
+          collection: {}
+        }
+      }
+    });
+  };
+
+  svc.sources = function() {
+    return $http({
+      url: base_url + "/search",
+      method: "GET"
+    });
   };
 
   return svc;

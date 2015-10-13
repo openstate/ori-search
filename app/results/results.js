@@ -13,6 +13,7 @@ angular.module('oriApp').factory("ResultsService", [function () {
 
   svc.set_results = function(data) {
     console.log('Setting results ..');
+    console.dir(data);
     results = data;
   };
 
