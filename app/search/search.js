@@ -6,28 +6,28 @@ angular.module('oriApp.search', ['ngRoute'])
   $routeProvider.when('/search', {
     redirectTo: '/search/een/page/1'
   }).
-  when('/search/:q', {
+  when('/search/:query', {
     redirectTo: '/search/:q/page/1'
   }).
-  when('/search/:q/page/:page',  {
+  when('/search/:query/page/:page',  {
     templateUrl: 'search/search.html',
     controller: 'SearchCtrl',
     resolve: {
-      perform: ['$route', 'ORIAPIService', 'SearchService', '$q',
-      function ($route, ORIAPIService, SearchService, $q) {
-        var defer = $q.defer();
-        var query = $route.current.params.q;
-        var page = $route.current.params.page;
+      perform: ['$route', 'SearchService', '$q',
+      function ($route, SearchService, $q) {
+        // var defer = $q.defer();
+        var query = $route.current.params.query;
         SearchService.set_query(query);
-        ORIAPIService.simple_search(query).then(function (result) {
-          console.log('Got data for ' + query);
-          SearchService.set_results(result.data);
-          defer.resolve(result);
-        }, function (error) {
-          console.log('There was en error getting the data for ' + query);
-          defer.resolve(error);
-        });
-        return defer.promise;
+        // var page = $route.current.params.page;
+        // SearchService.search(query, page).then(function (result) {
+        //   console.log('Got data for ' + query);
+        //   SearchService.set_results(result.data);
+        //   defer.resolve(result);
+        // }, function (error) {
+        //   console.log('There was en error getting the data for ' + query);
+        //   defer.resolve(error);
+        // });
+        // return defer.promise;
       }]
     }
   });
@@ -74,10 +74,10 @@ angular.module('oriApp.search', ['ngRoute'])
   };
 })
 
-.factory("SearchService", [function () {
+.factory("SearchService", ['ORIAPIService', function (ORIAPIService) {
   var svc = {};
   var results = {};
-  var query = null;
+  var query;
 
   svc.set_query = function(q) {
     query = q;
@@ -97,18 +97,29 @@ angular.module('oriApp.search', ['ngRoute'])
     return results;
   };
 
+  svc.search = function(query, page) {
+    svc.set_query(query);
+    return ORIAPIService.simple_search(query);
+  }
+
   return svc;
 }])
 
 .controller('SearchCtrl', ['$scope', '$location', 'ORIAPIService', 'SearchService',
 function($scope, $location, ORIAPIService, SearchService) {
   $scope.query = SearchService.get_query();
-  $scope.results = SearchService.get_results();
 
-  $scope.search = function() {
-    console.log('should search for ' + $scope.query + ' now!');
+  console.log('Initializing search controller : ' + $scope.query + ' : ' + $location.absUrl());
+  if ($scope.query) {
+    $scope.results = SearchService.get_results();
+  }
 
-    var urlstring = 'search/' + $scope.query + "/page/1";
+  $scope.search = function(query) {
+    var qry = query || $scope.query || SearchService.get_query();
+
+    console.log('should search for ' + qry + ' now!');
+
+    var urlstring = 'search/' + qry + "/page/1";
   	$location.path(urlstring);
   };
 
