@@ -3,7 +3,7 @@
     <img src="images/{{ result.classification |first_word |lowercase |event_type }}.png" alt="..." class="img-thumbnail" width="140">
   </div>
   <div class="col-xs-8 col-md-10 col-lg-10">
-    <h2>{{ result.name }}</h2>
+    <h2>{{ result.name }} <span class="pull-right">{{ result.meta.collection }}</span></h2>
     <h3>{{ result.start_date |from_iso8601 |format_date }}</h3>
     <ul class="list-unstyled">
       <li><em>{{ result.classification }}</em></il>
