@@ -13,15 +13,15 @@ angular.module('oriApp.search', ['ngRoute'])
     templateUrl: 'search/search.html',
     controller: 'SearchCtrl',
     resolve: {
-      perform: ['$route', 'ORIAPIService', 'ResultsService', '$q',
-      function ($route, ORIAPIService, ResultsService, $q) {
+      perform: ['$route', 'ORIAPIService', 'SearchService', '$q',
+      function ($route, ORIAPIService, SearchService, $q) {
         var defer = $q.defer();
         var query = $route.current.params.q;
         var page = $route.current.params.page;
-        ResultsService.set_query(query);
+        SearchService.set_query(query);
         ORIAPIService.simple_search(query).then(function (result) {
           console.log('Got data for ' + query);
-          ResultsService.set_results(result.data);
+          SearchService.set_results(result.data);
           defer.resolve(result);
         }, function (error) {
           console.log('There was en error getting the data for ' + query);
@@ -74,10 +74,36 @@ angular.module('oriApp.search', ['ngRoute'])
   };
 })
 
-.controller('SearchCtrl', ['$scope', '$location', 'ORIAPIService', 'ResultsService',
-function($scope, $location, ORIAPIService, ResultsService) {
-  $scope.query = ResultsService.get_query();
-  $scope.results = ResultsService.get_results();
+.factory("SearchService", [function () {
+  var svc = {};
+  var results = {};
+  var query = null;
+
+  svc.set_query = function(q) {
+    query = q;
+  };
+
+  svc.get_query = function() {
+    return query;
+  };
+
+  svc.set_results = function(data) {
+    console.log('Setting results ..');
+    console.dir(data);
+    results = data;
+  };
+
+  svc.get_results = function() {
+    return results;
+  };
+
+  return svc;
+}])
+
+.controller('SearchCtrl', ['$scope', '$location', 'ORIAPIService', 'SearchService',
+function($scope, $location, ORIAPIService, SearchService) {
+  $scope.query = SearchService.get_query();
+  $scope.results = SearchService.get_results();
 
   $scope.search = function() {
     console.log('should search for ' + $scope.query + ' now!');
