@@ -21,12 +21,13 @@ angular.module('oriApp.search', ['ngRoute'])
         ConstantsService.get_promise().then(function (data) {
           console.log('all constants data was retrieved!');
           var query = $route.current.params.query;
-          SearchService.set_query(query);
           var page = $route.current.params.page;
-          console.log('requesting data for ' + query);
+          SearchService.set_query(query);
+          SearchService.set_page(page);
+          console.log('requesting data for ' + query + ' for page ' + page);
           SearchService.search(query, page).then(function (result) {
-            console.log('Got data for ' + query);
-            SearchService.set_results(result.data);
+            //console.log('Got data for ' + query + ' for page ' + page);
+            //SearchService.set_results(result.data);
             defer.resolve(result);
           }, function (error) {
             console.log('There was en error getting the data for ' + query);
@@ -108,8 +109,15 @@ angular.module('oriApp.search', ['ngRoute'])
   var svc = {};
   var results = {};
   var query;
-  var sources;
-  var municipalities;
+  var page;
+
+  svc.set_page = function (p) {
+    page = p;
+  }
+
+  svc.get_page = function() {
+    return page;
+  }
 
   svc.set_query = function(q) {
     query = q;
@@ -131,7 +139,13 @@ angular.module('oriApp.search', ['ngRoute'])
 
   svc.search = function(query, page) {
     svc.set_query(query);
-    return ORIAPIService.simple_search(query);
+    svc.set_page(page);
+    console.log('Querying for ' + query + ' for page ' + page);
+    return ORIAPIService.simple_search(query, page);
+  }
+
+  svc.next_page = function() {
+    return svc.search(query, ++page);
   }
 
   return svc;
@@ -140,10 +154,14 @@ angular.module('oriApp.search', ['ngRoute'])
 .controller('SearchCtrl', ['$scope', '$location', 'ORIAPIService', 'SearchService',
 function($scope, $location, ORIAPIService, SearchService) {
   $scope.query = SearchService.get_query();
+  $scope.results = {};
+  $scope.meta = {took: 0, total: 0};
+  $scope.busy = true;
 
   console.log('Initializing search controller : ' + $scope.query + ' : ' + $location.absUrl());
   if ($scope.query) {
-    $scope.results = SearchService.get_results();
+    //$scope.results = SearchService.get_results();
+    $scope.busy = false;
   }
 
   $scope.search = function(query) {
@@ -156,6 +174,31 @@ function($scope, $location, ORIAPIService, SearchService) {
   };
 
   $scope.nextPage = function() {
+    if ($scope.busy) { return; }
+
+    $scope.busy = true;
+
     console.log('should load the next page now!');
-  }
+    SearchService.next_page().then(function (data) {
+      console.log('get next page data:');
+      console.dir(data);
+      console.log('current results :');
+      console.dir($scope.results);
+      $scope.meta = data.data.meta;
+
+      for (var tp in data.data) {
+        if (tp != 'meta') {
+          for (var item in data.data[tp]) {
+            var tmp_item = data.data[tp][item];
+            $scope.results[tmp_item.id] = tmp_item;
+          }
+        }
+      }
+
+      console.log('current results after data: ');
+      console.dir($scope.results);
+
+      $scope.busy = false;
+    });
+  };
 }]);

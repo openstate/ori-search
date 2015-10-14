@@ -1,8 +1,8 @@
 <div id="results">
  <div infinite-scroll='nextPage()' infinite-scroll-disabled='nextPageLoading' infinite-scroll-distance='1'>
     <p>Gezocht naar {{ query }}, {{ results.meta.total }} resultaten gevonden.</p>
-    <ul ng-repeat="type_results in results" class="list-unstyled">
-      <li ng-repeat="result in type_results">
+    <ul ng-repeat="result in results" class="list-unstyled">
+      <li>
         <div class="result" ng-class="result.meta._type" ng-if="result.meta._type" ng-include="'components/search/' + result.meta._type + '.html'">
           <h2>{{ result.name }}</h2>
           <p>{{ result.description }}</p>
