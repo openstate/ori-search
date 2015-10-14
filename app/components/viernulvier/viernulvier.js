@@ -20,7 +20,7 @@ controller('vierNulVierCtrl', ['$scope', '$location',
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise(
     {
-      templateUrl: 'viernulvier/viernulvier.html',
+      templateUrl: 'components/viernulvier/viernulvier.html',
       controller: 'vierNulVierCtrl'
     }
   );

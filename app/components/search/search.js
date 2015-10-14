@@ -10,7 +10,7 @@ angular.module('oriApp.search', ['ngRoute'])
     redirectTo: '/search/:q/page/1'
   }).
   when('/search/:query/page/:page',  {
-    templateUrl: 'search/search.html',
+    templateUrl: 'components/search/search.html',
     controller: 'SearchCtrl',
     resolve: {
       perform: ['$route', 'SearchService', '$q',
