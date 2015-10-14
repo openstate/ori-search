@@ -22,5 +22,19 @@ angular.module('oriApp').factory("ORIAPIService", ['$http', function ($http) {
     });
   };
 
+  svc.municipalities = function() {
+    return $http({
+      url: base_url + "/search/organizations",
+      method: "POST",
+      data: {
+        filters: {
+          classification: {
+            terms: ["municipality"]
+          }
+        }
+      }
+    });
+  };
+
   return svc;
 }]);

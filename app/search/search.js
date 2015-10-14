@@ -15,22 +15,28 @@ angular.module('oriApp.search', ['ngRoute'])
     resolve: {
       perform: ['$route', 'SearchService', '$q',
       function ($route, SearchService, $q) {
-        // var defer = $q.defer();
+        var defer = $q.defer();
         var query = $route.current.params.query;
         SearchService.set_query(query);
-        // var page = $route.current.params.page;
-        // SearchService.search(query, page).then(function (result) {
-        //   console.log('Got data for ' + query);
-        //   SearchService.set_results(result.data);
-        //   defer.resolve(result);
-        // }, function (error) {
-        //   console.log('There was en error getting the data for ' + query);
-        //   defer.resolve(error);
-        // });
-        // return defer.promise;
+        var page = $route.current.params.page;
+        SearchService.search(query, page).then(function (result) {
+          console.log('Got data for ' + query);
+          SearchService.set_results(result.data);
+          defer.resolve(result);
+        }, function (error) {
+          console.log('There was en error getting the data for ' + query);
+          defer.resolve(error);
+        });
+        return defer.promise;
       }]
     }
   });
+}])
+
+.run(['SearchService', function (SearchService) {
+  console.log('now in the run block of the search module!');
+  SearchService.get_sources();
+  SearchService.get_municipalities();
 }])
 
 .filter("first_word", function() {
@@ -78,6 +84,8 @@ angular.module('oriApp.search', ['ngRoute'])
   var svc = {};
   var results = {};
   var query;
+  var sources;
+  var municipalities;
 
   svc.set_query = function(q) {
     query = q;
@@ -96,6 +104,29 @@ angular.module('oriApp.search', ['ngRoute'])
   svc.get_results = function() {
     return results;
   };
+
+  svc.get_sources = function() {
+    if (sources) {
+      return sources;
+    } else {
+      ORIAPIService.sources().then(function (data) {
+        console.log('Got api sources data ...');
+        sources = data.data;
+      });
+    }
+  };
+
+  svc.get_municipalities = function() {
+    if (municipalities) {
+      return municipalities;
+    } else {
+      ORIAPIService.municipalities().then(function (data) {
+        console.log('Got municipalities data:');
+        console.dir(data);
+        municipalities = data.data;
+      });
+    }
+  }
 
   svc.search = function(query, page) {
     svc.set_query(query);
