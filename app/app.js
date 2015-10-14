@@ -3,6 +3,7 @@
 // Declare app level module which depends on views, and components
 angular.module('oriApp', [
   'ngRoute',
+  'oriApp.constants',
   'oriApp.viernulvier',
   'oriApp.search',
   'oriApp.version'
