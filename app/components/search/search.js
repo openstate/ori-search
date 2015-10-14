@@ -81,6 +81,29 @@ angular.module('oriApp.search', ['ngRoute'])
   };
 })
 
+.filter('municipality_img', ['ConstantsService', function(ConstantsService) {
+  return function (val) {
+    var muni = ConstantsService.get_municipality_by_collection(val.meta.collection)
+
+    if (muni && muni['image']) {
+      return muni['image'];
+    } else if (val.classification) {
+      var first_word = val.classification.toLowerCase().split(/\s+/)[0];
+      return "images/" + first_word +  ".png";
+    }
+  };
+}])
+
+.filter('person_img', function() {
+  return function (val) {
+    if (val.image) {
+      return val.image;
+    } else {
+      return "images/" + val.gender.toLowerCase() + ".svg";
+    }
+  };
+})
+
 .factory("SearchService", ['ORIAPIService', function (ORIAPIService) {
   var svc = {};
   var results = {};

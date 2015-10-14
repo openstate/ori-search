@@ -32,6 +32,30 @@ angular.module('oriApp.constants', ['ngRoute'])
     return municipalities;
   };
 
+  svc.get_municipality_by_name = function (name) {
+    console.log('looking for mun iwth name' + name);
+    for (var muni in municipalities.organizations) {
+      console.log(muni);
+      if (municipalities.organizations[muni].name.toLowerCase() == name.toLowerCase()) {
+        console.log('found : ');
+        console.dir(municipalities.organizations[muni]);
+        return municipalities.organizations[muni];
+      }
+    }
+  };
+
+  svc.get_municipality_by_collection = function (name) {
+    console.log('looking for mun iwth collection : ' + name);
+    for (var muni in municipalities.organizations) {
+      console.log(muni);
+      if (municipalities.organizations[muni].meta.collection.toLowerCase() == name.toLowerCase()) {
+        console.log('found : ');
+        console.dir(municipalities.organizations[muni]);
+        return municipalities.organizations[muni];
+      }
+    }
+  };
+
   var load_municipalities = function() {
     return ORIAPIService.municipalities().then(function (data) {
       console.log('Got municipalities data:');
