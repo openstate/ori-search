@@ -155,4 +155,7 @@ function($scope, $location, ORIAPIService, SearchService) {
   	$location.path(urlstring);
   };
 
+  $scope.nextPage = function() {
+    console.log('should load the next page now!');
+  }
 }]);
