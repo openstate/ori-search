@@ -99,7 +99,7 @@ angular.module('oriApp.search', ['ngRoute'])
   return function (val) {
     if (val.image) {
       return val.image;
-    } else {
+    } else  if (val.gender) {
       return "images/" + val.gender.toLowerCase() + ".svg";
     }
   };
@@ -141,7 +141,21 @@ angular.module('oriApp.search', ['ngRoute'])
     svc.set_query(query);
     svc.set_page(page);
     console.log('Querying for ' + query + ' for page ' + page);
-    return ORIAPIService.simple_search(query, page);
+    return ORIAPIService.simple_search(query, page).then(function (data) {
+      var i = 0;
+      console.log('Got data! :');
+      console.dir(data.data);
+      for (var tp in data.data) {
+        if (tp != 'meta' && tp != 'facets') {
+          for (var item in data.data[tp]) {
+            var tmp_item = data.data[tp][item];
+            var item_num = (page - 1) * 20;
+            results[item_num + i] = tmp_item;
+            i += 1;
+          }
+        }
+      }
+    });
   }
 
   svc.next_page = function() {
@@ -160,7 +174,7 @@ function($scope, $location, ORIAPIService, SearchService) {
 
   console.log('Initializing search controller : ' + $scope.query + ' : ' + $location.absUrl());
   if ($scope.query) {
-    //$scope.results = SearchService.get_results();
+    $scope.results = SearchService.get_results();
     $scope.busy = false;
   }
 
@@ -180,23 +194,14 @@ function($scope, $location, ORIAPIService, SearchService) {
 
     console.log('should load the next page now!');
     SearchService.next_page().then(function (data) {
-      console.log('get next page data:');
-      console.dir(data);
-      console.log('current results :');
-      console.dir($scope.results);
-      $scope.meta = data.data.meta;
+      $scope.results = SearchService.get_results();
 
-      for (var tp in data.data) {
-        if (tp != 'meta') {
-          for (var item in data.data[tp]) {
-            var tmp_item = data.data[tp][item];
-            $scope.results[tmp_item.id] = tmp_item;
-          }
-        }
+      if (data) {
+        $scope.meta = data.data.meta;
+
+        console.log('current results after data: ');
+        console.dir($scope.results);
       }
-
-      console.log('current results after data: ');
-      console.dir($scope.results);
 
       $scope.busy = false;
     });
