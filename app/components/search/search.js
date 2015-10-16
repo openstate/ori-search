@@ -18,7 +18,7 @@ var defered_resolver = {
         console.log('-- with options:');
         console.dir(options);
       }
-      SearchService.search(query, page).then(function (result) {
+      SearchService.search(query, page, options).then(function (result) {
         //console.log('Got data for ' + query + ' for page ' + page);
         //SearchService.set_results(result.data);
         defer.resolve(result);
@@ -138,6 +138,7 @@ angular.module('oriApp.search', ['ngRoute'])
   var facets = {};
   var query;
   var page;
+  var options;
 
   svc.set_facets = function (f) {
     facets = f;
@@ -194,10 +195,20 @@ angular.module('oriApp.search', ['ngRoute'])
     return results;
   };
 
-  svc.search = function(query, page) {
+  svc.get_options = function() {
+    return options;
+  }
+
+  svc.set_options = function(o) {
+    options = o;
+  }
+
+  svc.search = function(query, page, options) {
     svc.set_query(query);
     svc.set_page(page);
-    console.log('Querying for ' + query + ' for page ' + page);
+    svc.set_options(options);
+    console.log('Querying for ' + query + ' for page ' + page + ' with options:');
+    console.dir(options);
     return ORIAPIService.simple_search(query, page).then(function (data) {
       var i = 0;
       console.log('Got data! :');
@@ -229,7 +240,7 @@ angular.module('oriApp.search', ['ngRoute'])
   }
 
   svc.next_page = function() {
-    return svc.search(query, ++page);
+    return svc.search(query, ++page, options);
   }
 
   return svc;
