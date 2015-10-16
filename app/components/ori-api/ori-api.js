@@ -18,7 +18,8 @@ angular.module('oriApp').factory("ORIAPIService", ['$http', function ($http) {
         from: offset,
         size: 20,
         facets: {
-          collection: {}
+          collection: {},
+          types: {}
         }
       }
     });

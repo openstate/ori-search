@@ -105,10 +105,15 @@ angular.module('oriApp.search', ['ngRoute'])
   };
 })
 
-.filter('facet_collection_count', ['ConstantsService', 'SearchService', function (ConstantsService, SearchService) {
+.filter('facet_collection_count', ['SearchService', function (SearchService) {
   return function (val) {
     return SearchService.get_facet_count_for_term('collection', val);
-    //return SearchService.get_facet_terms("collection");
+  }
+}])
+
+.filter('facet_types_count', ['SearchService', function (SearchService) {
+  return function (val) {
+    return SearchService.get_facet_count_for_term('types', val);
   }
 }])
 

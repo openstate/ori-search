@@ -14,7 +14,7 @@
       <h3>Filter op</h3>
       <ul class="list-group">
         <li ng-repeat="doc_type in doc_types" class="list-group-item">
-          <span class="badge">14</span>
+          <span class="badge">{{ doc_type | facet_types_count }}</span>
           {{ doc_type }}
         </li>
       </ul>
