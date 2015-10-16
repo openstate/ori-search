@@ -105,19 +105,57 @@ angular.module('oriApp.search', ['ngRoute'])
   };
 })
 
+.filter('facet_collection_count', ['ConstantsService', 'SearchService', function (ConstantsService, SearchService) {
+  return function (val) {
+    return SearchService.get_facet_count_for_term('collection', val);
+    //return SearchService.get_facet_terms("collection");
+  }
+}])
+
 .factory("SearchService", ['ORIAPIService', function (ORIAPIService) {
   var svc = {};
   var results = {};
+  var facets = {};
   var query;
   var page;
 
+  svc.set_facets = function (f) {
+    facets = f;
+  };
+
+  svc.get_facets = function() {
+    return facets;
+  };
+
+  svc.get_facet = function (facet_name) {
+    return facets[facet_name];
+  };
+
+  svc.get_facet_terms = function(facet_name) {
+    var facet = svc.get_facet(facet_name);
+    if (facet) {
+      return facet.terms;
+    }
+  };
+
+  svc.get_facet_count_for_term = function(facet_name, term_name) {
+    console.log('Get facet count for ' + facet_name + ' / ' + term_name);
+    var terms = svc.get_facet_terms(facet_name);
+    for (var idx in terms) {
+      if (terms[idx].term == term_name) {
+        return terms[idx].count;
+      }
+    }
+    return 0;
+  };
+
   svc.set_page = function (p) {
     page = p;
-  }
+  };
 
   svc.get_page = function() {
     return page;
-  }
+  };
 
   svc.set_query = function(q) {
     query = q;
@@ -145,16 +183,29 @@ angular.module('oriApp.search', ['ngRoute'])
       var i = 0;
       console.log('Got data! :');
       console.dir(data.data);
+
+      var tmp_results = [];
       for (var tp in data.data) {
         if (tp != 'meta' && tp != 'facets') {
           for (var item in data.data[tp]) {
             var tmp_item = data.data[tp][item];
-            var item_num = (page - 1) * 20;
-            results[item_num + i] = tmp_item;
-            i += 1;
+            tmp_results.push(tmp_item);
           }
         }
       }
+
+      for (var idx in tmp_results.sort(function (a,b) {
+        return a['meta']['_score'] - b['meta']['_score'];
+      })) {
+        var tmp_item = tmp_results[idx];
+        var item_num = (page - 1) * 20;
+        results[item_num + i] = tmp_item;
+        i += 1;
+      }
+
+      facets = data.data.facets;
+      console.log('Got facets:');
+      console.dir(facets);
     });
   }
 
@@ -165,9 +216,11 @@ angular.module('oriApp.search', ['ngRoute'])
   return svc;
 }])
 
-.controller('SearchCtrl', ['$scope', '$location', 'ORIAPIService', 'SearchService',
-function($scope, $location, ORIAPIService, SearchService) {
+.controller('SearchCtrl', ['$scope', '$location', 'ORIAPIService', 'SearchService', 'ConstantsService',
+function($scope, $location, ORIAPIService, SearchService, ConstantsService) {
   $scope.query = SearchService.get_query();
+  $scope.municipalities = ConstantsService.get_municipalities();
+  $scope.doc_types = ['persons', 'organizations', 'events'];
   $scope.results = {};
   $scope.meta = {took: 0, total: 0};
   $scope.busy = true;

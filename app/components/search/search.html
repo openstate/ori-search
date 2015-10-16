@@ -1,13 +1,37 @@
-<div id="results">
- <div infinite-scroll='nextPage()' infinite-scroll-disabled='nextPageLoading' infinite-scroll-distance='1'>
-    <p>Gezocht naar {{ query }}, {{ results.meta.total }} resultaten gevonden.</p>
-    <ul ng-repeat="result in results" class="list-unstyled">
-      <li>
-        <div class="result" ng-class="result.meta._type" ng-if="result.meta._type" ng-include="'components/search/' + result.meta._type + '.html'">
-          <h2>{{ result.name }}</h2>
-          <p>{{ result.description }}</p>
-        </div>
-      </li>
-    </ul>
+<div class="row">
+  <div id="sidebar" class="col-md-4 col-xs-12">
+    <div class="sidebar-block">
+      <h3>Gemeenten</h3>
+      <ul class="list-group">
+        <li ng-repeat="municipality in municipalities.organizations" class="list-group-item">
+          <span class="badge">{{ municipality.meta.collection | facet_collection_count }}</span>
+          {{ municipality.name }}
+        </li>
+      </ul>
+    </div>
+
+    <div class="sidebar-block">
+      <h3>Filter op</h3>
+      <ul class="list-group">
+        <li ng-repeat="doc_type in doc_types" class="list-group-item">
+          <span class="badge">14</span>
+          {{ doc_type }}
+        </li>
+      </ul>
+    </div>
+
+  </div>
+  <div id="results" class="col-md-8 col-xs-12">
+   <div infinite-scroll='nextPage()' infinite-scroll-disabled='nextPageLoading' infinite-scroll-distance='1'>
+      <p>Gezocht naar {{ query }}, {{ meta.total }} resultaten gevonden.</p>
+      <ul ng-repeat="result in results" class="list-unstyled">
+        <li>
+          <div class="result" ng-class="result.meta._type" ng-if="result.meta._type" ng-include="'components/search/' + result.meta._type + '.html'">
+            <h2>{{ result.name }}</h2>
+            <p>{{ result.description }}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

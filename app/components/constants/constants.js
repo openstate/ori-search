@@ -61,4 +61,12 @@ angular.module('oriApp.constants', ['ngRoute'])
   };
 
   return svc;
+}])
+
+.controller('ConstantsCtrl', ['$scope', '$location', 'ConstantsService',
+function($scope, $location, ConstantsService) {
+    console.log('In the constants controller!');
+  $scope.municipalities = ConstantsService.get_municipalities();
+  console.dir($scope.municipalities);
+  $scope.sources = ConstantsService.get_sources();
 }]);
