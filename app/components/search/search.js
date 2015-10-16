@@ -1,43 +1,52 @@
 'use strict';
 
+var defered_resolver = {
+  perform: ['$route', 'ConstantsService', 'SearchService', '$q',
+  function ($route, ConstantsService, SearchService, $q) {
+    var defer = $q.defer();
+
+    console.log('performing resolve for search page');
+    ConstantsService.get_promise().then(function (data) {
+      console.log('all constants data was retrieved!');
+      var query = $route.current.params.query;
+      var page = 1;
+      var options = $route.current.params.options;
+      SearchService.set_query(query);
+      SearchService.set_page(page);
+      console.log('requesting data for ' + query + ' for page ' + page);
+      if (options) {
+        console.log('-- with options:');
+        console.dir(options);
+      }
+      SearchService.search(query, page).then(function (result) {
+        //console.log('Got data for ' + query + ' for page ' + page);
+        //SearchService.set_results(result.data);
+        defer.resolve(result);
+      }, function (error) {
+        console.log('There was en error getting the data for ' + query);
+        defer.resolve(error);
+      });
+    });
+
+    return defer.promise;
+  }]
+};
+
 angular.module('oriApp.search', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/search', {
-    redirectTo: '/search/een/page/1'
+    redirectTo: '/search/een'
   }).
   when('/search/:query', {
-    redirectTo: '/search/:q/page/1'
-  }).
-  when('/search/:query/page/:page',  {
     templateUrl: 'components/search/search.html',
     controller: 'SearchCtrl',
-    resolve: {
-      perform: ['$route', 'ConstantsService', 'SearchService', '$q',
-      function ($route, ConstantsService, SearchService, $q) {
-        var defer = $q.defer();
-
-        console.log('performing resolve for search page');
-        ConstantsService.get_promise().then(function (data) {
-          console.log('all constants data was retrieved!');
-          var query = $route.current.params.query;
-          var page = $route.current.params.page;
-          SearchService.set_query(query);
-          SearchService.set_page(page);
-          console.log('requesting data for ' + query + ' for page ' + page);
-          SearchService.search(query, page).then(function (result) {
-            //console.log('Got data for ' + query + ' for page ' + page);
-            //SearchService.set_results(result.data);
-            defer.resolve(result);
-          }, function (error) {
-            console.log('There was en error getting the data for ' + query);
-            defer.resolve(error);
-          });
-        });
-
-        return defer.promise;
-      }]
-    }
+    resolve: defered_resolver
+  }).
+  when('/search/:query/options/:options', {
+    templateUrl: 'components/search/search.html',
+    controller: 'SearchCtrl',
+    resolve: defered_resolver
   });
 }])
 
@@ -246,7 +255,7 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService) {
 
     console.log('should search for ' + qry + ' now!');
 
-    var urlstring = 'search/' + qry + "/page/1";
+    var urlstring = 'search/' + qry + "";
   	$location.path(urlstring);
   };
 
