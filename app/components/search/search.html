@@ -15,7 +15,7 @@
       <ul class="list-group">
         <li ng-repeat="doc_type in doc_types" class="list-group-item">
           <span class="badge">{{ doc_type | facet_types_count }}</span>
-          {{ doc_type }}
+          {{ doc_type | doc_type_name}}
         </li>
       </ul>
     </div>

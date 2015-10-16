@@ -108,15 +108,21 @@ angular.module('oriApp.search', ['ngRoute'])
 .filter('facet_collection_count', ['SearchService', function (SearchService) {
   return function (val) {
     return SearchService.get_facet_count_for_term('collection', val);
-  }
+  };
 }])
 
 .filter('facet_types_count', ['SearchService', function (SearchService) {
   return function (val) {
     return SearchService.get_facet_count_for_term('types', val);
-  }
+  };
 }])
 
+.filter('doc_type_name', function () {
+  var labels = {'persons': 'Personen', 'organizations': 'Organisaties', 'events': 'Activiteiten'};
+  return function (val) {
+    return labels[val];
+  };
+})
 .factory("SearchService", ['ORIAPIService', function (ORIAPIService) {
   var svc = {};
   var results = {};
@@ -144,7 +150,6 @@ angular.module('oriApp.search', ['ngRoute'])
   };
 
   svc.get_facet_count_for_term = function(facet_name, term_name) {
-    console.log('Get facet count for ' + facet_name + ' / ' + term_name);
     var terms = svc.get_facet_terms(facet_name);
     for (var idx in terms) {
       if (terms[idx].term == term_name) {
