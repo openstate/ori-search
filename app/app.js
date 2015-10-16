@@ -6,6 +6,7 @@ angular.module('oriApp', [
   'ngTouch',
   'infinite-scroll',
   'oriApp.constants',
+  'oriApp.options',
   'oriApp.viernulvier',
   'oriApp.search',
   'oriApp.version'
