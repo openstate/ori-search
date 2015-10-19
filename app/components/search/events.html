@@ -1,24 +1,30 @@
 <div class="row">
-  <div class="col-xs-4 col-md-2 col-lg-2">
-    <img src="{{ result | municipality_img | unsafe }}" alt="..." class="img-thumbnail" width="140">
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>{{ result.name }}</h2>
+    </div>
   </div>
-  <div class="col-xs-8 col-md-10 col-lg-10">
-    <h2>{{ result.name }}</h2>
-    <h3>{{ result.start_date |from_iso8601 |format_date }}</h3>
-    <ul class="list-unstyled">
-      <li><em>{{ result.classification }}</em></il>
-      <li>{{ result.organisation.name }}</li>
-    </ul>
-    <p></p>
-    <p ng-bind-html="result.description | unsafe"></p>
+  <div class="row">
+    <div class="col-xs-4 col-md-2 col-lg-2">
+      <img src="{{ result | municipality_img | unsafe }}" alt="..." class="img-thumbnail" width="140">
+    </div>
+    <div class="col-xs-8 col-md-10 col-lg-10">
+      <h3>{{ result.start_date |from_iso8601 |format_date }}</h3>
+      <ul class="list-unstyled">
+        <li><em>{{ result.classification }}</em></il>
+        <li>{{ result.organisation.name }}</li>
+      </ul>
+      <p></p>
+      <p ng-bind-html="result.description | unsafe"></p>
 
-    <ul ng-repeat="source in result.sources" class="list-unstyled">
-      <li>
-        <a href="{{ source.url}}" target="_blank">
-          <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>
-          {{ source.note }}
-        </a>
-      </li>
-    </ul>
+      <ul ng-repeat="source in result.sources" class="list-unstyled">
+        <li>
+          <a href="{{ source.url}}" target="_blank">
+            <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>
+            {{ source.note }}
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

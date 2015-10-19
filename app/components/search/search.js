@@ -89,8 +89,22 @@ angular.module('oriApp.search', ['ngRoute'])
 .filter('format_date', function() {
   return function(val) {
     if (val) {
-      var d = new Date(val);
-      return d.toDateString() + ' ' + d.toTimeString();
+      var tijd_datum = new Date(val);
+      console.log('de tijd voor ' + val);
+      console.dir(tijd_datum);
+      var dag = tijd_datum.getDay(); //dag in woorden
+      var dag2 = tijd_datum.getDate(); // dag in getal
+      var maand = tijd_datum.getMonth(); // +1 want js begint bij 0 te tellen
+      var jaar = tijd_datum.getFullYear();
+
+      var uur = tijd_datum.getHours();
+      var minuten = tijd_datum.getMinutes();
+      var seconden = tijd_datum.getSeconds();
+
+      var maandarray = new Array('januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december');
+      var dagarray = new Array('zondag','maandag','dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag');
+
+      return dagarray[dag]+" "+dag2+" "+maandarray[maand]+" "+jaar+" "+tijd_datum.toLocaleTimeString('nl-NL');
     }
   };
 })
