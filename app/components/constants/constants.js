@@ -24,6 +24,7 @@ angular.module('oriApp.constants', ['ngRoute'])
   var load_sources = function() {
     return ORIAPIService.sources().then(function (data) {
       console.log('Got api sources data ...');
+      console.log(data);
       sources = data.data;
     });
   };

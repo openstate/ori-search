@@ -2,7 +2,7 @@
 
 angular.module('oriApp.options', ['ngRoute'])
 
-.factory("OptionsService", ['ORIAPIService',  function (ORIAPIService) {
+.factory("OptionsService", ['ConstantsService',  function (ConstantsService) {
   var svc = {};
   var options_obj;
 
@@ -12,6 +12,16 @@ angular.module('oriApp.options', ['ngRoute'])
 
   svc.set_options = function (o) {
     options_obj = o;
+  };
+
+  svc.set_default_options = function() {
+    console.log('sources in constants:');
+    console.dir(ConstantsService.get_municipalities());
+    options_obj = {
+      filters: {
+        collection: {"terms": ConstantsService.get_municipalities().organizations.map(function (o) { return o.meta.collection; })}
+      }
+    };
   };
 
   var options_to_b64 = function(o) {

@@ -132,7 +132,8 @@ angular.module('oriApp.search', ['ngRoute'])
     return labels[val];
   };
 })
-.factory("SearchService", ['ORIAPIService', function (ORIAPIService) {
+.factory("SearchService", ['ORIAPIService', 'ConstantsService', 'OptionsService',
+function (ORIAPIService, ConstantsService, OptionsService) {
   var svc = {};
   var results = {};
   var facets = {};
@@ -196,17 +197,23 @@ angular.module('oriApp.search', ['ngRoute'])
   };
 
   svc.get_options = function() {
-    return options;
+    return OptionsService.get_options();
   }
 
   svc.set_options = function(o) {
-    options = o;
+    OptionsService.set_options(o);
   }
 
   svc.search = function(query, page, options) {
     svc.set_query(query);
     svc.set_page(page);
-    svc.set_options(options);
+
+    if (options !== undefined) {
+      svc.set_options(options);
+    } else {
+      OptionsService.set_default_options();
+    }
+    options = svc.get_options();
     console.log('Querying for ' + query + ' for page ' + page + ' with options:');
     console.dir(options);
     return ORIAPIService.simple_search(query, page).then(function (data) {

@@ -27,7 +27,7 @@ angular.module('oriApp').factory("ORIAPIService", ['$http', function ($http) {
 
   svc.sources = function() {
     return $http({
-      url: base_url + "/search",
+      url: base_url + "/sources",
       method: "GET"
     });
   };
