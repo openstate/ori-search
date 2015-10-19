@@ -250,6 +250,12 @@ function (ORIAPIService, ConstantsService, OptionsService) {
     return svc.search(query, ++page, options);
   }
 
+  svc.first_page = function() {
+    svc.set_page(1);
+    svc.set_results({});
+    return svc.search(query, page, options);
+  };
+
   return svc;
 }])
 
@@ -336,5 +342,6 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     console.log('Options after adjustment of filters:');
     console.dir(OptionsService.get_options());
     console.log('Should perform new search now!');
+    SearchService.first_page();
   };
 }]);
