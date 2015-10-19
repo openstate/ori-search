@@ -320,6 +320,8 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
 
     console.log('should search for ' + qry + ' now!');
 
+    $scope.results = {};
+
     var urlstring = 'search/' + qry + "";
   	$location.path(urlstring);
   };
