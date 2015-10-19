@@ -334,6 +334,8 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
 
     console.log('should search for ' + qry + ' now!');
 
+    SearchService.set_page(1);
+    SearchService.set_results({});
     $scope.results = {};
 
     var urlstring = 'search/' + qry + "";
