@@ -257,6 +257,17 @@ function (ORIAPIService, ConstantsService, OptionsService) {
 function($scope, $location, ORIAPIService, SearchService, ConstantsService) {
   $scope.query = SearchService.get_query();
   $scope.municipalities = ConstantsService.get_municipalities();
+  $scope.options = SearchService.get_options();
+
+  if ($scope.municipalities) {
+    $scope.municipalities_full = $scope.municipalities.organizations.map(function (o) {
+      o.active = ($.inArray(o.meta.collection, $scope.options.filters.collection.terms) >= 0);
+      return o;
+    });
+  } else {
+    $scope.municipalities_full = [];
+  }
+
   $scope.doc_types = ['persons', 'organizations', 'events'];
   $scope.results = {};
   $scope.meta = {took: 0, total: 0};
@@ -265,6 +276,7 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService) {
   console.log('Initializing search controller : ' + $scope.query + ' : ' + $location.absUrl());
   if ($scope.query) {
     $scope.results = SearchService.get_results();
+    $scope.options = SearchService.get_options();
     $scope.busy = false;
   }
 

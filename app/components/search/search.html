@@ -3,9 +3,9 @@
     <div class="sidebar-block">
       <h3>Gemeenten</h3>
       <ul class="list-group">
-        <li ng-repeat="municipality in municipalities.organizations" class="list-group-item">
+        <li ng-repeat="municipality in municipalities_full" class="list-group-item">
           <span class="badge">{{ municipality.meta.collection | facet_collection_count }}</span>
-          <input type="checkbox" value="" id="{{ municipality.collection }}" data-toggle="checkbox" ng-model="facet.active" ng-change="updateExcludeList('source_id')">
+          <input type="checkbox" value="" id="{{ municipality.collection }}" data-toggle="checkbox" ng-model="municipality.active" ng-change="updateExcludeList('source_id')">
           <label for="{{ municipality.collection }}">{{ municipality.name }}</label>
         </li>
       </ul>
