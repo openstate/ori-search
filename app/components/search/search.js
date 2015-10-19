@@ -216,7 +216,7 @@ function (ORIAPIService, ConstantsService, OptionsService) {
     options = svc.get_options();
     console.log('Querying for ' + query + ' for page ' + page + ' with options:');
     console.dir(options);
-    return ORIAPIService.simple_search(query, page).then(function (data) {
+    return ORIAPIService.simple_search(query, page, options).then(function (data) {
       var i = 0;
       console.log('Got data! :');
       console.dir(data.data);

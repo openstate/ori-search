@@ -2,7 +2,7 @@ angular.module('oriApp').factory("ORIAPIService", ['$http', function ($http) {
   var svc = {};
   var base_url = 'http://api.openraadsinformatie.nl/v0';
 
-  svc.simple_search = function(q, p) {
+  svc.simple_search = function(q, p, o) {
     var offset;
     if (p) {
       offset = (p-1) * 20;
@@ -10,18 +10,28 @@ angular.module('oriApp').factory("ORIAPIService", ['$http', function ($http) {
       offset = 0;
     }
 
+    var payload = {
+      query: q,
+      from: offset,
+      size: 20,
+      facets: {
+        collection: {},
+        types: {}
+      }
+    };
+
+    if (o !== undefined) {
+      payload.filters = o.filters;
+    }
+
+    console.log('Performing api call for query ' + q + 'with offset ' + offset);
+    console.log('--> payload:');
+    console.dir(payload);
+
     return $http({
       url: base_url + "/search",
       method: "POST",
-      data: {
-        query: q,
-        from: offset,
-        size: 20,
-        facets: {
-          collection: {},
-          types: {}
-        }
-      }
+      data: payload
     });
   };
 
