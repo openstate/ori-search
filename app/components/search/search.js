@@ -150,6 +150,27 @@ angular.module('oriApp.search', ['ngRoute'])
     return labels[val];
   };
 })
+
+.filter('no_wsdl_link', function () {
+  return function (val) {
+    if (val == 'https://www.mijnbabs.nl/iBabsWCFService/Public.svc?singleWsdl') {
+      return '#';
+    } else {
+      return val;
+    }
+  };
+})
+
+.filter('no_wsdl_no_external_link', function () {
+  return function (val) {
+    if (val == 'https://www.mijnbabs.nl/iBabsWCFService/Public.svc?singleWsdl') {
+      return '';
+    } else {
+      return '<span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>';
+    }
+  };
+})
+
 .factory("SearchService", ['ORIAPIService', 'ConstantsService', 'OptionsService',
 function (ORIAPIService, ConstantsService, OptionsService) {
   var svc = {};
