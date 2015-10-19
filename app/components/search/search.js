@@ -140,6 +140,15 @@ function (ORIAPIService, ConstantsService, OptionsService) {
   var query;
   var page;
   var options;
+  var meta = {took: 0, total: 0};
+
+  svc.set_meta = function(m) {
+    meta = m;
+  };
+
+  svc.get_meta = function() {
+    return meta;
+  };
 
   svc.set_facets = function (f) {
     facets = f;
@@ -243,6 +252,8 @@ function (ORIAPIService, ConstantsService, OptionsService) {
       facets = data.data.facets;
       console.log('Got facets:');
       console.dir(facets);
+
+      svc.set_meta(data.data.meta);
     });
   }
 
@@ -278,13 +289,14 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
   $scope.doc_types = ConstantsService.get_doc_types();
   $scope.doc_types_full = [];
   $scope.results = {};
-  $scope.meta = {took: 0, total: 0};
+  $scope.meta = SearchService.get_meta();
   $scope.busy = true;
 
 
   console.log('Initializing search controller : ' + $scope.query + ' : ' + $location.absUrl());
   if ($scope.query) {
     $scope.results = SearchService.get_results();
+    $scope.meta = SearchService.get_meta();
     $scope.options = SearchService.get_options();
     $scope.busy = false;
 
@@ -318,8 +330,7 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
       $scope.results = SearchService.get_results();
 
       if (data) {
-        $scope.meta = data.data.meta;
-
+        $scope.meta = SearchService.get_meta();
         console.log('current results after data: ');
         console.dir($scope.results);
       }
@@ -347,6 +358,7 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     SearchService.first_page().then(function (data) {
       console.log('Search service got some data!');
       $scope.results = SearchService.get_results();
+      $scope.meta = SearchService.get_meta();
       console.dir($scope.results);
       $.each($scope.doc_types_full, function (idx, item) {
         item.count = SearchService.get_facet_count_for_term('types', item.term);
