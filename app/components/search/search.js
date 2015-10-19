@@ -268,6 +268,7 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
   if ($scope.municipalities) {
     $scope.municipalities_full = $scope.municipalities.organizations.map(function (o) {
       o.active = ($.inArray(o.meta.collection, $scope.options.filters.collection.terms) >= 0);
+      o.count = SearchService.get_facet_count_for_term('collection', o.meta.collection)
       return o;
     });
   } else {
@@ -291,7 +292,8 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
       $scope.doc_types_full.push({
         term: doc_type,
         label: $scope.doc_types[doc_type],
-        active: ($.inArray(doc_type, $scope.options.filters.types.terms) >= 0)
+        active: ($.inArray(doc_type, $scope.options.filters.types.terms) >= 0),
+        count: SearchService.get_facet_count_for_term('types', doc_type)
       })
     }
   }
@@ -346,6 +348,12 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
       console.log('Search service got some data!');
       $scope.results = SearchService.get_results();
       console.dir($scope.results);
+      $.each($scope.doc_types_full, function (idx, item) {
+        item.count = SearchService.get_facet_count_for_term('types', item.term);
+      });
+      $.each($scope.municipalities_full, function (idx, item) {
+        item.count = SearchService.get_facet_count_for_term('collection', item.meta.collection);
+      });
     });
   };
 }]);
