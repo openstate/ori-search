@@ -1,8 +1,8 @@
 'use strict';
 
 var defered_resolver = {
-  perform: ['$route', 'ConstantsService', 'SearchService', '$q',
-  function ($route, ConstantsService, SearchService, $q) {
+  perform: ['$route', 'ConstantsService', 'OptionsService', 'SearchService', '$q',
+  function ($route, ConstantsService, OptionsService, SearchService, $q) {
     var defer = $q.defer();
 
     console.log('performing resolve for search page');
@@ -15,7 +15,11 @@ var defered_resolver = {
       SearchService.set_page(page);
       console.log('requesting data for ' + query + ' for page ' + page);
       if (options) {
-        console.log('-- with options:');
+        console.log('-- with encoded options:');
+        console.dir(options);
+        console.log('-- with decoded options:');
+        OptionsService.set_options_b64(options);
+        options = OptionsService.get_options();
         console.dir(options);
       }
       SearchService.search(query, page, options).then(function (result) {
@@ -366,6 +370,7 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
       $.each($scope.municipalities_full, function (idx, item) {
         item.count = SearchService.get_facet_count_for_term('collection', item.meta.collection);
       });
+      $location.path("search/" + SearchService.get_query() + "/options/" + OptionsService.get_options_b64());
     });
   };
 }]);
