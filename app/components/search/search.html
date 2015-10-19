@@ -5,7 +5,8 @@
       <ul class="list-group">
         <li ng-repeat="municipality in municipalities.organizations" class="list-group-item">
           <span class="badge">{{ municipality.meta.collection | facet_collection_count }}</span>
-          {{ municipality.name }}
+          <input type="checkbox" value="" id="{{ municipality.collection }}" data-toggle="checkbox" ng-model="facet.active" ng-change="updateExcludeList('source_id')">
+          <label for="{{ municipality.collection }}">{{ municipality.name }}</label>
         </li>
       </ul>
     </div>
@@ -15,7 +16,8 @@
       <ul class="list-group">
         <li ng-repeat="doc_type in doc_types" class="list-group-item">
           <span class="badge">{{ doc_type | facet_types_count }}</span>
-          {{ doc_type | doc_type_name}}
+          <input type="checkbox" value="" id="{{ doc_type }}" data-toggle="checkbox" ng-model="facet.active" ng-change="updateExcludeList('source_id')">
+          <label for="{{ doc_type}}">{{ doc_type | doc_type_name}}</label>
         </li>
       </ul>
     </div>
