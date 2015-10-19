@@ -5,7 +5,7 @@
       <ul class="list-group">
         <li ng-repeat="municipality in municipalities_full" class="list-group-item">
           <span class="badge">{{ municipality.meta.collection | facet_collection_count }}</span>
-          <input type="checkbox" value="" id="{{ municipality.collection }}" data-toggle="checkbox" ng-model="municipality.active" ng-change="updateExcludeList('source_id')">
+          <input type="checkbox" value="" id="{{ municipality.collection }}" data-toggle="checkbox" ng-model="municipality.active" ng-change="updateOptions()">
           <label for="{{ municipality.collection }}">{{ municipality.name }}</label>
         </li>
       </ul>
@@ -14,10 +14,10 @@
     <div class="sidebar-block">
       <h3>Filter op</h3>
       <ul class="list-group">
-        <li ng-repeat="doc_type in doc_types" class="list-group-item">
-          <span class="badge">{{ doc_type | facet_types_count }}</span>
-          <input type="checkbox" value="" id="{{ doc_type }}" data-toggle="checkbox" ng-model="facet.active" ng-change="updateExcludeList('source_id')">
-          <label for="{{ doc_type}}">{{ doc_type | doc_type_name}}</label>
+        <li ng-repeat="doc_type in doc_types_full" class="list-group-item">
+          <span class="badge">{{ doc_type.term | facet_types_count }}</span>
+          <input type="checkbox" value="" id="{{ doc_type }}" data-toggle="checkbox" ng-model="doc_type.active" ng-change="updateOptions()">
+          <label for="{{ doc_type}}">{{ doc_type.label }}</label>
         </li>
       </ul>
     </div>

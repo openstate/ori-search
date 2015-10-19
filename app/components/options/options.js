@@ -19,9 +19,14 @@ angular.module('oriApp.options', ['ngRoute'])
     console.dir(ConstantsService.get_municipalities());
     options_obj = {
       filters: {
-        collection: {"terms": ConstantsService.get_municipalities().organizations.map(function (o) { return o.meta.collection; })}
+        collection: {"terms": ConstantsService.get_municipalities().organizations.map(function (o) { return o.meta.collection; })},
+        types: {"terms": Object.keys(ConstantsService.get_doc_types()) }
       }
     };
+  };
+
+  svc.set_filter_terms = function(filter_name, terms) {
+    options_obj.filters[filter_name] = {"terms": terms};
   };
 
   var options_to_b64 = function(o) {

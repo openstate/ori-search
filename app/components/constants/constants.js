@@ -12,14 +12,23 @@ angular.module('oriApp.constants', ['ngRoute'])
   var promise;
   var sources;
   var municipalities;
+  var doc_types = {
+    'persons': 'Personen',
+    'organizations': 'Organisaties',
+    'events': 'Activiteiten'
+  };
 
   svc.get_promise = function() {
     return promise;
-  }
+  };
+
+  svc.get_doc_types = function() {
+    return doc_types;
+  };
 
   svc.get_sources = function() {
     return sources;
-  }
+  };
 
   var load_sources = function() {
     return ORIAPIService.sources().then(function (data) {

@@ -253,8 +253,8 @@ function (ORIAPIService, ConstantsService, OptionsService) {
   return svc;
 }])
 
-.controller('SearchCtrl', ['$scope', '$location', 'ORIAPIService', 'SearchService', 'ConstantsService',
-function($scope, $location, ORIAPIService, SearchService, ConstantsService) {
+.controller('SearchCtrl', ['$scope', '$location', 'ORIAPIService', 'SearchService', 'ConstantsService', 'OptionsService',
+function($scope, $location, ORIAPIService, SearchService, ConstantsService, OptionsService) {
   $scope.query = SearchService.get_query();
   $scope.municipalities = ConstantsService.get_municipalities();
   $scope.options = SearchService.get_options();
@@ -268,17 +268,28 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService) {
     $scope.municipalities_full = [];
   }
 
-  $scope.doc_types = ['persons', 'organizations', 'events'];
+  $scope.doc_types = ConstantsService.get_doc_types();
+  $scope.doc_types_full = [];
   $scope.results = {};
   $scope.meta = {took: 0, total: 0};
   $scope.busy = true;
+
 
   console.log('Initializing search controller : ' + $scope.query + ' : ' + $location.absUrl());
   if ($scope.query) {
     $scope.results = SearchService.get_results();
     $scope.options = SearchService.get_options();
     $scope.busy = false;
+
+    for (var doc_type in $scope.doc_types) {
+      $scope.doc_types_full.push({
+        term: doc_type,
+        label: $scope.doc_types[doc_type],
+        active: ($.inArray(doc_type, $scope.options.filters.types.terms) >= 0)
+      })
+    }
   }
+
 
   $scope.search = function(query) {
     var qry = query || $scope.query || SearchService.get_query();
@@ -307,5 +318,23 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService) {
 
       $scope.busy = false;
     });
+
+  };
+
+  $scope.updateOptions = function () {
+    console.log('Should update options now!');
+    var collections = $scope.municipalities_full.filter(function (o) {
+      return o.active; }).map(function (o) { return o.meta.collection; });
+    var doc_types = $scope.doc_types_full.filter(function (o) {
+      return o.active; }).map(function (o) { return o.term; });
+    console.log('Active collections:');
+    console.dir(collections);
+    console.log('Active types:');
+    console.dir(doc_types);
+    OptionsService.set_filter_terms('collection', collections);
+    OptionsService.set_filter_terms('types', doc_types);
+    console.log('Options after adjustment of filters:');
+    console.dir(OptionsService.get_options());
+    console.log('Should perform new search now!');
   };
 }]);
