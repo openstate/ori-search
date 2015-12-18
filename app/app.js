@@ -9,8 +9,9 @@ angular.module('oriApp', [
   'oriApp.options',
   'oriApp.viernulvier',
   'oriApp.search',
+  'oriApp.home',
   'oriApp.version'
 ]).
 config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/', {redirectTo: '/search'});
+//  $routeProvider.when('/', {redirectTo: '/search'});
 }]);
