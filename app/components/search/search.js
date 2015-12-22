@@ -20,12 +20,19 @@ var defered_resolver = {
         console.dir(options);
         console.log('-- with decoded options:');
         OptionsService.set_options_b64(options);
-        options = OptionsService.get_options();
-        if (typeof(municipality) != 'undefined') {
-          OptionsService.set_collection([municipality]);
-        }
-        console.dir(options);
+      } else {
+        console.log('-- initializing default options');
+        OptionsService.set_default_options();
       }
+      options = OptionsService.get_options();
+      console.dir(options);
+
+      if (typeof(municipality) != 'undefined') {
+        OptionsService.set_internal_option('single_mode', true);
+        OptionsService.set_internal_option('municipality', municipality);
+        OptionsService.set_collection([municipality]);
+      }
+
       SearchService.search(query, page, options).then(function (result) {
         //console.log('Got data for ' + query + ' for page ' + page);
         //SearchService.set_results(result.data);
@@ -55,6 +62,9 @@ angular.module('oriApp.search', ['ngRoute'])
     templateUrl: 'components/search/search.html',
     controller: 'SearchCtrl',
     resolve: defered_resolver
+  }).
+  when('/g/:municipality', {
+    redirectTo: '/g/:municipality/search/een'
   }).
   when('/g/:municipality/search/:query', {
     templateUrl: 'components/search/search.html',
@@ -400,7 +410,12 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
       $.each($scope.municipalities_full, function (idx, item) {
         item.count = SearchService.get_facet_count_for_term('collection', item.meta.collection);
       });
-      $location.path("search/" + SearchService.get_query() + "/options/" + OptionsService.get_options_b64());
+
+      var start_path = "";
+      if (OptionsService.get_internal_option('single_mode')) {
+        start_path = "g/" + OptionsService.get_internal_option('municipality') + "/";
+      }
+      $location.path(start_path + "search/" + SearchService.get_query() + "/options/" + OptionsService.get_options_b64());
     });
   };
 }]);

@@ -5,6 +5,18 @@ angular.module('oriApp.options', ['ngRoute'])
 .factory("OptionsService", ['ConstantsService',  function (ConstantsService) {
   var svc = {};
   var options_obj;
+  var internal_options = {
+    single_mode: false,
+    municipality: undefined
+  };
+
+  svc.get_internal_option = function(name) {
+    return internal_options[name];
+  };
+
+  svc.set_internal_option = function(name, val) {
+    internal_options[name] = val;
+  };
 
   svc.get_options = function() {
     return options_obj;
