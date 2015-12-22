@@ -3,7 +3,7 @@
     <div class="sidebar-block">
       <h2>Filters</h2>
     </div>
-    <div class="sidebar-block">
+    <div class="sidebar-block" ng-if="!single_mode">
       <h3>Gemeenten</h3>
       <ul class="list-group">
         <li ng-repeat="municipality in municipalities_full" class="list-group-item">

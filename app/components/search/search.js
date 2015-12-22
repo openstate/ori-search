@@ -338,6 +338,7 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     $scope.results = SearchService.get_results();
     $scope.meta = SearchService.get_meta();
     $scope.options = SearchService.get_options();
+    $scope.single_mode = OptionsService.get_internal_option('single_mode');
     $scope.busy = false;
 
     for (var doc_type in $scope.doc_types) {
