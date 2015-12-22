@@ -361,7 +361,12 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     SearchService.set_results({});
     $scope.results = {};
 
-    var urlstring = 'search/' + qry + "";
+    var start_path = "";
+    if (OptionsService.get_internal_option('single_mode')) {
+      start_path = "g/" + OptionsService.get_internal_option('municipality') + "/";
+    }
+
+    var urlstring = start_path + 'search/' + qry + "";
   	$location.path(urlstring);
   };
 

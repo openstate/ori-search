@@ -29,4 +29,6 @@ function($scope, $location, ORIAPIService, ConstantsService, OptionsService) {
   console.log('Initializing home controller!');
   $scope.municipalities = ConstantsService.get_municipalities();
   console.dir($scope.municipalities);
+  OptionsService.set_internal_option('single_mode', false);
+  OptionsService.set_internal_option('municipality', undefined);
 }]);
