@@ -25,6 +25,10 @@ angular.module('oriApp.options', ['ngRoute'])
     };
   };
 
+  svc.set_collection = function(municipalities) {
+    options_obj.filters.collection.terms = municipalities;
+  };
+
   svc.set_filter_terms = function(filter_name, terms) {
     options_obj.filters[filter_name] = {"terms": terms};
   };

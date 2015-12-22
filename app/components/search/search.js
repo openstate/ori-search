@@ -11,15 +11,19 @@ var defered_resolver = {
       var query = $route.current.params.query;
       var page = 1;
       var options = $route.current.params.options;
+      var municipality = $route.current.params.municipality;
       SearchService.set_query(query);
       SearchService.set_page(page);
-      console.log('requesting data for ' + query + ' for page ' + page);
+      console.log('requesting data for ' +municipality + ', for query: '+ query + ', for page: ' + page);
       if (options) {
         console.log('-- with encoded options:');
         console.dir(options);
         console.log('-- with decoded options:');
         OptionsService.set_options_b64(options);
         options = OptionsService.get_options();
+        if (typeof(municipality) != 'undefined') {
+          OptionsService.set_collection([municipality]);
+        }
         console.dir(options);
       }
       SearchService.search(query, page, options).then(function (result) {
@@ -48,6 +52,16 @@ angular.module('oriApp.search', ['ngRoute'])
     resolve: defered_resolver
   }).
   when('/search/:query/options/:options', {
+    templateUrl: 'components/search/search.html',
+    controller: 'SearchCtrl',
+    resolve: defered_resolver
+  }).
+  when('/g/:municipality/search/:query', {
+    templateUrl: 'components/search/search.html',
+    controller: 'SearchCtrl',
+    resolve: defered_resolver
+  }).
+  when('/g/:municipality/search/:query/options/:options', {
     templateUrl: 'components/search/search.html',
     controller: 'SearchCtrl',
     resolve: defered_resolver
