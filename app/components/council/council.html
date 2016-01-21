@@ -1,3 +1,9 @@
 <h1>Council</h1>
-
-{{ organizations }}
+<div class="row" ng-repeat="classification in all_classifications()">
+  <div class="row" ng-repeat="organization in organizations_by_classification(classification)">
+    <h2>{{ organization.name }}</h2>
+    <ul ng-repeat="person in persons_by_organization(organization)">
+      <li>{{ person.name }}</li>
+    </ul>
+  </div>
+</div>

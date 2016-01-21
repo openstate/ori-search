@@ -66,5 +66,14 @@ angular.module('oriApp').factory("ORIAPIService", ['$http', function ($http) {
     });
   };
 
+  svc.persons = function(municipality_slug) {
+    return $http({
+      url: base_url + "/" + municipality_slug + "/persons/search",
+      method: "POST",
+      data: {
+        size: 100
+      }
+    });
+  };
   return svc;
 }]);
