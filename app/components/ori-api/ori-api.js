@@ -56,5 +56,15 @@ angular.module('oriApp').factory("ORIAPIService", ['$http', function ($http) {
     });
   };
 
+  svc.organizations = function(municipality_slug) {
+    return $http({
+      url: base_url + "/" + municipality_slug + "/organizations/search",
+      method: "POST",
+      data: {
+        size: 100
+      }
+    });
+  };
+
   return svc;
 }]);
