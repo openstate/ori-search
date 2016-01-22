@@ -16,7 +16,8 @@ angular.module('oriApp').factory("ORIAPIService", ['$http', function ($http) {
       size: 20,
       facets: {
         collection: {},
-        types: {}
+        types: {},
+        start_date: {"interval": "year"}
       }
     };
 
@@ -29,7 +30,7 @@ angular.module('oriApp').factory("ORIAPIService", ['$http', function ($http) {
     console.dir(payload);
 
     return $http({
-      url: base_url + "/search",
+      url: base_url + "/search/events",
       method: "POST",
       data: payload
     });

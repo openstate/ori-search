@@ -19,6 +19,20 @@
       </ul>
     </div>
 
+    <div class="sidebar-block">
+      <h3>Jaren</h3>
+      <ul class="list-group">
+        <li ng-repeat="entry in facets.start_date.entries" class="list-group-item">
+          <span class="badge">{{ entry.count }}</span>
+          <!--
+          <input type="checkbox" value="" id="{{ municipality.collection }}" data-toggle="checkbox" ng-model="municipality.active" ng-change="updateOptions()">
+          <label for="{{ municipality.collection }}">{{ municipality.name }}</label>
+          -->
+          {{ entry.time | date:'yyyy' }}
+        </li>
+      </ul>
+
+    </div>
   </div>
   <div id="results" class="col-md-8 col-xs-12">
    <div infinite-scroll='nextPage()' infinite-scroll-disabled='nextPageLoading' infinite-scroll-distance='1'>

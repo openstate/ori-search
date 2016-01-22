@@ -331,7 +331,7 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
   $scope.results = {};
   $scope.meta = SearchService.get_meta();
   $scope.busy = true;
-
+  $scope.facets = [];
 
   console.log('Initializing search controller : ' + $scope.query + ' : ' + $location.absUrl());
   if ($scope.query) {
@@ -341,6 +341,7 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     $scope.single_mode = OptionsService.get_internal_option('single_mode');
     $scope.municipality = OptionsService.get_internal_option('municipality');
     $scope.busy = false;
+    $scope.facets = SearchService.get_facets();
 
     for (var doc_type in $scope.doc_types) {
       $scope.doc_types_full.push({
