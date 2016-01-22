@@ -1,18 +1,20 @@
 <div class="row">
-  <div class="col-xs-4 col-md-2 col-lg-2">
-    <img src="{{ result | person_img | unsafe }}" alt="..." class="img-thumbnail" width="140">
+  <div class="col-xs-12">
+    <img src="{{ person | person_img | unsafe }}" alt="..." class="img-thumbnail" width="140">
   </div>
-  <div class="col-xs-8 col-md-10 col-lg-10">
-    <h2>{{ result.name }}</h2>
-    <p ng-bind-html="result.description | unsafe"></p>
-    <ul ng-repeat="member in result.memberships" ng-if="member.organisation.classification != 'Council'" class="list-unstyled">
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <h2>{{ person.name }}</h2>
+    <p ng-bind-html="person.description | unsafe"></p>
+    <ul ng-repeat="member in person.memberships" ng-if="member.organisation.classification != 'Council'" class="list-unstyled">
       <li>{{ member.role }} {{ member.organisation.name }}</li>
     </dl>
   </div>
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <a href="http://api.openraadsinformatie.nl/v0/{{ result.meta.collection }}/{{ result.meta._type }}/{{ result.id }}" target="_blank">
+    <a href="http://api.openraadsinformatie.nl/v0/{{ person.meta.collection }}/{{ person.meta._type }}/{{ person.id }}" target="_blank">
       <img src="images/json.svg" title="Rauwe JSON data voor dit item" width="40" height="40" class="pull-right">
     </a>
   </div>

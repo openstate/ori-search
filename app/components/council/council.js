@@ -17,6 +17,22 @@ angular.module('oriApp.council', ['ngRoute'])
   });
 }])
 
+.filter('person_img', function() {
+  return function (val) {
+    if (val.image) {
+      return val.image;
+    } else  if (val.gender) {
+      return "images/" + val.gender.toLowerCase() + ".svg";
+    }
+  };
+})
+
+.filter('unsafe', function($sce) {
+  return function(val) {
+    return $sce.trustAsHtml(val);
+  };
+})
+
 .factory("CouncilService", ['$q', 'ORIAPIService',
 function ($q, ORIAPIService) {
   var svc = {};

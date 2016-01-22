@@ -2,8 +2,17 @@
 <div class="row" ng-repeat="classification in all_classifications()">
   <div class="row" ng-repeat="organization in organizations_by_classification(classification)">
     <h2>{{ organization.name }}</h2>
-    <ul ng-repeat="person in persons_by_organization(organization)">
-      <li>{{ person.name }}</li>
-    </ul>
+    <div class="row" ng-repeat="person in persons_by_organization(organization)" style="margin-bottom: 1em;">
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+        <img src="{{ person | person_img | unsafe }}" alt="..." class="img-thumbnail" width="140">
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-10">
+        <h2>{{ person.name }}</h2>
+        <p ng-bind-html="person.description | unsafe"></p>
+        <ul ng-repeat="member in person.memberships" ng-if="member.organisation.classification != 'Council'" class="list-unstyled">
+          <li>{{ member.role }} {{ member.organisation.name }}</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
