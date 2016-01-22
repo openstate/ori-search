@@ -1,9 +1,15 @@
 'use strict';
 
 var defered_council_resolver = {
-  perform: ['$route', 'CouncilService',
-  function($route, CouncilService) {
-    return CouncilService.load_information($route.current.params.municipality)
+  perform: ['$route', 'CouncilService', 'OptionsService',
+  function($route, CouncilService, OptionsService) {
+    var municipality = $route.current.params.municipality;
+    if (typeof(municipality) != 'undefined') {
+      OptionsService.set_internal_option('single_mode', true);
+      OptionsService.set_internal_option('municipality', municipality);
+    }
+
+    return CouncilService.load_information(municipality);
   }]
 };
 
@@ -77,11 +83,12 @@ function ($q, ORIAPIService) {
   return svc;
 }])
 
-.controller('CouncilCtrl', ['$scope', '$location', 'ORIAPIService', 'CouncilService',
-function($scope, $location, ORIAPIService, CouncilService) {
+.controller('CouncilCtrl', ['$scope', '$location', 'ORIAPIService', 'CouncilService', 'OptionsService',
+function($scope, $location, ORIAPIService, CouncilService,OptionsService) {
   $scope.organizations = CouncilService.get_organizations();
   $scope.persons = CouncilService.get_persons();
   $scope.classifications = CouncilService.get_classifications();
+  $scope.municipality = OptionsService.get_internal_option('municipality');
 
   $scope.all_classifications = function() {
     return $scope.classifications;

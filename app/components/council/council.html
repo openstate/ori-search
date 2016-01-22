@@ -1,4 +1,8 @@
-<h1>Council</h1>
+<ul class="nav nav-pills nav-justified">
+  <li role="presentation"><a href="#/g/{{ municipality }}/">Stukken</a></li>
+  <li role="presentation" class="active"><a href="#/c/{{ municipality }}">Gemeenteraad</a></li>
+</ul>
+
 <div class="row" ng-repeat="classification in all_classifications()">
   <div class="row" ng-repeat="organization in organizations_by_classification(classification)">
     <h2>{{ organization.name }}</h2>
