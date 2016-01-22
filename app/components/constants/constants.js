@@ -13,8 +13,6 @@ angular.module('oriApp.constants', ['ngRoute'])
   var sources;
   var municipalities;
   var doc_types = {
-    'persons': 'Personen',
-    'organizations': 'Organisaties',
     'events': 'Activiteiten'
   };
 

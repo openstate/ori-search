@@ -19,17 +19,6 @@
       </ul>
     </div>
 
-    <div class="sidebar-block">
-      <h3>Soort</h3>
-      <ul class="list-group">
-        <li ng-repeat="doc_type in doc_types_full" class="list-group-item">
-          <span class="badge">{{ doc_type.count }}</span>
-          <input type="checkbox" value="" id="{{ doc_type }}" data-toggle="checkbox" ng-model="doc_type.active" ng-change="updateOptions()">
-          <label for="{{ doc_type}}">{{ doc_type.label }}</label>
-        </li>
-      </ul>
-    </div>
-
   </div>
   <div id="results" class="col-md-8 col-xs-12">
    <div infinite-scroll='nextPage()' infinite-scroll-disabled='nextPageLoading' infinite-scroll-distance='1'>
