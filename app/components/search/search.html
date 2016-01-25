@@ -22,13 +22,10 @@
     <div class="sidebar-block">
       <h3>Jaren</h3>
       <ul class="list-group">
-        <li ng-repeat="entry in facets.start_date.entries" class="list-group-item">
-          <span class="badge">{{ entry.count }}</span>
-          <!--
-          <input type="checkbox" value="" id="{{ municipality.collection }}" data-toggle="checkbox" ng-model="municipality.active" ng-change="updateOptions()">
-          <label for="{{ municipality.collection }}">{{ municipality.name }}</label>
-          -->
-          {{ entry.time | date:'yyyy' }}
+        <li ng-repeat="year in years_full" class="list-group-item">
+          <span class="badge">{{ year.count }}</span>
+          <input type="checkbox" value="" id="{{ year.label }}" data-toggle="checkbox" ng-model="year.active" ng-change="updateOptions()">
+          <label for="{{ year.label }}">{{ year.label }}</label>
         </li>
       </ul>
 

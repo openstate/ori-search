@@ -15,6 +15,16 @@ angular.module('oriApp.constants', ['ngRoute'])
   var doc_types = {
     'events': 'Activiteiten'
   };
+  var start_year = 2006;
+
+  svc.get_years = function() {
+    var years = [];
+    var current_date = new Date();
+    for(var i = start_year; i<= current_date.getFullYear(); i++) {
+      years.push(i);
+    }
+    return years;
+  };
 
   svc.get_promise = function() {
     return promise;

@@ -315,6 +315,7 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
   $scope.query = SearchService.get_query();
   $scope.municipalities = ConstantsService.get_municipalities();
   $scope.options = SearchService.get_options();
+  $scope.years = ConstantsService.get_years();
 
   if ($scope.municipalities) {
     $scope.municipalities_full = $scope.municipalities.organizations.map(function (o) {
@@ -332,6 +333,7 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
   $scope.meta = SearchService.get_meta();
   $scope.busy = true;
   $scope.facets = [];
+  $scope.years_full = [];
 
   console.log('Initializing search controller : ' + $scope.query + ' : ' + $location.absUrl());
   if ($scope.query) {
@@ -351,6 +353,18 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
         count: SearchService.get_facet_count_for_term('types', doc_type)
       })
     }
+
+    console.log('facets:');
+    console.dir($scope.facets);
+    // FIXME: years is a range query
+    $scope.years_full = $scope.years.map(function (y) {
+      return {
+        label: y,
+        active: ($.inArray(y, $scope.options.filters.start_date.terms) >= 0),
+        count: SearchService.get_facet_count_for_term('start_date', y.toString())
+      };
+    });
+
   }
 
 
