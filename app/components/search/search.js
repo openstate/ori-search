@@ -334,8 +334,8 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
   $scope.busy = true;
   $scope.facets = [];
   $scope.years_full = [];
+
   $scope.date = {
-    // FIXME: take from options object
     usermin: 2006,
     usermax: 2016
   };
@@ -359,16 +359,11 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
       })
     }
 
-    console.log('facets:');
-    console.dir($scope.facets);
-    // FIXME: years is a range query
-    $scope.years_full = $scope.years.map(function (y) {
-      return {
-        label: y,
-        active: ($.inArray(y, $scope.options.filters.start_date.terms) >= 0),
-        count: SearchService.get_facet_count_for_term('start_date', y.toString())
-      };
-    });
+    var start_date_range = OptionsService.get_filter('start_date');
+    $scope.date = {
+      usermin: start_date_range.from.split('-')[0],
+      usermax: start_date_range.to.split('-')[0]
+    };
 
   }
 

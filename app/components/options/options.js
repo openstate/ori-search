@@ -50,6 +50,10 @@ angular.module('oriApp.options', ['ngRoute'])
     options_obj.filters[filter_name] = filter_obj;
   };
 
+  svc.get_filter = function(filter_name) {
+    return options_obj.filters[filter_name];
+  };
+
   var options_to_b64 = function(o) {
     return window.LZString.compressToBase64(JSON.stringify(o)).split('/').join('-');
   }
