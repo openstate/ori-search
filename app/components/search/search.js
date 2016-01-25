@@ -335,6 +335,7 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
   $scope.facets = [];
   $scope.years_full = [];
   $scope.date = {
+    // FIXME: take from options object
     usermin: 2006,
     usermax: 2016
   };
@@ -422,6 +423,10 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     console.dir(doc_types);
     OptionsService.set_filter_terms('collection', collections);
     OptionsService.set_filter_terms('types', doc_types);
+    OptionsService.set_filter('start_date', {
+      "from": $scope.date.usermin + "-01-01",
+      "to": $scope.date.usermax + "-12-31"
+    });
     console.log('Options after adjustment of filters:');
     console.dir(OptionsService.get_options());
     console.log('Should perform new search now!');
