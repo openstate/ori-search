@@ -5,6 +5,7 @@ angular.module('oriApp', [
   'ngRoute',
   'ngTouch',
   'infinite-scroll',
+  'ui-rangeSlider',
   'oriApp.constants',
   'oriApp.options',
   'oriApp.viernulvier',

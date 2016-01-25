@@ -334,6 +334,10 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
   $scope.busy = true;
   $scope.facets = [];
   $scope.years_full = [];
+  $scope.date = {
+    usermin: 2006,
+    usermax: 2016
+  };
 
   console.log('Initializing search controller : ' + $scope.query + ' : ' + $location.absUrl());
   if ($scope.query) {

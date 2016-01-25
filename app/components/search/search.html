@@ -21,14 +21,10 @@
 
     <div class="sidebar-block">
       <h3>Jaren</h3>
-      <ul class="list-group">
-        <li ng-repeat="year in years_full" class="list-group-item">
-          <span class="badge">{{ year.count }}</span>
-          <input type="checkbox" value="" id="{{ year.label }}" data-toggle="checkbox" ng-model="year.active" ng-change="updateOptions()">
-          <label for="{{ year.label }}">{{ year.label }}</label>
-        </li>
-      </ul>
-
+      <!--
+      <div range-slider min="date.min" max="date.max" model-min="date.usermin" model-max="date.usermax" on-handle-up="onHandleUp()" show-values="true"></div>
+      -->
+      <div range-slider min="2006" max="2016" model-min="date.usermin" model-max="date.usermax" on-handle-up="onHandleUp()" show-values="true"></div>
     </div>
   </div>
   <div id="results" class="col-md-8 col-xs-12">
