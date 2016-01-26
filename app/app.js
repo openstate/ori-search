@@ -6,6 +6,7 @@ angular.module('oriApp', [
   'ngTouch',
   'infinite-scroll',
   'ui-rangeSlider',
+  'chart.js',
   'oriApp.constants',
   'oriApp.options',
   'oriApp.viernulvier',

@@ -47,7 +47,7 @@ var defered_resolver = {
   }]
 };
 
-angular.module('oriApp.search', ['ngRoute'])
+angular.module('oriApp.search', ['ngRoute', 'chart.js'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/search', {
@@ -340,6 +340,10 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     usermax: 2016
   };
 
+  $scope.ylabels = [];
+  $scope.yseries = ['Documenten'];
+  $scope.ydata = [[]];
+
   console.log('Initializing search controller : ' + $scope.query + ' : ' + $location.absUrl());
   if ($scope.query) {
     $scope.results = SearchService.get_results();
@@ -365,6 +369,11 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
       usermax: start_date_range.to.split('-')[0]
     };
 
+    var year_facet = SearchService.get_facet('start_date').entries;
+    console.log('start date facet entries:');
+    console.dir(year_facet);
+    $scope.ylabels = year_facet.map(function (i) { var d = new Date(i.time); return d.getFullYear(); });
+    $scope.ydata = [year_facet.map(function (i) {return i.count; })];
   }
 
 
