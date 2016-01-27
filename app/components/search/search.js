@@ -314,6 +314,8 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
   $scope.municipalities = ConstantsService.get_municipalities();
   $scope.options = SearchService.get_options();
   $scope.years = ConstantsService.get_years();
+  $scope.sort = '_score';
+  $scope.order = 'desc';
 
   if ($scope.municipalities) {
     $scope.municipalities_full = $scope.municipalities.organizations.map(function (o) {
@@ -351,6 +353,8 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     $scope.municipality = OptionsService.get_internal_option('municipality');
     $scope.busy = false;
     $scope.facets = SearchService.get_facets();
+    $scope.sort = OptionsService.get_option('sort');
+    $scope.order = OptionsService.get_option('order');
 
     for (var doc_type in $scope.doc_types) {
       $scope.doc_types_full.push({

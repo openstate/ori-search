@@ -35,8 +35,8 @@ angular.module('oriApp.options', ['ngRoute'])
         types: {"terms": Object.keys(ConstantsService.get_doc_types()) },
         start_date: {"from": "2006-01-01", "to": "now"}
       },
-      //sort: ['_score']
-      sort: "start_date"
+      sort: '_score',
+      order: 'desc'
     };
   };
 
@@ -54,6 +54,14 @@ angular.module('oriApp.options', ['ngRoute'])
 
   svc.get_filter = function(filter_name) {
     return options_obj.filters[filter_name];
+  };
+
+  svc.set_option = function(option_name, val) {
+    options_obj[option_name] = val;
+  };
+
+  svc.get_option = function(option_name) {
+    return options_obj[option_name];
   };
 
   var options_to_b64 = function(o) {
