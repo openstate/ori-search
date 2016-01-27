@@ -280,9 +280,7 @@ function (ORIAPIService, ConstantsService, OptionsService) {
         }
       }
 
-      for (var idx in tmp_results.sort(function (a,b) {
-        return a['meta']['_score'] - b['meta']['_score'];
-      })) {
+      for (var idx in tmp_results) {
         var tmp_item = tmp_results[idx];
         var item_num = (page - 1) * 20;
         results[item_num + i] = tmp_item;

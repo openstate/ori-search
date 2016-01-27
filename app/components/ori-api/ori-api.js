@@ -18,11 +18,19 @@ angular.module('oriApp').factory("ORIAPIService", ['$http', function ($http) {
         collection: {},
         types: {},
         start_date: {"interval": "year"}
-      }
+      },
+      sort: '_score',
+      order: 'desc'
     };
 
     if (o !== undefined) {
       payload.filters = o.filters;
+      if (o.sort !== undefined) {
+        payload.sort = o.sort;
+      }
+      if (o.order !== undefined) {
+        payload.order = o.order;
+      }
     }
 
     console.log('Performing api call for query ' + q + 'with offset ' + offset);
