@@ -38,13 +38,13 @@
           <form class="form-horizontal">
             <label class="control-label col-xs-4">Sorteren op:</label>
             <div class="col-xs-4">
-              <select ng-model="sort" name="sort" class="form-control">
+              <select ng-model="sort" name="sort" class="form-control" ng-change="updateOptions()">
                 <option value="_score">Relevantie</option>
                 <option value="start_date">Datum</option>
               </select>
             </div>
             <div class="col-xs-4">
-              <select ng-model="order" name="order" class="form-control">
+              <select ng-model="order" name="order" class="form-control" ng-change="updateOptions()">
                 <option value="desc">Aflopend</option>
                 <option value="asc">Oplopend</option>
               </select>

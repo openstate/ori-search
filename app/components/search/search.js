@@ -433,6 +433,8 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
       "from": $scope.date.usermin + "-01-01",
       "to": $scope.date.usermax + "-12-31"
     });
+    OptionsService.set_option('sort', $scope.sort);
+    OptionsService.set_option('order', $scope.order);
     console.log('Options after adjustment of filters:');
     console.dir(OptionsService.get_options());
     console.log('Should perform new search now!');
