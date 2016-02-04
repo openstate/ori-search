@@ -11,17 +11,22 @@ angular.module('oriApp').factory("ORIAPIService", ['$http', function ($http) {
     }
 
     var payload = {
-      query: q,
+      //query: q,
       from: offset,
       size: 20,
       facets: {
         collection: {},
         types: {},
-        start_date: {"interval": "year"}
+        start_date: {"interval": "year"},
+        classification: {}
       },
       sort: '_score',
       order: 'desc'
     };
+
+    if (q !== undefined) {
+      payload.query = q;
+    }
 
     if (o !== undefined) {
       payload.filters = o.filters;

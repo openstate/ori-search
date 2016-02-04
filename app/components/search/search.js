@@ -33,9 +33,29 @@ var defered_resolver = {
         OptionsService.set_collection([municipality]);
       }
 
-      SearchService.search(query, page, options).then(function (result) {
+      var search_base_filters = {
+        size: 0
+      };
+
+      if (OptionsService.get_internal_option('single_mode')) {
+        search_base_filters.filters = {
+          collection: {"terms": [municipality]}
+        };
+      }
+
+      var search_promise = $q.all([
+        SearchService.search(query, page, options),
+        SearchService.base_search(search_base_filters).then(function (result) {
+          console.log('doing base search to get all terms for facets!');
+          console.dir(result);
+          // FIXME: do something with the returned data here ...
+        })
+      ]);
+
+      search_promise.then(function (result) {
         //console.log('Got data for ' + query + ' for page ' + page);
         //SearchService.set_results(result.data);
+        console.log('Full search defered promise is finally done!');
         defer.resolve(result);
       }, function (error) {
         console.log('There was en error getting the data for ' + query);
@@ -253,6 +273,10 @@ function (ORIAPIService, ConstantsService, OptionsService) {
     OptionsService.set_options(o);
   }
 
+  svc.base_search = function(options) {
+    return ORIAPIService.simple_search(undefined, 1, options);
+  };
+
   svc.search = function(query, page, options) {
     svc.set_query(query);
     svc.set_page(page);
@@ -334,6 +358,8 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
   $scope.busy = true;
   $scope.facets = [];
   $scope.years_full = [];
+  $scope.classifications = [];
+  $scope.classifications_full = [];
 
   $scope.date = {
     usermin: 2006,
