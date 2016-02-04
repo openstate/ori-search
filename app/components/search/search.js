@@ -201,6 +201,7 @@ function (ORIAPIService, ConstantsService, OptionsService) {
   var page;
   var options;
   var meta = {took: 0, total: 0};
+  var classifications = [];
 
   svc.set_meta = function(m) {
     meta = m;
@@ -274,7 +275,13 @@ function (ORIAPIService, ConstantsService, OptionsService) {
   }
 
   svc.base_search = function(options) {
-    return ORIAPIService.simple_search(undefined, 1, options);
+    return ORIAPIService.simple_search(undefined, 1, options).then(function (result) {
+      classifications = result.data.facets.classification.terms.map(function (t) { return t.term; });
+    });
+  };
+
+  svc.get_classifications = function () {
+    return classifications;
   };
 
   svc.search = function(query, page, options) {
@@ -381,6 +388,17 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     $scope.facets = SearchService.get_facets();
     $scope.sort = OptionsService.get_option('sort');
     $scope.order = OptionsService.get_option('order');
+    $scope.classifications = SearchService.get_classifications();
+    console.log('classifications:');
+    console.dir($scope.classifications);
+    for (var classification in $scope.classifications) {
+      $scope.classifications_full.push({
+        term: classification,
+        label: classification,
+        active: ($.inArray(classification, $scope.options.filters.classification.terms) >= 0),
+        count: SearchService.get_facet_count_for_term('classification', term)
+      });
+    }
 
     for (var doc_type in $scope.doc_types) {
       $scope.doc_types_full.push({
