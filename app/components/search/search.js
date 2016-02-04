@@ -455,12 +455,17 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
       return o.active; }).map(function (o) { return o.meta.collection; });
     var doc_types = $scope.doc_types_full.filter(function (o) {
       return o.active; }).map(function (o) { return o.term; });
+    var classifications = $scope.classifications_full.filter(function (o) {
+      return o.active; }).map(function (o) { return o.term; });
     console.log('Active collections:');
     console.dir(collections);
     console.log('Active types:');
     console.dir(doc_types);
+    console.log('Active classifications:');
+    console.dir(classifications);
     OptionsService.set_filter_terms('collection', collections);
     OptionsService.set_filter_terms('types', doc_types);
+    OptionsService.set_filter_terms('classification', classifications);
     OptionsService.set_filter('start_date', {
       "from": $scope.date.usermin + "-01-01",
       "to": $scope.date.usermax + "-12-31"
@@ -480,6 +485,9 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
       });
       $.each($scope.municipalities_full, function (idx, item) {
         item.count = SearchService.get_facet_count_for_term('collection', item.meta.collection);
+      });
+      $.each($scope.classifications_full, function (idx, item) {
+        item.count = SearchService.get_facet_count_for_term('classification', item.term);
       });
 
       var start_path = "";
