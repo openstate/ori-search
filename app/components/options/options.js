@@ -33,6 +33,7 @@ angular.module('oriApp.options', ['ngRoute'])
       filters: {
         collection: {"terms": ConstantsService.get_municipalities().organizations.map(function (o) { return o.meta.collection; })},
         types: {"terms": Object.keys(ConstantsService.get_doc_types()) },
+        classification: {"terms": ConstantsService.get_classifications() },
         start_date: {"from": "2006-01-01", "to": "now"}
       },
       sort: '_score',

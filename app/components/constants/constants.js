@@ -12,6 +12,7 @@ angular.module('oriApp.constants', ['ngRoute'])
   var promise;
   var sources;
   var municipalities;
+  var classifications = [];
   var doc_types = {
     'events': 'Activiteiten'
   };
@@ -36,6 +37,10 @@ angular.module('oriApp.constants', ['ngRoute'])
 
   svc.get_sources = function() {
     return sources;
+  };
+
+  svc.get_classifications = function() {
+    return classifications;
   };
 
   var load_sources = function() {
@@ -74,8 +79,16 @@ angular.module('oriApp.constants', ['ngRoute'])
     });
   };
 
+  var load_classifications = function() {
+    return ORIAPIService.simple_search(undefined, 1, {size: 0}).then(function (result) {
+      console.log('doing base search to get all terms for facets!');
+      console.dir(result);
+      classifications = result.data.facets.classification.terms.map(function (t) { return t.term; });
+    });
+  };
+
   svc.init = function() {
-    promise = $q.all([load_sources(), load_municipalities()]);
+    promise = $q.all([load_sources(), load_municipalities(), load_classifications()]);
   };
 
   return svc;

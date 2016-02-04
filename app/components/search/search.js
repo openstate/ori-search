@@ -37,19 +37,8 @@ var defered_resolver = {
         size: 0
       };
 
-      if (OptionsService.get_internal_option('single_mode')) {
-        search_base_filters.filters = {
-          collection: {"terms": [municipality]}
-        };
-      }
-
       var search_promise = $q.all([
-        SearchService.search(query, page, options),
-        SearchService.base_search(search_base_filters).then(function (result) {
-          console.log('doing base search to get all terms for facets!');
-          console.dir(result);
-          // FIXME: do something with the returned data here ...
-        })
+        SearchService.search(query, page, options)
       ]);
 
       search_promise.then(function (result) {
@@ -365,7 +354,7 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
   $scope.busy = true;
   $scope.facets = [];
   $scope.years_full = [];
-  $scope.classifications = [];
+  $scope.classifications = ConstantsService.get_classifications();
   $scope.classifications_full = [];
 
   $scope.date = {
@@ -388,15 +377,14 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     $scope.facets = SearchService.get_facets();
     $scope.sort = OptionsService.get_option('sort');
     $scope.order = OptionsService.get_option('order');
-    $scope.classifications = SearchService.get_classifications();
     console.log('classifications:');
     console.dir($scope.classifications);
     for (var classification in $scope.classifications) {
       $scope.classifications_full.push({
-        term: classification,
-        label: classification,
-        active: ($.inArray(classification, $scope.options.filters.classification.terms) >= 0),
-        count: SearchService.get_facet_count_for_term('classification', term)
+        term: $scope.classifications[classification],
+        label: $scope.classifications[classification],
+        active: ($.inArray($scope.classifications[classification], $scope.options.filters.classification.terms) >= 0),
+        count: SearchService.get_facet_count_for_term('classification', $scope.classifications[classification])
       });
     }
 
