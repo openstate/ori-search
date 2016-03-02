@@ -6,7 +6,15 @@ var defered_resolver = {
     var defer = $q.defer();
 
     console.log('performing resolve for search page');
-    ConstantsService.get_promise().then(function (data) {
+    ConstantsService.get_promise().then(function(data) {
+      console.log('Getting to the first then of the search!');
+      var municipality = $route.current.params.municipality;
+      if (typeof(municipality) != 'undefined') {
+        return ConstantsService.load_classifications_for_municipality(municipality);
+      } else {
+        return ConstantsService.load_classifications();
+      }
+    }).then(function (data) {
       console.log('all constants data was retrieved!');
       var query = $route.current.params.query;
       var page = 1;

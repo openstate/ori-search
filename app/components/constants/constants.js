@@ -79,7 +79,8 @@ angular.module('oriApp.constants', ['ngRoute'])
     });
   };
 
-  var load_classifications = function() {
+  svc.load_classifications = function() {
+    console.log('loading classifications!');
     return ORIAPIService.simple_search(undefined, 1, {size: 0}).then(function (result) {
       console.log('doing base search to get all terms for facets!');
       console.dir(result);
@@ -87,8 +88,17 @@ angular.module('oriApp.constants', ['ngRoute'])
     });
   };
 
+  svc.load_classifications_for_municipality = function(municipality) {
+    console.log('loading classifications for ' + municipality + ' !');
+    return ORIAPIService.simple_search(undefined, 1, {size: 0, filters: {collection:{terms: [municipality]}}}).then(function (result) {
+      console.log('doing base search to get all terms for facets!');
+      console.dir(result);
+      classifications = result.data.facets.classification.terms.map(function (t) { return t.term; });
+    });
+  };
+
   svc.init = function() {
-    promise = $q.all([load_sources(), load_municipalities(), load_classifications()]);
+    promise = $q.all([load_sources(), load_municipalities()]);
   };
 
   return svc;
