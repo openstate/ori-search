@@ -18,7 +18,7 @@ angular.module('oriApp').factory("ORIAPIService", ['$http', function ($http) {
         collection: {},
         types: {},
         start_date: {"interval": "year"},
-        classification: {}
+        classification: {"size": 100}
       },
       sort: '_score',
       order: 'desc'
@@ -63,7 +63,7 @@ angular.module('oriApp').factory("ORIAPIService", ['$http', function ($http) {
       data: {
         filters: {
           classification: {
-            terms: ["municipality"]
+            terms: ["Municipality"]
           }
         }
       }
