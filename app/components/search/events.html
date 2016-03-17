@@ -1,7 +1,7 @@
 <div class="row">
   <div class="row">
     <div class="col-xs-12">
-      <h2><a href="{{ result.meta.original_object_urls.html | no_wsdl_link }}" target="_blank">{{ result.name }} <span ng-bind-html="result.meta.original_object_urls.html | no_wsdl_no_external_link | unsafe"></span></a></h2>
+      <h2><a href="{{ result.meta.original_object_urls.html | no_wsdl_link }}" target="_blank"><span ng-bind-html="result.name |highlight_in_full_string:result.meta.highlight.name[0] |unsafe"></span> <span ng-bind-html="result.meta.original_object_urls.html | no_wsdl_no_external_link | unsafe"></span></a></h2>
     </div>
   </div>
   <div class="row">
@@ -15,7 +15,7 @@
         <li>{{ result.organisation.name }}</li>
       </ul>
       <p></p>
-      <p ng-bind-html="result.description | unsafe"></p>
+      <p ng-bind-html="result.description | highlight_in_full_string:result.meta.highlight.description[0] |unsafe"></p>
 
       <ul ng-repeat="source in result.sources" class="list-unstyled">
         <li>

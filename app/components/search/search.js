@@ -95,6 +95,17 @@ angular.module('oriApp.search', ['ngRoute', 'chart.js'])
   });
 }])
 
+.filter("highlight_in_full_string", function () {
+  return function (val, highlight_for_field) {
+    if (typeof(highlight_for_field) !== 'undefined') {
+      var normalized_highlight = highlight_for_field.replace('<em>', '').replace('</em>', '');
+      return val.replace(normalized_highlight, highlight_for_field);
+    } else {
+      return val;
+    }
+  };
+})
+
 .filter("first_word", function() {
   return function (val) {
     return val.split(/\s+/)[0];
@@ -112,11 +123,9 @@ angular.module('oriApp.search', ['ngRoute', 'chart.js'])
   };
 })
 
-.filter('unsafe', function($sce) {
-  return function(val) {
-    return $sce.trustAsHtml(val);
-  };
-})
+.filter('unsafe', ['$sce', function($sce) {
+  return $sce.trustAsHtml;
+}])
 
 .filter('format_date', function() {
   return function(val) {
