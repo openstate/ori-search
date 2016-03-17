@@ -95,6 +95,18 @@ angular.module('oriApp.search', ['ngRoute', 'chart.js'])
   });
 }])
 
+.filter("clear_highlight", function () {
+  return function(val) {
+    return val.replace('<em>', '').replace('</em>', '');
+  };
+})
+
+.filter("add_ellipses", function () {
+  return function(val) {
+    return '&hellip;' + val + '&hellip;';
+  };
+})
+
 .filter("highlight_in_full_string", function () {
   return function (val, highlight_for_field) {
     if (typeof(highlight_for_field) !== 'undefined') {
@@ -427,6 +439,10 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     $scope.ydata = [year_facet.map(function (i) {return i.count; })];
   }
 
+
+  $scope.clear_highlight = function(val) {
+    return val.replace('<em>', '').replace('</em>', '');
+  };
 
   $scope.search = function(query) {
     var qry = query || $scope.query || SearchService.get_query();

@@ -23,6 +23,9 @@
             <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>
             {{ source.note || 'Document' }}
           </a>
+          <ul ng-repeat="fragment in result.meta.highlight['sources.description']">
+            <li ng-if="source.description.indexOf(clear_highlight(fragment)) > -1"><span ng-bind-html="fragment |add_ellipses |unsafe"></span></li>
+          </ul>
         </li>
       </ul>
     </div>
