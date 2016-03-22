@@ -485,7 +485,7 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
   $scope.deselect_all = function() {
     console.log('Deselect all clicked!');
     for (var c in $scope.classifications_full) {
-      $scope.classifications_full[c].active = false;
+      $scope.classifications_full[c].active = !$scope.classifications_full[c].active;
     }
     $scope.updateOptions();
   };
