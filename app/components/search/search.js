@@ -482,6 +482,14 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
 
   };
 
+  $scope.deselect_all = function() {
+    console.log('Deselect all clicked!');
+    for (var c in $scope.classifications_full) {
+      $scope.classifications_full[c].active = false;
+    }
+    $scope.updateOptions();
+  };
+
   $scope.updateOptions = function () {
     console.log('Should update options now!');
     var collections = $scope.municipalities_full.filter(function (o) {

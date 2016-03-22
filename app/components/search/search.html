@@ -27,7 +27,10 @@
     </div>
 
     <div class="sidebar-block">
-      <h3>Soorten</h3>
+      <h3>Soorten
+        <!-- Standard button -->
+        <button type="button" class="btn btn-default pull-right" ng-click="deselect_all()">Alles deselecteren</button>
+      </h3>
       <ul class="list-group">
         <li ng-repeat="classification in classifications_full" class="list-group-item">
           <span class="badge">{{ classification.count }}</span>
