@@ -20,10 +20,10 @@
     </div>
 
     <div class="sidebar-block">
-      <h3>Jaren</h3>
+      <h3>Periode</h3>
       <canvas id="ychart" class="chart chart-bar" chart-data="ydata" chart-labels="ylabels" chart-series="yseries">
       </canvas>
-      <div range-slider min="2006" max="2016" model-min="date.usermin" model-max="date.usermax" on-handle-up="updateOptions()" show-values="true"></div>
+      <div range-slider min="min_date" max="max_date" step="604800000" filter="date_slider_as_string" model-min="date.usermin" model-max="date.usermax" on-handle-up="updateOptions()" show-values="true"></div>
     </div>
 
     <div class="sidebar-block">

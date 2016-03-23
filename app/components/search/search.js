@@ -95,6 +95,12 @@ angular.module('oriApp.search', ['ngRoute', 'chart.js'])
   });
 }])
 
+.filter("date_slider_as_string", function () {
+  return function (val) {
+    return new Date(val).toLocaleString();
+  };
+})
+
 .filter("clear_highlight", function () {
   return function(val) {
     return val.replace('<em>', '').replace('</em>', '');
@@ -385,10 +391,12 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
   $scope.years_full = [];
   $scope.classifications = ConstantsService.get_classifications();
   $scope.classifications_full = [];
+  $scope.min_date = new Date(2006, 0, 1).valueOf();
+  $scope.max_date = new Date().valueOf(); // FIXME: should be larger than this
 
   $scope.date = {
-    usermin: 2006,
-    usermax: 2016
+    usermin: $scope.min_date,
+    usermax: $scope.max_date
   };
 
   $scope.ylabels = [];
@@ -406,6 +414,7 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     $scope.facets = SearchService.get_facets();
     $scope.sort = OptionsService.get_option('sort');
     $scope.order = OptionsService.get_option('order');
+
     console.log('classifications:');
     console.dir($scope.classifications);
     for (var classification in $scope.classifications) {
@@ -428,8 +437,8 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
 
     var start_date_range = OptionsService.get_filter('start_date');
     $scope.date = {
-      usermin: start_date_range.from.split('-')[0],
-      usermax: start_date_range.to.split('-')[0]
+      usermin: Date.parse(start_date_range.from),
+      usermax: Date.parse(start_date_range.to)
     };
 
     var year_facet = SearchService.get_facet('start_date').entries;
@@ -482,7 +491,7 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
 
   };
 
-  $scope.deselect_all = function() {
+  $scope.toggle_classifications = function() {
     console.log('Deselect all clicked!');
     for (var c in $scope.classifications_full) {
       $scope.classifications_full[c].active = !$scope.classifications_full[c].active;
@@ -508,8 +517,8 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     OptionsService.set_filter_terms('types', doc_types);
     OptionsService.set_filter_terms('classification', classifications);
     OptionsService.set_filter('start_date', {
-      "from": $scope.date.usermin + "-01-01",
-      "to": $scope.date.usermax + "-12-31"
+      "from": new Date($scope.date.usermin).toISOString(),
+      "to": new Date($scope.date.usermax).toISOString()
     });
     OptionsService.set_option('sort', $scope.sort);
     OptionsService.set_option('order', $scope.order);
