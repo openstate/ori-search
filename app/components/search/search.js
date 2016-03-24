@@ -400,22 +400,23 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
   };
 
   $scope.dateOpts = {
+    linkedCalendars: false,
     locale: {
       applyClass: 'btn-green',
-      applyLabel: "Apply",
-      fromLabel: "From",
-      format: "YYYY-MM-DD",
-      toLabel: "To",
-      cancelLabel: 'Cancel',
-      customRangeLabel: 'Custom range'
+      applyLabel: "Kiezen",
+      fromLabel: "Van",
+      //format: "YYYY-MM-DD",
+      format: "D MMM YYYY",
+      toLabel: "Tot",
+      cancelLabel: 'Annuleren',
+      customRangeLabel: 'Ander interval'
     },
     ranges: {
-      'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-      'Last 30 Days': [moment().subtract(29, 'days'), moment()]
+      'Afgelopen 7 Dagen': [moment().subtract(6, 'days'), moment()],
+      'Afgelopen 30 Dagen': [moment().subtract(29, 'days'), moment()]
     },
     eventHandlers: {
       'apply.daterangepicker': function(ev, picker) {
-        console.log('appy clicked!');
         $scope.updateOptions();
       }
     }
