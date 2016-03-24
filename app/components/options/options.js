@@ -37,9 +37,24 @@ angular.module('oriApp.options', ['ngRoute'])
         classification: {"terms": ConstantsService.get_classifications() },
         start_date: {"from": "2006-01-01T00:00:00Z", "to": x.toISOString()}
       },
+      facets: {
+        start_date: {"interval": "year"},
+      },
       sort: '_score',
       order: 'desc'
     };
+  };
+
+  svc.set_facet = function(facet_name, facet_obj) {
+    options_obj.facets[facet_name] = facet_obj;
+  };
+
+  svc.set_facet_option = function(facet_name, facet_option, facet_val) {
+    options_obj.facets[facet_name][facet_option] = facet_val;
+  };
+
+  svc.get_facet_option = function(facet_name, facet_option) {
+    return options_obj.facets[facet_name][facet_option];
   };
 
   svc.set_collection = function(municipalities) {

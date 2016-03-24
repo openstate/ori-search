@@ -467,7 +467,17 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     var year_facet = SearchService.get_facet('start_date').entries;
     console.log('start date facet entries:');
     console.dir(year_facet);
-    $scope.ylabels = year_facet.map(function (i) { var d = new Date(i.time); return d.getFullYear(); });
+    console.log('start date interval' + OptionsService.get_facet_option('start_date', 'interval'));
+
+    var date_formats = {
+      day: 'D MMM YYYY',
+      week: 'D MMMM YYYY',
+      month: 'MMM YYYY',
+      year: 'YYYY'
+    };
+    var date_interval = OptionsService.get_facet_option('start_date', 'interval');
+
+    $scope.ylabels = year_facet.map(function (i) { return moment(i.time).format(date_formats[date_interval]); });
     $scope.ydata = [year_facet.map(function (i) {return i.count; })];
   }
 
@@ -543,6 +553,21 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
       "from": new Date($scope.date.startDate).toISOString(),
       "to": new Date($scope.date.endDate).toISOString()
     });
+
+    var date_diff = moment.duration($scope.date.endDate - $scope.date.startDate);
+    console.log('date diff : ' + date_diff);
+
+    var max_window = 15;
+    if (date_diff < moment.duration(max_window, 'days')) {
+      OptionsService.set_facet_option('start_date', 'interval', 'day');
+    } else if (date_diff < moment.duration(max_window, 'weeks')) {
+      OptionsService.set_facet_option('start_date', 'interval', 'week');
+    } else if (date_diff < moment.duration(max_window, 'months')) {
+      OptionsService.set_facet_option('start_date', 'interval', 'month');
+    } else {
+      OptionsService.set_facet_option('start_date', 'interval', 'year');
+    }
+
     OptionsService.set_option('sort', $scope.sort);
     OptionsService.set_option('order', $scope.order);
     console.log('Options after adjustment of filters:');

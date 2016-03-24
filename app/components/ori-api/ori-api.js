@@ -31,6 +31,9 @@ angular.module('oriApp').factory("ORIAPIService", ['$http', function ($http) {
 
     if (o !== undefined) {
       payload.filters = o.filters;
+      if (o.facets !== undefined) {
+        $.extend(payload.facets, o.facets);
+      }
       if (o.sort !== undefined) {
         payload.sort = o.sort;
       }
