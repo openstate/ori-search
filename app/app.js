@@ -7,6 +7,7 @@ angular.module('oriApp', [
   'infinite-scroll',
   'ui-rangeSlider',
   'chart.js',
+  'daterangepicker',
   'oriApp.constants',
   'oriApp.options',
   'oriApp.viernulvier',

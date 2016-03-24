@@ -64,7 +64,7 @@ var defered_resolver = {
   }]
 };
 
-angular.module('oriApp.search', ['ngRoute', 'chart.js'])
+angular.module('oriApp.search', ['ngRoute', 'chart.js', 'daterangepicker'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/search', {
@@ -395,8 +395,30 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
   $scope.max_date = new Date().valueOf(); // FIXME: should be larger than this
 
   $scope.date = {
-    usermin: $scope.min_date,
-    usermax: $scope.max_date
+    startDate: $scope.min_date,
+    endDate: $scope.max_date
+  };
+
+  $scope.dateOpts = {
+    locale: {
+      applyClass: 'btn-green',
+      applyLabel: "Apply",
+      fromLabel: "From",
+      format: "YYYY-MM-DD",
+      toLabel: "To",
+      cancelLabel: 'Cancel',
+      customRangeLabel: 'Custom range'
+    },
+    ranges: {
+      'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+      'Last 30 Days': [moment().subtract(29, 'days'), moment()]
+    },
+    eventHandlers: {
+      'apply.daterangepicker': function(ev, picker) {
+        console.log('appy clicked!');
+        $scope.updateOptions();
+      }
+    }
   };
 
   $scope.ylabels = [];
@@ -437,8 +459,8 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
 
     var start_date_range = OptionsService.get_filter('start_date');
     $scope.date = {
-      usermin: Date.parse(start_date_range.from),
-      usermax: Date.parse(start_date_range.to)
+      startDate: Date.parse(start_date_range.from),
+      endDate: Date.parse(start_date_range.to)
     };
 
     var year_facet = SearchService.get_facet('start_date').entries;
@@ -517,8 +539,8 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     OptionsService.set_filter_terms('types', doc_types);
     OptionsService.set_filter_terms('classification', classifications);
     OptionsService.set_filter('start_date', {
-      "from": new Date($scope.date.usermin).toISOString(),
-      "to": new Date($scope.date.usermax).toISOString()
+      "from": new Date($scope.date.startDate).toISOString(),
+      "to": new Date($scope.date.endDate).toISOString()
     });
     OptionsService.set_option('sort', $scope.sort);
     OptionsService.set_option('order', $scope.order);
