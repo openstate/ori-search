@@ -471,13 +471,19 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
 
     var date_formats = {
       day: 'D MMM YYYY',
-      week: 'D MMMM YYYY',
+      week: 'W / YYYY',
       month: 'MMM YYYY',
       year: 'YYYY'
     };
+    var date_prefixes = {
+      day: '',
+      week: 'wk ',
+      month: '',
+      year: ''
+    };
     var date_interval = OptionsService.get_facet_option('start_date', 'interval');
 
-    $scope.ylabels = year_facet.map(function (i) { return moment(i.time).format(date_formats[date_interval]); });
+    $scope.ylabels = year_facet.map(function (i) { return date_prefixes[date_interval] + moment(i.time).format(date_formats[date_interval]); });
     $scope.ydata = [year_facet.map(function (i) {return i.count; })];
   }
 
@@ -522,6 +528,14 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
       $scope.busy = false;
     });
 
+  };
+
+  $scope.clear_period = function() {
+    $scope.date = {
+      startDate: $scope.min_date,
+      endDate: $scope.max_date
+    };
+    $scope.updateOptions();
   };
 
   $scope.toggle_classifications = function() {

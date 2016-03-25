@@ -20,7 +20,10 @@
     </div>
 
     <div class="sidebar-block">
-      <h3>Periode</h3>
+      <h3>Periode
+        <!-- Standard button -->
+        <button type="button" class="btn btn-default pull-right" ng-click="clear_period()">Opnieuw</button>
+      </h3>
       <canvas id="ychart" class="chart chart-bar" chart-data="ydata" chart-labels="ylabels" chart-series="yseries">
       </canvas>
       <input date-range-picker class="form-control date-picker" type="text" min="" max="" ng-model="date" options="dateOpts" />
