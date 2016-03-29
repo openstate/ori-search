@@ -24,7 +24,7 @@
             {{ source.note || 'Document' }}
           </a>
           <ul ng-repeat="fragment in result.meta.highlight['sources.description']">
-            <li ng-if="source.description.indexOf(clear_highlight(fragment)) > -1"><span ng-bind-html="fragment |add_ellipses |unsafe"></span></li>
+            <li ng-if="(result.sources.length == 1) || (source.description.indexOf(clear_highlight(fragment)) > -1)"><span ng-bind-html="fragment |add_ellipses |unsafe"></span></li>
           </ul>
         </li>
       </ul>
