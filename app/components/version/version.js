@@ -5,4 +5,4 @@ angular.module('oriApp.version', [
   'oriApp.version.version-directive'
 ])
 
-.value('version', '0.1');
+.value('version', '0.8');
