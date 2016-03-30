@@ -1,7 +1,16 @@
 <div class="row">
   <div class="row">
     <div class="col-xs-12">
-      <h2><a href="{{ result.meta.original_object_urls.html | no_wsdl_link }}" target="_blank"><span ng-bind-html="result.name |highlight_in_full_string:result.meta.highlight.name[0] |unsafe"></span> <span ng-bind-html="result.meta.original_object_urls.html | no_wsdl_no_external_link | unsafe"></span></a></h2>
+      <h2>
+        <a ng-show="result.meta.original_object_urls.html != 'https://www.mijnbabs.nl/iBabsWCFService/Public.svc?singleWsdl'" href="{{ result.meta.original_object_urls.html | no_wsdl_link }}" target="_blank">
+          <span ng-bind-html="result.name |highlight_in_full_string:result.meta.highlight.name[0] |unsafe"></span>
+          <span ng-bind-html="result.meta.original_object_urls.html | no_wsdl_no_external_link | unsafe"></span>
+        </a>
+        <span ng-show="result.meta.original_object_urls.html == 'https://www.mijnbabs.nl/iBabsWCFService/Public.svc?singleWsdl'">
+          <span ng-bind-html="result.name |highlight_in_full_string:result.meta.highlight.name[0] |unsafe"></span>
+          <span ng-bind-html="result.meta.original_object_urls.html | no_wsdl_no_external_link | unsafe"></span>
+        </span>
+      </h2>
     </div>
   </div>
   <div class="row">

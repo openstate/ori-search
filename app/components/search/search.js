@@ -199,7 +199,7 @@ angular.module('oriApp.search', ['ngRoute', 'chart.js', 'daterangepicker'])
 .filter('no_wsdl_link', function () {
   return function (val) {
     if (val == 'https://www.mijnbabs.nl/iBabsWCFService/Public.svc?singleWsdl') {
-      return '#';
+      return '';
     } else {
       return val;
     }
