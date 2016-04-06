@@ -20,7 +20,7 @@
     <div class="col-xs-8 col-md-10 col-lg-10">
       <h3>{{ result.start_date |format_date }}</h3>
       <ul class="list-unstyled">
-        <li><em>{{ result.classification }}</em></il>
+        <li><em><a ng-click="filter_on_classification($event)">{{ result.classification }}</a></em></il>
         <li>{{ result.organisation.name }}</li>
       </ul>
       <p></p>

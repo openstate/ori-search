@@ -69,6 +69,10 @@ angular.module('oriApp.options', ['ngRoute'])
     options_obj.filters[filter_name] = filter_obj;
   };
 
+  svc.set_filter_option = function(filter_name, filter_option, filter_val) {
+    options_obj.filters[filter_name][filter_option] = filter_val;
+  };
+
   svc.get_filter = function(filter_name) {
     return options_obj.filters[filter_name];
   };
