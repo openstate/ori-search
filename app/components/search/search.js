@@ -68,7 +68,14 @@ angular.module('oriApp.search', ['ngRoute', 'chart.js', 'daterangepicker'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/search', {
-    redirectTo: '/search/een'
+    templateUrl: 'components/search/search.html',
+    controller: 'SearchCtrl',
+    resolve: defered_resolver
+  }).
+  when('/search/options/:options', {
+    templateUrl: 'components/search/search.html',
+    controller: 'SearchCtrl',
+    resolve: defered_resolver
   }).
   when('/search/:query', {
     templateUrl: 'components/search/search.html',
@@ -81,7 +88,14 @@ angular.module('oriApp.search', ['ngRoute', 'chart.js', 'daterangepicker'])
     resolve: defered_resolver
   }).
   when('/g/:municipality', {
-    redirectTo: '/g/:municipality/search/een'
+    templateUrl: 'components/search/search.html',
+    controller: 'SearchCtrl',
+    resolve: defered_resolver
+  }).
+  when('/g/:municipality/options/:options', {
+    templateUrl: 'components/search/search.html',
+    controller: 'SearchCtrl',
+    resolve: defered_resolver
   }).
   when('/g/:municipality/search/:query', {
     templateUrl: 'components/search/search.html',
@@ -427,7 +441,15 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
   $scope.ydata = [[]];
 
   console.log('Initializing search controller : ' + $scope.query + ' : ' + $location.absUrl());
-  if ($scope.query) {
+  console.dir(OptionsService.get_options());
+
+  if ($scope.municipalities) {
+    if (OptionsService.get_options() === undefined) {
+      console.log('We should set default options now!');
+      console.dir(ConstantsService.get_municipalities());
+      OptionsService.set_default_options();
+    }
+
     $scope.results = SearchService.get_results();
     $scope.meta = SearchService.get_meta();
     $scope.options = SearchService.get_options();
@@ -435,6 +457,8 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     $scope.municipality = OptionsService.get_internal_option('municipality');
     $scope.busy = false;
     $scope.facets = SearchService.get_facets();
+    console.log('get options before sort:');
+    console.dir(OptionsService.get_options());
     $scope.sort = OptionsService.get_option('sort');
     $scope.order = OptionsService.get_option('order');
 
@@ -486,7 +510,6 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     $scope.ylabels = year_facet.map(function (i) { return date_prefixes[date_interval] + moment(i.time).format(date_formats[date_interval]); });
     $scope.ydata = [year_facet.map(function (i) {return i.count; })];
   }
-
 
   $scope.clear_highlight = function(val) {
     return val.replace('<em>', '').replace('</em>', '');
@@ -606,7 +629,12 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
       if (OptionsService.get_internal_option('single_mode')) {
         start_path = "g/" + OptionsService.get_internal_option('municipality') + "/";
       }
-      $location.path(start_path + "search/" + SearchService.get_query() + "/options/" + OptionsService.get_options_b64());
+
+      if (SearchService.get_query() !== undefined) {
+        $location.path(start_path + "search/" + SearchService.get_query() + "/options/" + OptionsService.get_options_b64());
+      } else {
+        $location.path(start_path + "options/" + OptionsService.get_options_b64());
+      }
     });
   };
 }]);

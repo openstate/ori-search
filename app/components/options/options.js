@@ -27,8 +27,8 @@ angular.module('oriApp.options', ['ngRoute'])
   };
 
   svc.set_default_options = function() {
-    console.log('sources in constants:');
-    console.dir(ConstantsService.get_municipalities());
+    // console.log('sources in constants:');
+    // console.dir(ConstantsService.get_municipalities());
     var x = new Date();
     options_obj = {
       filters: {
