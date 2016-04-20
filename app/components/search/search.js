@@ -72,7 +72,7 @@ angular.module('oriApp.search', ['ngRoute', 'chart.js', 'daterangepicker'])
     controller: 'SearchCtrl',
     resolve: defered_resolver
   }).
-  when('/search/options/:options', {
+  when('/options/:options', {
     templateUrl: 'components/search/search.html',
     controller: 'SearchCtrl',
     resolve: defered_resolver
