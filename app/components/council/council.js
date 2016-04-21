@@ -43,7 +43,7 @@ angular.module('oriApp.council', ['ngRoute'])
 function ($q, ORIAPIService) {
   var svc = {};
   var organizations = [];
-  var persons = []
+  var persons = [];
   var classifications = ['Party', 'committee'];
 
   svc.load_information = function(municipality_slug) {
@@ -52,18 +52,20 @@ function ($q, ORIAPIService) {
 
   svc.load_organizations = function(municipality_slug) {
     // FIXME: set internal data when promise is fulfilled
+    console.log('Start getting organixations');
     return ORIAPIService.organizations(municipality_slug).then(function (data) {
       console.log('Got organization data for ' + municipality_slug);
-      organizations = data.data;
+      organizations = data.data.organizations;
       console.dir(data);
     });
   };
 
   svc.load_persons = function(municipality_slug) {
+    console.log('Start getting persons');
     // FIXME: set internal data when promise is fulfilled
     return ORIAPIService.persons(municipality_slug).then(function (data) {
       console.log('Got person data for ' + municipality_slug);
-      persons = data.data;
+      persons = data.data.persons;
       console.dir(data);
     });
   };
@@ -95,18 +97,26 @@ function($scope, $location, ORIAPIService, CouncilService,OptionsService) {
   };
 
   $scope.organizations_by_classification = function(classification) {
-    var results  = $scope.organizations.organizations.filter(function (item) { return (item.classification == classification); });
+    var results  = $scope.organizations.filter(function (item) { return (item.classification == classification); });
     return results;
   };
 
   $scope.persons_by_organization = function(organization) {
-    var results = $scope.persons.persons.filter(function (person) {
+    if (typeof(organization.id) == 'undefined') {
+      return [];
+    }
+    var results = $scope.persons.filter(function (person) {
+      if (typeof(person.memberships) == 'undefined') {
+        return false;
+      }
+      if (person.memberships.length <= 0) {
+        return false;
+      }
       var memberships = person.memberships.map(function (m) { return m.organization_id; });
       //console.log(organization.id + ' <-> ' + memberships);
       return ( memberships.indexOf(organization.id) >= 0 );
     });
-    console.log('searching for persons belonging to ' + organization.id);
-    console.dir(results);
+    //console.dir(results);
     return results;
   };
 
