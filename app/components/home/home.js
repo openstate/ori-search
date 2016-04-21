@@ -27,7 +27,16 @@ angular.module('oriApp.home', ['ngRoute'])
 .controller('HomeCtrl', ['$scope', '$location', 'ORIAPIService', 'ConstantsService', 'OptionsService', 'SearchService',
 function($scope, $location, ORIAPIService, ConstantsService, OptionsService, SearchService) {
   console.log('Initializing home controller!');
+  var _chunk = function(arr, size) {
+    var newArr = [];
+    for (var i=0; i<arr.length; i+=size) {
+      newArr.push(arr.slice(i, i+size));
+    }
+    return newArr;
+  }
+
   $scope.municipalities = ConstantsService.get_municipalities();
+  $scope.chunked_municipalities = _chunk($scope.municipalities.organizations, 3);
   console.dir($scope.municipalities);
   OptionsService.set_internal_option('single_mode', false);
   OptionsService.set_internal_option('municipality', undefined);

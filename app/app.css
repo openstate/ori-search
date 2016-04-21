@@ -7,3 +7,13 @@
 .result {
   margin-bottom: 20px;
 }
+
+.home-item img {
+  width: 140px;
+  height: 140px;
+  margin: auto;
+}
+
+.home-item h2 a {
+  color: inherit;
+}

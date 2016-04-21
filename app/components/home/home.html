@@ -1,11 +1,10 @@
-<div class="row">
-<ul ng-repeat="municipality in municipalities.organizations" class="list-unstyled">
-  <li>
-    <div class="result col-md-2">
-      <a href="#/g/{{ municipality.meta.collection }}">
-        <img src="{{ municipality.image }}" class="img-responsive" alt="{{ municipality.name }}" title="{{ municipality.name }}" style="width: 100%;">
-      </a>
-    </div>
-  </li>
-</ul>
+
+<div ng-repeat="municipalities in chunked_municipalities" class="row">
+  <div ng-repeat="municipality in municipalities" class="col-md-4 text-center home-item">
+    <a href="#/g/{{ municipality.meta.collection }}">
+      <img class="img-thumbnail img-responsive" src="{{ municipality.image }}">
+    </a>
+    <h2><a href="#/g/{{ municipality.meta.collection }}">{{ municipality.name }}</a></h2>
+    <p><a class="btn btn-default" href="#/g/{{ municipality.meta.collection }}">Bekijken &rarr;</a></p>
+  </div>
 </div>
