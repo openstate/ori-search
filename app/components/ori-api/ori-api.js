@@ -69,7 +69,9 @@ angular.module('oriApp').factory("ORIAPIService", ['$http', function ($http) {
           classification: {
             terms: ["Municipality"]
           }
-        }
+        },
+        "sort": "meta.source_id",
+        "order": "asc"
       }
     });
   };
