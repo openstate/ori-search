@@ -8,6 +8,10 @@ function($scope, $location) {
   //$scope.has_filters = /^\/g\/.*/.test($location.url());
 
   $scope.has_filter = function() {
-    return $('#sidebar').is(':visible');
+    return ($('#sidebar').length > 0);
+  };
+
+  $scope.toggle_sidebar = function() {
+    $('#sidebar').toggle();
   };
 }]);
