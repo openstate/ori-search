@@ -31,6 +31,9 @@
            <span class="icon-bar"></span>
            <span class="icon-bar"></span>
          </button>
+         <button type="button" class="navbar-toggle collapsed" ng-show="has_filter()" ng-click="showsidebar()" style="padding: 6px 10px; color: white;" ng-controller="NavbarCtrl">
+           <span class="glyphicon glyphicon-cog white"></span>
+         </button>
          <a class="navbar-brand" href="#/">Open Raadsinformatie</a>
        </div>
        <div id="navbar" class="collapse navbar-collapse">
@@ -85,6 +88,7 @@
   <script src="components/constants/constants.js"></script>
   <script src="components/options/options.js"></script>
   <script src="components/viernulvier/viernulvier.js"></script>
+  <script src="components/navbar/navbar.js"></script>
   <script src="components/search/search.js"></script>
   <script src="components/council/council.js"></script>
 </body>

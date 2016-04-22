@@ -12,6 +12,7 @@ angular.module('oriApp', [
   'oriApp.options',
   'oriApp.viernulvier',
   'oriApp.search',
+  'oriApp.navbar',
   'oriApp.council',
   'oriApp.home',
   'oriApp.version'
