@@ -12,6 +12,10 @@ function($scope, $location) {
   };
 
   $scope.toggle_sidebar = function() {
-    $('#sidebar').toggle();
+    if ($('#sidebar').hasClass('hidden-xs')) {
+      $('#sidebar').removeClass('hidden-xs');
+    } else {
+      $('#sidebar').toggle();
+    }
   };
 }]);
