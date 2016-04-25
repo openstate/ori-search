@@ -7,7 +7,8 @@ angular.module('oriApp.options', ['ngRoute'])
   var options_obj;
   var internal_options = {
     single_mode: false,
-    municipality: undefined
+    municipality: undefined,
+    sidebar_visible: false
   };
 
   svc.get_internal_option = function(name) {

@@ -2,8 +2,8 @@
 
 angular.module('oriApp.navbar', ['ngRoute'])
 
-.controller('NavbarCtrl', ['$scope', '$location',
-function($scope, $location) {
+.controller('NavbarCtrl', ['$scope', '$location', 'OptionsService',
+function($scope, $location, OptionsService) {
   console.log('Initializing navbar controller!');
   //$scope.has_filters = /^\/g\/.*/.test($location.url());
 
@@ -12,10 +12,7 @@ function($scope, $location) {
   };
 
   $scope.toggle_sidebar = function() {
-    if ($('#sidebar').hasClass('hidden-xs')) {
-      $('#sidebar').removeClass('hidden-xs');
-    } else {
-      $('#sidebar').toggle();
-    }
+    OptionsService.set_internal_option(
+      'sidebar_visible', !OptionsService.get_internal_option('sidebar_visible'));
   };
 }]);

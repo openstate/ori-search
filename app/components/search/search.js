@@ -511,6 +511,10 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     $scope.ydata = [year_facet.map(function (i) {return i.count; })];
   }
 
+  $scope.sidebar_visible = function() {
+    return OptionsService.get_internal_option('sidebar_visible');
+  };
+
   $scope.clear_highlight = function(val) {
     return val.replace('<em>', '').replace('</em>', '');
   };

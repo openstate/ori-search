@@ -4,45 +4,46 @@
 </ul>
 
 <div class="row">
-  <div id="sidebar" class="col-md-4 col-xs-12 hidden-xs">
-    <div class="sidebar-block">
-      <h2>Filters</h2>
-    </div>
-    <div class="sidebar-block" ng-if="!single_mode">
-      <h3>Gemeenten</h3>
-      <ul class="list-group">
-        <li ng-repeat="municipality in municipalities_full" class="list-group-item">
-          <span class="badge">{{ municipality.count }}</span>
-          <input type="checkbox" value="" id="{{ municipality.collection }}" data-toggle="checkbox" ng-model="municipality.active" ng-change="updateOptions()">
-          <label for="{{ municipality.collection }}">{{ municipality.name }}</label>
-        </li>
-      </ul>
-    </div>
+  <div id="sidebar" class="col-md-4 col-xs-12">
+    <div class="sidebar-wrapper" ng-show="sidebar_visible()">
+      <div class="sidebar-block">
+        <h2>Filters</h2>
+      </div>
+      <div class="sidebar-block" ng-if="!single_mode">
+        <h3>Gemeenten</h3>
+        <ul class="list-group">
+          <li ng-repeat="municipality in municipalities_full" class="list-group-item">
+            <span class="badge">{{ municipality.count }}</span>
+            <input type="checkbox" value="" id="{{ municipality.collection }}" data-toggle="checkbox" ng-model="municipality.active" ng-change="updateOptions()">
+            <label for="{{ municipality.collection }}">{{ municipality.name }}</label>
+          </li>
+        </ul>
+      </div>
 
-    <div class="sidebar-block">
-      <h3>Periode
-        <!-- Standard button -->
-        <button type="button" class="btn btn-default pull-right" ng-click="clear_period()">Opnieuw</button>
-      </h3>
-      <canvas id="ychart" class="chart chart-bar" chart-data="ydata" chart-labels="ylabels" chart-series="yseries">
-      </canvas>
-      <input date-range-picker class="form-control date-picker" type="text" min="" max="" ng-model="date" options="dateOpts" />
-    </div>
+      <div class="sidebar-block">
+        <h3>Periode
+          <!-- Standard button -->
+          <button type="button" class="btn btn-default pull-right" ng-click="clear_period()">Opnieuw</button>
+        </h3>
+        <canvas id="ychart" class="chart chart-bar" chart-data="ydata" chart-labels="ylabels" chart-series="yseries">
+        </canvas>
+        <input date-range-picker class="form-control date-picker" type="text" min="" max="" ng-model="date" options="dateOpts" />
+      </div>
 
-    <div class="sidebar-block">
-      <h3>Soorten
-        <!-- Standard button -->
-        <button type="button" class="btn btn-default pull-right" ng-click="toggle_classifications()">Alles aan/uit</button>
-      </h3>
-      <ul class="list-group">
-        <li ng-repeat="classification in classifications_full" class="list-group-item">
-          <span class="badge">{{ classification.count }}</span>
-          <input type="checkbox" value="" id="{{ classification.term }}" data-toggle="checkbox" ng-model="classification.active" ng-change="updateOptions()">
-          <label for="{{ classification.term }}">{{ classification.label }}</label>
-        </li>
-      </ul>
+      <div class="sidebar-block">
+        <h3>Soorten
+          <!-- Standard button -->
+          <button type="button" class="btn btn-default pull-right" ng-click="toggle_classifications()">Alles aan/uit</button>
+        </h3>
+        <ul class="list-group">
+          <li ng-repeat="classification in classifications_full" class="list-group-item">
+            <span class="badge">{{ classification.count }}</span>
+            <input type="checkbox" value="" id="{{ classification.term }}" data-toggle="checkbox" ng-model="classification.active" ng-change="updateOptions()">
+            <label for="{{ classification.term }}">{{ classification.label }}</label>
+          </li>
+        </ul>
+      </div>
     </div>
-
   </div>
   <div id="results" class="col-md-8 col-xs-12">
    <div infinite-scroll='nextPage()' infinite-scroll-disabled='nextPageLoading' infinite-scroll-distance='1'>
