@@ -14,5 +14,12 @@ function($scope, $location, OptionsService) {
   $scope.toggle_sidebar = function() {
     OptionsService.set_internal_option(
       'sidebar_visible', !OptionsService.get_internal_option('sidebar_visible'));
+
+    var is_active = OptionsService.get_internal_option('sidebar_visible');
+    if (is_active) {
+      $('#button-cog').addClass('active');
+    } else {
+      $('#button-cog').removeClass('active');
+    }
   };
 }]);

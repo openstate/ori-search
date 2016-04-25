@@ -25,13 +25,13 @@
   <nav class="navbar navbar-inverse navbar-fixed-top">
      <div class="container">
        <div class="navbar-header">
-         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
            <span class="sr-only">Toon/verberg navigatie</span>
            <span class="icon-bar"></span>
            <span class="icon-bar"></span>
            <span class="icon-bar"></span>
          </button>
-         <button type="button" class="navbar-toggle collapsed" ng-show="has_filter()" ng-click="toggle_sidebar()" style="padding: 6px 10px; color: white;" ng-controller="NavbarCtrl">
+         <button type="button" id="button-cog" class="navbar-toggle" ng-show="has_filter()" ng-click="toggle_sidebar()" style="padding: 6px 10px; color: white;" ng-controller="NavbarCtrl">
            <span class="glyphicon glyphicon-cog white"></span>
          </button>
          <a class="navbar-brand" href="#/">Open Raadsinformatie</a>
