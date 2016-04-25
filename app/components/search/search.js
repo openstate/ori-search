@@ -377,8 +377,8 @@ function (ORIAPIService, ConstantsService, OptionsService) {
   return svc;
 }])
 
-.controller('SearchCtrl', ['$scope', '$location', 'ORIAPIService', 'SearchService', 'ConstantsService', 'OptionsService',
-function($scope, $location, ORIAPIService, SearchService, ConstantsService, OptionsService) {
+.controller('SearchCtrl', ['$scope', '$location', 'ORIAPIService', 'SearchService', 'ConstantsService', 'OptionsService', 'screenSize',
+function($scope, $location, ORIAPIService, SearchService, ConstantsService, OptionsService, screenSize) {
   $scope.query = SearchService.get_query();
   $scope.municipalities = ConstantsService.get_municipalities();
   $scope.options = SearchService.get_options();

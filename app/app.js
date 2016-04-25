@@ -4,6 +4,7 @@
 angular.module('oriApp', [
   'ngRoute',
   'ngTouch',
+  'matchMedia',
   'infinite-scroll',
   'ui-rangeSlider',
   'chart.js',
