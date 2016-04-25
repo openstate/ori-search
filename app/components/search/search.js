@@ -512,7 +512,9 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
   }
 
   $scope.sidebar_visible = function() {
-    return OptionsService.get_internal_option('sidebar_visible');
+    var is_cog_visible = $('#button-cog span.glyphicon').is(':visible');
+    var is_sibdebar_visible = OptionsService.get_internal_option('sidebar_visible');
+    return (!is_cog_visible || is_sidebar_visible);
   };
 
   $scope.clear_highlight = function(val) {
