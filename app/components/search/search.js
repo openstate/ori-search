@@ -436,6 +436,17 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     }
   };
 
+  $scope.desktop = screenSize.on('md, lg', function(match){
+      console.log('medium or large:');
+      console.dir(match);
+      $scope.desktop = match;
+  });
+  $scope.mobile = screenSize.on('xs, sm', function(match){
+      console.log('medium or large:');
+      console.dir(match);
+      $scope.mobile = match;
+  });
+
   $scope.ylabels = [];
   $scope.yseries = ['Documenten'];
   $scope.ydata = [[]];
@@ -513,8 +524,8 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
 
   $scope.sidebar_visible = function() {
     var is_cog_visible = $('#button-cog span.glyphicon').is(':visible');
-    var is_sibdebar_visible = OptionsService.get_internal_option('sidebar_visible');
-    return (!is_cog_visible || is_sidebar_visible);
+    var is_sidebar_visible = OptionsService.get_internal_option('sidebar_visible');
+    return $scope.desktop || (!is_cog_visible || is_sidebar_visible);
   };
 
   $scope.clear_highlight = function(val) {
