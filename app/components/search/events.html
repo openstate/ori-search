@@ -22,7 +22,16 @@
       <ul class="list-unstyled">
         <li><em><a ng-click="filter_on_classification($event)">{{ result.classification }}</a></em></il>
         <li>{{ result.organisation.name }}</li>
+        <li>
+          <a href="http://api.openraadsinformatie.nl/v0/{{ result.meta.collection }}/{{ result.meta._type }}/{{ result.id }}" target="_blank">
+            <img src="images/json.svg" title="Rauwe JSON data voor dit item" width="16" height="16" class="pull-right">
+          </a>
+        </li>
       </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
       <p></p>
       <p ng-bind-html="result.description | highlight_in_full_string:result.meta.highlight.description[0] |unsafe"></p>
 
@@ -37,13 +46,6 @@
           </ul>
         </li>
       </ul>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <a href="http://api.openraadsinformatie.nl/v0/{{ result.meta.collection }}/{{ result.meta._type }}/{{ result.id }}" target="_blank">
-        <img src="images/json.svg" title="Rauwe JSON data voor dit item" width="40" height="40" class="pull-right">
-      </a>
     </div>
   </div>
 </div>
