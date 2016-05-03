@@ -21,6 +21,14 @@
 .result h2 {
 }
 
+.attachments li {
+  /* essential */
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+  width: 100%;
+}
+
 @media(max-width:767px){
   .result h2 {
     font-size: 15px;

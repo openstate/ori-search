@@ -35,7 +35,7 @@
       <p></p>
       <p ng-bind-html="result.description | highlight_in_full_string:result.meta.highlight.description[0] |unsafe"></p>
 
-      <ul ng-repeat="source in result.sources" class="list-unstyled">
+      <ul ng-repeat="source in result.sources" class="list-unstyled attachments">
         <li>
           <a href="{{ source.url}}" target="_blank">
             <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>
