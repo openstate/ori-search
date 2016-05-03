@@ -45,24 +45,26 @@
       </div>
     </div>
   </div>
+
   <div id="results" class="col-md-8 col-xs-12">
    <div infinite-scroll='nextPage()' infinite-scroll-disabled='nextPageLoading' infinite-scroll-distance='1'>
-      <div class="row">
+      <div class="row" ng-if="query">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <p>Gezocht naar {{ query }}, {{ meta.total }} resultaten gevonden.</p>
         </div>
       </div>
+
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <form class="form-horizontal">
-            <label class="control-label col-xs-4">Sorteren op:</label>
-            <div class="col-xs-4">
+            <label class="control-label col-xs-12">Sorteren op:</label>
+            <div class="col-xs-6">
               <select ng-model="sort" name="sort" class="form-control" ng-change="updateOptions()">
                 <option value="_score">Relevantie</option>
                 <option value="start_date">Datum</option>
               </select>
             </div>
-            <div class="col-xs-4">
+            <div class="col-xs-6">
               <select ng-model="order" name="order" class="form-control" ng-change="updateOptions()">
                 <option value="desc">Aflopend</option>
                 <option value="asc">Oplopend</option>
@@ -71,14 +73,16 @@
           </form>
         </div>
       </div>
-      <ul ng-repeat="result in results" class="list-unstyled">
-        <li>
+
+      <div ng-repeat="result in results">
+        <div class="col-xs-12">
           <div class="result" ng-class="result.meta._type" ng-if="result.meta._type" ng-include="'components/search/' + result.meta._type + '.html'">
             <h2>{{ result.name }}</h2>
             <p>{{ result.description }}</p>
           </div>
-        </li>
-      </ul>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

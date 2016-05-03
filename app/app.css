@@ -17,3 +17,24 @@
 .home-item h2 a {
   color: inherit;
 }
+
+.result h2 {
+}
+
+@media(max-width:767px){
+  .result h2 {
+    font-size: 15px;
+  }
+  .result h3 {
+    font-size: 14px;
+  }
+}
+@media(min-width:768px){
+
+}
+@media(min-width:992px){
+
+}
+@media(min-width:1200px){
+
+}
