@@ -162,8 +162,17 @@ angular.module('oriApp.search', ['ngRoute', 'chart.js', 'daterangepicker'])
 .filter('format_date', function() {
   return function(val) {
     if (val) {
-      var tijd_datum = new Date(val);
-      return tijd_datum.toLocaleString();
+      var val_as_moment = moment(val);
+      return val_as_moment.format('D MMM YYYY');
+    }
+  };
+})
+
+.filter('format_time', function() {
+  return function(val) {
+    if (val) {
+      var val_as_moment = moment(val);
+      return val_as_moment.format('hh:mm');
     }
   };
 })

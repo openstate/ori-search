@@ -1,5 +1,7 @@
 'use strict';
 
+moment.locale('nl');
+
 // Declare app level module which depends on views, and components
 angular.module('oriApp', [
   'ngRoute',

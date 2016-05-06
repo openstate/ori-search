@@ -19,7 +19,8 @@
   color: inherit;
 }
 
-.result h2 {
+.result h3 {
+  margin-top: 0px;
 }
 
 .attachments li {
