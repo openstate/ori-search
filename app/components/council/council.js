@@ -25,10 +25,12 @@ angular.module('oriApp.council', ['ngRoute'])
 
 .filter('person_img', function() {
   return function (val) {
-    if (val.image) {
+    if (typeof(val.image) !== 'undefined') {
       return val.image;
-    } else  if (val.gender) {
+    } else  if (typeof(val.gender) !== 'undefined') {
       return "images/" + val.gender.toLowerCase() + ".svg";
+    } else {
+      return "images/male.svg";
     }
   };
 })
