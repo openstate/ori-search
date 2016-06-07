@@ -1,1 +1,53 @@
-<h2>This is a motion!</h2>
+<div class="row">
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>
+        <a ng-show="result.meta.original_object_urls.html != 'https://www.mijnbabs.nl/iBabsWCFService/Public.svc?singleWsdl'" href="{{ result.meta.original_object_urls.html | no_wsdl_link }}" target="_blank">
+          <span ng-bind-html="result.name |highlight_in_full_string:result.meta.highlight.name[0] |unsafe"></span>
+          <span ng-bind-html="result.meta.original_object_urls.html | no_wsdl_no_external_link | unsafe"></span>
+        </a>
+        <span ng-show="result.meta.original_object_urls.html == 'https://www.mijnbabs.nl/iBabsWCFService/Public.svc?singleWsdl'">
+          <span ng-bind-html="result.name |highlight_in_full_string:result.meta.highlight.name[0] |unsafe"></span>
+          <span ng-bind-html="result.meta.original_object_urls.html | no_wsdl_no_external_link | unsafe"></span>
+        </span>
+      </h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4 col-md-2 col-lg-2">
+      <img src="{{ result | municipality_img | unsafe }}" alt="..." class="img-thumbnail" width="140">
+    </div>
+    <div class="col-xs-8 col-md-10 col-lg-10">
+      <h3>{{ result.start_date |format_date }}</h3>
+      <h3>{{ result.start_date |format_time }}</h3>
+      <ul class="list-unstyled">
+        <li><em><a ng-click="filter_on_classification($event)">{{ result.classification }}</a></em></il>
+        <li>{{ result.organisation.name }}</li>
+        <li>
+          <a href="http://api.openraadsinformatie.nl/v0/{{ result.meta.collection }}/{{ result.meta._type }}/{{ result.id }}" target="_blank">
+            <img src="images/json.svg" title="Rauwe JSON data voor dit item" width="16" height="16" class="pull-right">
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <p><strong>Indiener:</strong> {{ result.creator.name }}</p>
+      <p><strong>Resultaat:</strong> {{ result.result }}<p>
+      <p>{{ results.text }}</p>
+
+      <ul ng-repeat="source in result.sources" class="list-unstyled attachments">
+        <li>
+          <a href="{{ source.url}}" target="_blank">
+            <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>
+            {{ source.note || 'Document' }}
+          </a>
+          <ul ng-repeat="fragment in result.meta.highlight['sources.description']">
+            <li ng-if="(result.sources.length == 1) || (source.description.indexOf(clear_highlight(fragment)) > -1)"><span ng-bind-html="fragment |add_ellipses |unsafe"></span></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
