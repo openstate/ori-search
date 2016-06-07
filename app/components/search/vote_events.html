@@ -36,7 +36,36 @@
       <p><strong>Indiener:</strong> {{ result.motion.creator.name }}</p>
       <p><strong>Resultaat:</strong> {{ result.result }}<p>
       <p>{{ results.motion.text }}</p>
-
+      <h3>Stemming per partij</h3>
+      <table class="table">
+        <thead>
+          <th>Partij</th>
+          <th>Keuze</th>
+          <th>Aantal stemmen</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="party_count in result.counts">
+            <td>{{ party_count.group.name }}</td>
+            <td>{{ party_count.result }}</td>
+            <td>{{ party_count.value }}</td>
+          </tr>
+        </tbody>
+      <table>
+      <h3>Stemming per hoofd</h3>
+      <table class="table">
+        <thead>
+          <th>Persoon</th>
+          <th>Partij</th>
+          <th>Keuze</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="vote in result.votes">
+            <td>{{ vote.voter.name }}</td>
+            <td>{{ vote.group_id }}</td>
+            <td>{{ vote.option }}</td>
+          </tr>
+        </tbody>
+      <table>
       <ul ng-repeat="source in result.sources" class="list-unstyled attachments">
         <li>
           <a href="{{ source.url}}" target="_blank">
