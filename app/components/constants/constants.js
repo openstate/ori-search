@@ -35,6 +35,10 @@ angular.module('oriApp.constants', ['ngRoute'])
     return doc_types;
   };
 
+  svc.get_doc_types_as_keys = function() {
+    return Object.keys(doc_types);
+  };
+
   svc.get_sources = function() {
     return sources;
   };
@@ -81,7 +85,13 @@ angular.module('oriApp.constants', ['ngRoute'])
 
   svc.load_classifications = function() {
     console.log('loading classifications!');
-    return ORIAPIService.simple_search(undefined, 1, {size: 0}).then(function (result) {
+    var search_options = {
+      filters: {
+        types: {terms: svc.get_doc_types_as_keys()}
+      },
+      size: 0
+    };
+    return ORIAPIService.simple_search(undefined, 1, search_options).then(function (result) {
       console.log('doing base search to get all terms for facets!');
       console.dir(result);
       classifications = result.data.facets.classification.terms.map(function (t) { return t.term; });
@@ -90,7 +100,14 @@ angular.module('oriApp.constants', ['ngRoute'])
 
   svc.load_classifications_for_municipality = function(municipality) {
     console.log('loading classifications for ' + municipality + ' !');
-    return ORIAPIService.simple_search(undefined, 1, {size: 0, filters: {collection:{terms: [municipality]}}}).then(function (result) {
+    var search_options = {
+      filters: {
+        collection:{terms: [municipality]},
+        types: {terms: svc.get_doc_types_as_keys()}
+      },
+      size: 0
+    };
+    return ORIAPIService.simple_search(undefined, 1, search_options).then(function (result) {
       console.log('doing base search to get all terms for facets!');
       console.dir(result);
       classifications = result.data.facets.classification.terms.map(function (t) { return t.term; });
