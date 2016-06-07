@@ -14,7 +14,9 @@ angular.module('oriApp.constants', ['ngRoute'])
   var municipalities;
   var classifications = [];
   var doc_types = {
-    'events': 'Activiteiten'
+    'events': 'Activiteiten',
+    'motions': 'Moties',
+    'vote_events': 'Stemmingen'
   };
   var start_year = 2006;
 

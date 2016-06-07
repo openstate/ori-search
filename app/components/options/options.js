@@ -34,9 +34,8 @@ angular.module('oriApp.options', ['ngRoute'])
     options_obj = {
       filters: {
         collection: {"terms": ConstantsService.get_municipalities().organizations.map(function (o) { return o.meta.collection; })},
-        types: {"terms": Object.keys(ConstantsService.get_doc_types()) },
+        types: {"terms": ConstantsService.get_doc_types_as_keys() },
         classification: {"terms": ConstantsService.get_classifications() },
-        types: {"terms": ["events"]},
         start_date: {"from": "2006-01-01T00:00:00Z", "to": x.toISOString()}
       },
       facets: {
