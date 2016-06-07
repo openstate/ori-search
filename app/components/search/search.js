@@ -239,6 +239,34 @@ angular.module('oriApp.search', ['ngRoute', 'chart.js', 'daterangepicker'])
   };
 })
 
+.filter('get_party_labels_for_result', function() {
+  return function(val) {
+    if (typeof(val["counts"]) != "undefined") {
+      if ((val["counts"].length || 0) > 0) {
+        return val["counts"].map(function (i) {return i['group']['name'] + " - " + i['option'];});
+      } else {
+        return [];
+      }
+    } else {
+      return [];
+    }
+  };
+})
+
+.filter('get_party_counts_for_result', function() {
+  return function(val) {
+    if (typeof(val["counts"]) != "undefined") {
+      if ((val["counts"].length || 0) > 0) {
+        return val["counts"].map(function (i) {return i['value'];});
+      } else {
+        return [];
+      }
+    } else {
+      return [];
+    }
+  };
+})
+
 .factory("SearchService", ['ORIAPIService', 'ConstantsService', 'OptionsService',
 function (ORIAPIService, ConstantsService, OptionsService) {
   var svc = {};

@@ -35,22 +35,11 @@
     <div class="col-xs-12">
       <p><strong>Indiener:</strong> {{ result.motion.creator.name }}</p>
       <p><strong>Resultaat:</strong> {{ result.result }}<p>
-      <p>{{ results.motion.text }}</p>
+      <p>{{ result.motion.text }}</p>
       <h3>Stemming per partij</h3>
-      <table class="table">
-        <thead>
-          <th>Partij</th>
-          <th>Keuze</th>
-          <th>Aantal stemmen</th>
-        </thead>
-        <tbody>
-          <tr ng-repeat="party_count in result.counts">
-            <td>{{ party_count.group.name }}</td>
-            <td>{{ party_count.result }}</td>
-            <td>{{ party_count.value }}</td>
-          </tr>
-        </tbody>
-      <table>
+      <canvas id="doughnut-{{ result.id }}" class="chart chart-doughnut"
+        chart-data="result |get_party_counts_for_result" chart-labels="result |get_party_labels_for_result">
+      </canvas>
       <h3>Stemming per hoofd</h3>
       <table class="table">
         <thead>
