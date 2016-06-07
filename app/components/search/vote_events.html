@@ -41,20 +41,10 @@
         chart-data="result |get_party_counts_for_result" chart-labels="result |get_party_labels_for_result">
       </canvas>
       <h3>Stemming per hoofd</h3>
-      <table class="table">
-        <thead>
-          <th>Persoon</th>
-          <th>Partij</th>
-          <th>Keuze</th>
-        </thead>
-        <tbody>
-          <tr ng-repeat="vote in result.votes">
-            <td>{{ vote.voter.name }}</td>
-            <td>{{ vote.group_id }}</td>
-            <td>{{ vote.option }}</td>
-          </tr>
-        </tbody>
-      <table>
+      <div ng-repeat="(key,value) in result.votes | groupBy:'option'">
+        <h4>{{ key }}</h4>
+        <p>{{ value |get_list_of_voters }}</p>
+      </div>
       <ul ng-repeat="source in result.sources" class="list-unstyled attachments">
         <li>
           <a href="{{ source.url}}" target="_blank">

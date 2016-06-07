@@ -239,6 +239,30 @@ angular.module('oriApp.search', ['ngRoute', 'chart.js', 'daterangepicker'])
   };
 })
 
+.filter('groupBy', function() {
+  return function (collection, getter) {
+    var result = {};
+    var prop;
+
+    collection.forEach(function( elm ) {
+      prop = elm[getter];
+
+      if(!result[prop]) {
+        result[prop] = [];
+      }
+      result[prop].push(elm);
+    });
+    return result;
+  };
+})
+
+.filter('get_list_of_voters', function() {
+  return function(val) {
+    var voters = val.map(function (v) { return v.voter.name; });
+    return voters.join();
+  };
+})
+
 .filter('get_party_labels_for_result', function() {
   return function(val) {
     if (typeof(val["counts"]) != "undefined") {
