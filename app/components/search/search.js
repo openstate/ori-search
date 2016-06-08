@@ -395,6 +395,7 @@ function (ORIAPIService, ConstantsService, OptionsService) {
                 vote_options[c.option].data.push(c.value);
                 vote_options[c.option].total += c.value;
               });
+              tmp_item.party_votes_options = Object.keys(vote_options).sort();
               tmp_item.party_votes = vote_options;
             }
             if (typeof(tmp_item.votes) != 'undefined') {
@@ -404,6 +405,7 @@ function (ORIAPIService, ConstantsService, OptionsService) {
               tmp_item.votes.forEach(function (v) {
                 vote_options[v.option].push(v.voter.name);
               });
+              tmp_item.person_votes_options = Object.keys(vote_options).sort();
               tmp_item.person_votes = vote_options;
             }
             tmp_results.push(tmp_item);

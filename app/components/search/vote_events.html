@@ -38,18 +38,18 @@
       <p>{{ result.motion.text }}</p>
       <h3>Stemming per partij</h3>
       <div class="row">
-        <div ng-repeat="(option, votes) in result.party_votes">
+        <div ng-repeat="option in result.party_votes_options">
           <div class="col-xs-12 col-md-6">
-            <h4>{{ option }} ({{ votes.total}} stemmen)</h4>
+            <h4>{{ option }} ({{ result.party_votes[option].total }} stemmen)</h4>
             <canvas id="doughnut-{{ result.id }}" class="chart chart-doughnut"
-              chart-data="votes.data" chart-labels="votes.labels">
+              chart-data="result.party_votes[option].data" chart-labels="result.party_votes[option].labels">
             </canvas>
           </div>
         </div>
       </div>
       <h3>Stemming per hoofd</h3>
-      <div ng-repeat="(option, persons) in result.person_votes">
-        <p><strong>{{ option}} ({{ result.party_votes[option].total }} stemmen):</strong> {{ persons |get_list_of_voters }}</p>
+      <div ng-repeat="option in result.person_votes_options">
+        <p><strong>{{ option }} ({{ result.party_votes[option].total }} stemmen):</strong> {{ result.person_votes[option] |get_list_of_voters }}</p>
       </div>
       <ul ng-repeat="source in result.sources" class="list-unstyled attachments">
         <li>
