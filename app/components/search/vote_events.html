@@ -48,6 +48,9 @@
         </div>
       </div>
       <h3>Stemming per hoofd</h3>
+      <div ng-repeat="(option, persons) in result.person_votes">
+        <p><strong>{{ option}}:</strong> {{ persons |get_list_of_voters }}</p>
+      </div>
       <ul ng-repeat="source in result.sources" class="list-unstyled attachments">
         <li>
           <a href="{{ source.url}}" target="_blank">

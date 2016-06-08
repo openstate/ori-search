@@ -240,9 +240,8 @@ angular.module('oriApp.search', ['ngRoute', 'chart.js', 'daterangepicker'])
 })
 
 .filter('get_list_of_voters', function() {
-  return function(val) {
-    var voters = val.map(function (v) { return v.voter.name; });
-    return voters.join();
+  return function(voters) {
+    return voters.join(', ');
   };
 })
 
@@ -398,7 +397,13 @@ function (ORIAPIService, ConstantsService, OptionsService) {
               tmp_item.party_votes = vote_options;
             }
             if (typeof(tmp_item.votes) != 'undefined') {
-            // person votes
+              // person votes
+              var vote_options = {};
+              tmp_item.votes.forEach(function (v) { vote_options[v.option] = []; });
+              tmp_item.votes.forEach(function (v) {
+                vote_options[v.option].push(v.voter.name);
+              });
+              tmp_item.person_votes = vote_options;
             }
             tmp_results.push(tmp_item);
           }
