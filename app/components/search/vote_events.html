@@ -34,8 +34,18 @@
   <div class="row">
     <div class="col-xs-12">
       <p><strong>Indiener:</strong> {{ result.motion.creator.name }}</p>
-      <p><strong>Resultaat:</strong> {{ result.result }}<p>
       <p>{{ result.motion.text }}</p>
+      <p><strong>Resultaat:</strong> {{ result.result }}<p>
+      <div class="progress">
+        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ result.party_votes['Motie aangenomen'].total }}"
+          aria-valuemin="0" aria-valuemax="100" style="width: {{ result.party_votes['Motie aangenomen'].total / (result.party_votes['Motie aangenomen'].total + result.party_votes['Motie verworpen'].total) * 100 }}%;">
+          <span class="sr-only">{{ result.party_votes['Motie aangenomen'].total }} stemmen</span>
+        </div>
+        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{ result.party_votes['Motie verworpen'].total }}"
+          aria-valuemin="0" aria-valuemax="100" style="width: {{ result.party_votes['Motie verworpen'].total / (result.party_votes['Motie aangenomen'].total + result.party_votes['Motie verworpen'].total) * 100 }}%;">
+          <span class="sr-only">{{ result.party_votes['Motie verworpen'].total }} stemmen</span>
+        </div>
+      </div>
       <h3>Stemming per partij</h3>
       <div class="row">
         <div ng-repeat="option in result.party_votes_options">
