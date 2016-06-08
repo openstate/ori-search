@@ -59,7 +59,12 @@
       </div>
       <h3>Stemming per hoofd</h3>
       <div ng-repeat="option in result.person_votes_options">
-        <p><strong>{{ option }} ({{ result.party_votes[option].total }} stemmen):</strong> {{ result.person_votes[option] |get_list_of_voters }}</p>
+        <h4>{{ option }} ({{ result.party_votes[option].total }} stemmen):</h4>
+        <p ng-repeat="(party, voters) in result.person_votes[option]">
+          <span ng-if="party != 'undefined'">
+            <strong>{{ party }}:</strong>{{ voters |get_list_of_voters }}
+          </span>
+        </p>
       </div>
       <ul ng-repeat="source in result.sources" class="list-unstyled attachments">
         <li>

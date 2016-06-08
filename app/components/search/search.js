@@ -401,9 +401,12 @@ function (ORIAPIService, ConstantsService, OptionsService) {
             if (typeof(tmp_item.votes) != 'undefined') {
               // person votes
               var vote_options = {};
-              tmp_item.votes.forEach(function (v) { vote_options[v.option] = []; });
+              tmp_item.votes.forEach(function (v) { vote_options[v.option] = {}; });
               tmp_item.votes.forEach(function (v) {
-                vote_options[v.option].push(v.voter.name + '(' + (v.voter.memberships || []).filter(function (m) {return m.organization.classification == 'Party'}).map(function (m) { return m.organization.name; }).join('/') + ')');
+                var voter_parties = (v.voter.memberships || []).filter(function (m) {return m.organization.classification == 'Party'}).map(function (m) { return m.organization.name; });
+                var main_party = voter_parties[0];
+                vote_options[v.option][main_party] = (vote_options[v.option][main_party] || []);
+                vote_options[v.option][main_party].push(v.voter.name);
               });
               tmp_item.person_votes_options = Object.keys(vote_options).sort();
               tmp_item.person_votes = vote_options;
