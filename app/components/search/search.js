@@ -239,23 +239,6 @@ angular.module('oriApp.search', ['ngRoute', 'chart.js', 'daterangepicker'])
   };
 })
 
-.filter('groupBy', function() {
-  return function (collection, getter) {
-    var result = {};
-    var prop;
-
-    collection.forEach(function( elm ) {
-      prop = elm[getter];
-
-      if(!result[prop]) {
-        result[prop] = [];
-      }
-      result[prop].push(elm);
-    });
-    return result;
-  };
-})
-
 .filter('get_list_of_voters', function() {
   return function(val) {
     var voters = val.map(function (v) { return v.voter.name; });
@@ -405,6 +388,18 @@ function (ORIAPIService, ConstantsService, OptionsService) {
         if (tp != 'meta' && tp != 'facets') {
           for (var item in data.data[tp]) {
             var tmp_item = data.data[tp][item];
+            if (typeof(tmp_item.counts) != 'undefined') {
+              var vote_options = {};
+              tmp_item.counts.forEach(function (c) { vote_options[c.option] = {labels: [], data: []}; });
+              tmp_item.counts.forEach(function (c) {
+                vote_options[c.option].labels.push(c.group.name);
+                vote_options[c.option].data.push(c.value);
+              });
+              tmp_item.party_votes = vote_options;
+            }
+            if (typeof(tmp_item.votes) != 'undefined') {
+            // person votes
+            }
             tmp_results.push(tmp_item);
           }
         }
