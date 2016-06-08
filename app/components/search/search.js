@@ -389,10 +389,11 @@ function (ORIAPIService, ConstantsService, OptionsService) {
             var tmp_item = data.data[tp][item];
             if (typeof(tmp_item.counts) != 'undefined') {
               var vote_options = {};
-              tmp_item.counts.forEach(function (c) { vote_options[c.option] = {labels: [], data: []}; });
+              tmp_item.counts.forEach(function (c) { vote_options[c.option] = {labels: [], data: [], total: 0}; });
               tmp_item.counts.forEach(function (c) {
                 vote_options[c.option].labels.push(c.group.name);
                 vote_options[c.option].data.push(c.value);
+                vote_options[c.option].total += c.value;
               });
               tmp_item.party_votes = vote_options;
             }

@@ -40,7 +40,7 @@
       <div class="row">
         <div ng-repeat="(option, votes) in result.party_votes">
           <div class="col-xs-12 col-md-6">
-            <h4>{{ option }}</h4>
+            <h4>{{ option }} ({{ votes.total}} stemmen)</h4>
             <canvas id="doughnut-{{ result.id }}" class="chart chart-doughnut"
               chart-data="votes.data" chart-labels="votes.labels">
             </canvas>
@@ -49,7 +49,7 @@
       </div>
       <h3>Stemming per hoofd</h3>
       <div ng-repeat="(option, persons) in result.person_votes">
-        <p><strong>{{ option}}:</strong> {{ persons |get_list_of_voters }}</p>
+        <p><strong>{{ option}} ({{ result.party_votes[option].total }} stemmen):</strong> {{ persons |get_list_of_voters }}</p>
       </div>
       <ul ng-repeat="source in result.sources" class="list-unstyled attachments">
         <li>
