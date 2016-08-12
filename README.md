@@ -1,7 +1,20 @@
-# Open Raads Informatie Search
+# Open Raadsinformatie Search
 
-This is the search interface for the [Open Raads Informatie API](https://github.com/openstate/open-raadsinformatie).
+This is the search interface for the [Open Raadsinformatie API](https://github.com/openstate/open-raadsinformatie).
 
+To install:
+
+```
+npm install
+```
+
+To run:
+
+```
+npm start
+```
+
+You can now view the Open Raadsinformatie Search on [http://localhost:4444/app](http://localhost:4444/app). It will retrieve the information from the live Open Raadsinformatie API. If you want it to use your own local version the change the API URL in `app/components/ori-api/ori-app.js`.
 
 ## Getting Started
 
