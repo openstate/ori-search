@@ -389,8 +389,16 @@ function (ORIAPIService, ConstantsService, OptionsService) {
             var tmp_item = data.data[tp][item];
             if (typeof(tmp_item.counts) != 'undefined') {
               var vote_options = {};
-              tmp_item.counts.forEach(function (c) { vote_options[c.option] = {labels: [], data: [], total: 0}; });
+              tmp_item.counts.forEach(function (c) { vote_options[c.option] = 0; });
               tmp_item.counts.forEach(function (c) {
+                vote_options[c.option] = c.value;
+              });
+              tmp_item.count_options = vote_options;
+            }
+            if (typeof(tmp_item.group_results) != 'undefined') {
+              var vote_options = {};
+              tmp_item.group_results.forEach(function (c) { vote_options[c.option] = {labels: [], data: [], total: 0}; });
+              tmp_item.group_results.forEach(function (c) {
                 vote_options[c.option].labels.push(c.group.name);
                 vote_options[c.option].data.push(c.value);
                 vote_options[c.option].total += c.value;
@@ -403,8 +411,7 @@ function (ORIAPIService, ConstantsService, OptionsService) {
               var vote_options = {};
               tmp_item.votes.forEach(function (v) { vote_options[v.option] = {}; });
               tmp_item.votes.forEach(function (v) {
-                var voter_parties = (v.voter.memberships || []).filter(function (m) {return m.organization.classification == 'Party'}).map(function (m) { return m.organization.name; });
-                var main_party = voter_parties[0];
+                var main_party = v.group_id;
                 vote_options[v.option][main_party] = (vote_options[v.option][main_party] || []);
                 vote_options[v.option][main_party].push(v.voter.name);
               });

@@ -37,13 +37,13 @@
       <p>{{ result.motion.text }}</p>
       <p><strong>Resultaat:</strong> {{ result.result }}<p>
       <div class="progress">
-        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ result.party_votes['Motie aangenomen'].total }}"
-          aria-valuemin="0" aria-valuemax="100" style="width: {{ result.party_votes['Motie aangenomen'].total / (result.party_votes['Motie aangenomen'].total + result.party_votes['Motie verworpen'].total) * 100 }}%;">
-          <span class="sr-only">{{ result.party_votes['Motie aangenomen'].total }} stemmen</span>
+        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ result.count_options['yes']  }}"
+          aria-valuemin="0" aria-valuemax="100" style="width: {{ result.count_options['yes'] / (result.count_options['no'] + result.count_options['yes']) * 100 }}%;">
+          <span class="sr-only">{{ result.count_options['yes']  }} stemmen</span>
         </div>
-        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{ result.party_votes['Motie verworpen'].total }}"
-          aria-valuemin="0" aria-valuemax="100" style="width: {{ result.party_votes['Motie verworpen'].total / (result.party_votes['Motie aangenomen'].total + result.party_votes['Motie verworpen'].total) * 100 }}%;">
-          <span class="sr-only">{{ result.party_votes['Motie verworpen'].total }} stemmen</span>
+        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{ result.count_options['no']  }}"
+          aria-valuemin="0" aria-valuemax="100" style="width: {{ result.count_options['no']  / (result.count_options['no'] + result.count_options['yes']) * 100 }}%;">
+          <span class="sr-only">{{ result.count_options['no']  }} stemmen</span>
         </div>
       </div>
       <h3>Stemming per partij</h3>
