@@ -409,9 +409,11 @@ function (ORIAPIService, ConstantsService, OptionsService) {
             if (typeof(tmp_item.votes) != 'undefined') {
               // person votes
               var vote_options = {};
+              var group_by_id = {}
+              tmp_item.group_results.forEach(function (g) { group_by_id[g.group_id] = g.group.name; });
               tmp_item.votes.forEach(function (v) { vote_options[v.option] = {}; });
               tmp_item.votes.forEach(function (v) {
-                var main_party = v.group_id;
+                var main_party = group_by_id[v.group_id];
                 vote_options[v.option][main_party] = (vote_options[v.option][main_party] || []);
                 vote_options[v.option][main_party].push(v.voter.name);
               });
