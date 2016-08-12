@@ -241,7 +241,7 @@ angular.module('oriApp.search', ['ngRoute', 'chart.js', 'daterangepicker'])
 
 .filter('get_list_of_voters', function() {
   return function(voters) {
-    return voters.join(', ');
+    return voters.join('; ');
   };
 })
 
@@ -273,6 +273,15 @@ angular.module('oriApp.search', ['ngRoute', 'chart.js', 'daterangepicker'])
   };
 })
 
+.filter('get_human_readable_vote_option', function() {
+  return function(val) {
+    var vote_options = {
+      "yes": "voor",
+      "no": "tegen"
+    };
+    return (vote_options[val] || val);
+  };
+})
 .factory("SearchService", ['ORIAPIService', 'ConstantsService', 'OptionsService',
 function (ORIAPIService, ConstantsService, OptionsService) {
   var svc = {};
@@ -409,7 +418,7 @@ function (ORIAPIService, ConstantsService, OptionsService) {
             if (typeof(tmp_item.votes) != 'undefined') {
               // person votes
               var vote_options = {};
-              var group_by_id = {}
+              var group_by_id = {};
               tmp_item.group_results.forEach(function (g) { group_by_id[g.group_id] = g.group.name; });
               tmp_item.votes.forEach(function (v) { vote_options[v.option] = {}; });
               tmp_item.votes.forEach(function (v) {
