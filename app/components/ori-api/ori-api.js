@@ -71,7 +71,8 @@ angular.module('oriApp').factory("ORIAPIService", ['$http', function ($http) {
           }
         },
         "sort": "meta.source_id",
-        "order": "asc"
+        "order": "asc",
+        "size": 100
       }
     });
   };

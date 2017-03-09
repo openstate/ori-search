@@ -282,6 +282,7 @@ angular.module('oriApp.search', ['ngRoute', 'chart.js', 'daterangepicker'])
     return (vote_options[val] || val);
   };
 })
+
 .factory("SearchService", ['ORIAPIService', 'ConstantsService', 'OptionsService',
 function (ORIAPIService, ConstantsService, OptionsService) {
   var svc = {};
