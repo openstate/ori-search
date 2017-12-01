@@ -96,7 +96,7 @@ angular.module('oriApp.constants', ['ngRoute'])
     return ORIAPIService.simple_search(undefined, 1, search_options).then(function (result) {
       console.log('doing base search to get all terms for facets!');
       console.dir(result);
-      classifications = result.data.facets.classification.terms.map(function (t) { return t.term; });
+      classifications = result.data.facets.classification.buckets.map(function (t) { return t.key; });
     });
   };
 
@@ -112,7 +112,7 @@ angular.module('oriApp.constants', ['ngRoute'])
     return ORIAPIService.simple_search(undefined, 1, search_options).then(function (result) {
       console.log('doing base search to get all terms for facets!');
       console.dir(result);
-      classifications = result.data.facets.classification.terms.map(function (t) { return t.term; });
+      classifications = result.data.facets.classification.buckets.map(function (t) { return t.key; });
     });
   };
 

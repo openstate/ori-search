@@ -317,15 +317,15 @@ function (ORIAPIService, ConstantsService, OptionsService) {
   svc.get_facet_terms = function(facet_name) {
     var facet = svc.get_facet(facet_name);
     if (facet) {
-      return facet.terms;
+      return facet.buckets;
     }
   };
 
   svc.get_facet_count_for_term = function(facet_name, term_name) {
     var terms = svc.get_facet_terms(facet_name);
     for (var idx in terms) {
-      if (terms[idx].term == term_name) {
-        return terms[idx].count;
+      if (terms[idx].key == term_name) {
+        return terms[idx].doc_count;
       }
     }
     return 0;
@@ -367,7 +367,7 @@ function (ORIAPIService, ConstantsService, OptionsService) {
 
   svc.base_search = function(options) {
     return ORIAPIService.simple_search(undefined, 1, options).then(function (result) {
-      classifications = result.data.facets.classification.terms.map(function (t) { return t.term; });
+      classifications = result.data.facets.classification.buckets.map(function (t) { return t.key; });
     });
   };
 
@@ -585,7 +585,7 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
       endDate: Date.parse(start_date_range.to)
     };
 
-    var year_facet = SearchService.get_facet('start_date').entries;
+    var year_facet = SearchService.get_facet('start_date').buckets;
     console.log('start date facet entries:');
     console.dir(year_facet);
     console.log('start date interval' + OptionsService.get_facet_option('start_date', 'interval'));
@@ -604,8 +604,8 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     };
     var date_interval = OptionsService.get_facet_option('start_date', 'interval');
 
-    $scope.ylabels = year_facet.map(function (i) { return date_prefixes[date_interval] + moment(i.time).format(date_formats[date_interval]); });
-    $scope.ydata = [year_facet.map(function (i) {return i.count; })];
+    $scope.ylabels = year_facet.map(function (i) { return date_prefixes[date_interval] + moment(i.key).format(date_formats[date_interval]); });
+    $scope.ydata = [year_facet.map(function (i) {return i.doc_count; })];
   }
 
   $scope.sidebar_visible = function() {
