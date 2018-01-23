@@ -4,7 +4,7 @@
     <p ng-bind-html="result.description | unsafe"></p>
   </div>
   <div class="col-xs-4 col-md-2 col-lg-2">
-    <div class="municipality-logo">
+    <div class="municipality-logo" title="{{ result | municipality_name }}">
       <span>{{ result | municipality_name_short }}</span>
     </div>
   </div>
