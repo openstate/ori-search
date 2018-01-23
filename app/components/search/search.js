@@ -177,12 +177,25 @@ angular.module('oriApp.search', ['ngRoute', 'chart.js', 'daterangepicker'])
   };
 })
 
-.filter('municipality_img', ['ConstantsService', function(ConstantsService) {
+.filter('municipality_name', ['ConstantsService', function(ConstantsService) {
   return function (val) {
     var muni = ConstantsService.get_municipality_by_collection(val.meta.collection)
 
-    if (muni && muni['image']) {
-      return muni['image'];
+    if (muni && muni['name']) {
+      return muni['name'];
+    } else if (val.classification) {
+      var first_word = val.classification.toLowerCase().split(/\s+/)[0];
+      return "images/" + first_word +  ".png";
+    }
+  };
+}])
+
+.filter('municipality_name_short', ['ConstantsService', function(ConstantsService) {
+  return function (val) {
+    var muni = ConstantsService.get_municipality_by_collection(val.meta.collection)
+
+    if (muni && muni['name']) {
+      return muni['name'][0];
     } else if (val.classification) {
       var first_word = val.classification.toLowerCase().split(/\s+/)[0];
       return "images/" + first_word +  ".png";

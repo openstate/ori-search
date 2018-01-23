@@ -15,7 +15,9 @@
   </div>
   <div class="row">
     <div class="col-xs-4 col-md-2 col-lg-2">
-      <img src="{{ result | municipality_img | unsafe }}" alt="..." class="img-thumbnail" width="140">
+      <div class="municipality-logo">
+        <span>{{ result | municipality_name_short }}</span>
+      </div>
     </div>
     <div class="col-xs-8 col-md-10 col-lg-10">
       <h3>{{ result.start_date |format_date }}</h3>

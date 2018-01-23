@@ -1,5 +1,19 @@
 /* app css stylesheet */
 
+.municipality-logo {
+  width: 120px;
+  height: 120px;
+  text-align: center;
+  background: black;
+  color: white;
+}
+
+.municipality-logo span {
+  font-size: 48px;
+  display: inline-block;
+  margin-top: 25px;
+}
+
 #wrapper {
   margin-top: 70px;
 }

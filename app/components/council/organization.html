@@ -4,7 +4,9 @@
     <p ng-bind-html="result.description | unsafe"></p>
   </div>
   <div class="col-xs-4 col-md-2 col-lg-2">
-    <img src="{{ result | municipality_img | unsafe }}" alt="..." class="img-thumbnail" width="140">
+    <div class="municipality-logo">
+      <span>{{ result | municipality_name_short }}</span>
+    </div>
   </div>
 </div>
 <div class="row">
