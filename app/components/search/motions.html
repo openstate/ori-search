@@ -41,7 +41,7 @@
 
       <ul ng-repeat="source in result.sources" class="list-unstyled attachments">
         <li>
-          <a href="{{ source.url}}" target="_blank">
+          <a ng-show="source.url != ''" href="{{ source.url}}" target="_blank">
             <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>
             {{ source.note || 'Document' }}
           </a>
