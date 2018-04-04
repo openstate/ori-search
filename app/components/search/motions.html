@@ -26,7 +26,7 @@
         <li><em><a ng-click="filter_on_classification($event)">{{ result.classification }}</a></em></il>
         <li>{{ result.organisation.name }}</li>
         <li>
-          <a href="http://api.openraadsinformatie.nl/v0/{{ result.meta.collection }}/{{ result.meta._type }}/{{ result.id }}" target="_blank">
+          <a href="{{ base_json_url }}/{{ result.meta.collection }}/{{ result.meta._type }}/{{ result.id }}" target="_blank">
             <img src="images/json.svg" title="Rauwe JSON data voor dit item" width="16" height="16" class="pull-right">
           </a>
         </li>

@@ -484,6 +484,7 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
   $scope.years = ConstantsService.get_years();
   $scope.sort = '_score';
   $scope.order = 'desc';
+  $scope.base_json_url = ORIAPIService.base_url;
 
   if ($scope.municipalities) {
     $scope.municipalities_full = $scope.municipalities.organizations.map(function (o) {
