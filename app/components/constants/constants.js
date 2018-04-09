@@ -16,7 +16,6 @@ angular.module('oriApp.constants', ['ngRoute'])
   var doc_types = {
     'events': 'Activiteiten',
     'motions': 'Moties',
-    'amendments': 'Amendementen',
     'vote_events': 'Stemmingen'
   };
   var start_year = 2006;
