@@ -34,12 +34,6 @@
           <a id="large-brand" class="navbar-brand hidden-xs hidden" href="#/"><img src="images/logo.svg"></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
-          <form class="navbar-form navbar-left" role="search" ng-controller="SearchCtrl">
-           <div class="form-group">
-             <input type="text" class="form-control" name="q" ng-model="query" placeholder="Zoek iets, bv. Amsterdam">
-           </div>
-           <button type="submit"  ng-click="search(q)" class="btn btn-default">Zoeken</button>
-          </form>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="http://www.openraadsinformatie.nl/" target="_blank">Over <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></li>
             <li><a href="https://github.com/openstate/open-raadsinformatie" target="_blank">Github <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></li>
@@ -69,6 +63,16 @@
 
   <article>
     <div id="wrapper" class="container">
+      <form class="form-inline" role="search" ng-controller="SearchCtrl" style="margin-bottom: 20px;">
+      <div class="row">
+        <div class="col-xs-10">
+          <input type="text" class="form-control" name="q" ng-model="query" placeholder="Zoek iets, bv. Amsterdam" style="width: 100%;">
+        </div>
+        <div class="col-xs-2">
+          <button type="submit"  ng-click="search(q)" class="btn btn-default pull-right">Zoeken</button>
+        </div>
+      </div>
+      </form>
       <div ng-view></div>
     </div>
   </article>
