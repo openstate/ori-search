@@ -62,26 +62,26 @@ angular.module('oriApp').factory("ORIAPIService", ['$http', function ($http) {
     });
   };
 
-  svc.municipalities = function() {
+  svc.governing_bodies = function(classifications) {
     return $http({
       url: base_url + "/search/organizations",
       method: "POST",
       data: {
         filters: {
           classification: {
-            terms: ["Municipality"]
+            terms: classifications
           }
         },
         "sort": "meta.source_id",
         "order": "asc",
-        "size": 100
+        "size": 500
       }
     });
   };
 
-  svc.organizations = function(municipality_slug) {
+  svc.organizations = function(slug) {
     return $http({
-      url: base_url + "/" + municipality_slug + "/organizations/search",
+      url: base_url + "/" + slug + "/organizations/search",
       method: "POST",
       data: {
         size: 100
@@ -89,9 +89,9 @@ angular.module('oriApp').factory("ORIAPIService", ['$http', function ($http) {
     });
   };
 
-  svc.persons = function(municipality_slug) {
+  svc.persons = function(slug) {
     return $http({
-      url: base_url + "/" + municipality_slug + "/persons/search",
+      url: base_url + "/" + slug + "/persons/search",
       method: "POST",
       data: {
         size: 100

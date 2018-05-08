@@ -18,6 +18,10 @@ angular.module('oriApp.constants', ['ngRoute'])
     'motions': 'Moties',
     'vote_events': 'Stemmingen'
   };
+  var governing_body_types = {
+    "Municipality": 'Gemeente',
+    "Province": 'Provincie'
+  };
   var start_year = 2006;
 
   svc.get_years = function() {
@@ -61,14 +65,6 @@ angular.module('oriApp.constants', ['ngRoute'])
     return municipalities;
   };
 
-  svc.get_municipality_by_name = function (name) {
-    for (var muni in municipalities.organizations) {
-      if (municipalities.organizations[muni].name.toLowerCase() == name.toLowerCase()) {
-        return municipalities.organizations[muni];
-      }
-    }
-  };
-
   svc.get_municipality_by_collection = function (name) {
     for (var muni in municipalities.organizations) {
       if (municipalities.organizations[muni].meta.collection.toLowerCase() == name.toLowerCase()) {
@@ -77,8 +73,8 @@ angular.module('oriApp.constants', ['ngRoute'])
     }
   };
 
-  var load_municipalities = function() {
-    return ORIAPIService.municipalities().then(function (data) {
+  var load_governing_bodies = function() {
+    return ORIAPIService.governing_bodies(Object.keys(governing_body_types)).then(function (data) {
       console.log('Got municipalities data:');
       console.dir(data);
       municipalities = data.data;
@@ -117,7 +113,7 @@ angular.module('oriApp.constants', ['ngRoute'])
   };
 
   svc.init = function() {
-    promise = $q.all([load_sources(), load_municipalities()]);
+    promise = $q.all([load_sources(), load_governing_bodies()]);
   };
 
   return svc;
