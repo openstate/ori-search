@@ -41,7 +41,7 @@ angular.module('oriApp.options', ['ngRoute'])
       facets: {
         start_date: {"interval": "year"},
       },
-      sort: '_score',
+      sort: 'start_date',
       order: 'desc'
     };
   };

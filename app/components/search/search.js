@@ -482,7 +482,7 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
   $scope.municipalities = ConstantsService.get_municipalities();
   $scope.options = SearchService.get_options();
   $scope.years = ConstantsService.get_years();
-  $scope.sort = '_score';
+  $scope.sort = 'start_date';
   $scope.order = 'desc';
   $scope.base_json_url = ORIAPIService.base_url;
 

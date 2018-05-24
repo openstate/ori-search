@@ -23,7 +23,7 @@ angular.module('oriApp').factory("ORIAPIService", ['$http', function ($http) {
         start_date: {"interval": "year"},
         classification: {"size": 100}
       },
-      sort: '_score',
+      sort: 'start_date',
       order: 'desc'
     };
 
