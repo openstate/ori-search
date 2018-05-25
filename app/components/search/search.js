@@ -232,26 +232,6 @@ angular.module('oriApp.search', ['ngRoute', 'chart.js', 'daterangepicker'])
   };
 })
 
-.filter('no_wsdl_link', function () {
-  return function (val) {
-    if (val == 'https://www.mijnbabs.nl/iBabsWCFService/Public.svc?singleWsdl') {
-      return '';
-    } else {
-      return val;
-    }
-  };
-})
-
-.filter('no_wsdl_no_external_link', function () {
-  return function (val) {
-    if (val == 'https://www.mijnbabs.nl/iBabsWCFService/Public.svc?singleWsdl') {
-      return '';
-    } else {
-      return '<span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>';
-    }
-  };
-})
-
 .filter('get_list_of_voters', function() {
   return function(voters) {
     return voters.join('; ');

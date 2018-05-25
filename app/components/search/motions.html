@@ -2,35 +2,21 @@
   <div class="row">
     <div class="col-xs-12">
       <h2>
-        <a ng-show="result.meta.original_object_urls.html != 'https://www.mijnbabs.nl/iBabsWCFService/Public.svc?singleWsdl'" href="{{ result.meta.original_object_urls.html | no_wsdl_link }}" target="_blank">
-          <span ng-bind-html="result.name |highlight_in_full_string:result.meta.highlight.name[0] |unsafe"></span>
-          <span ng-bind-html="result.meta.original_object_urls.html | no_wsdl_no_external_link | unsafe"></span>
-        </a>
-        <span ng-show="result.meta.original_object_urls.html == 'https://www.mijnbabs.nl/iBabsWCFService/Public.svc?singleWsdl'">
-          <span ng-bind-html="result.name |highlight_in_full_string:result.meta.highlight.name[0] |unsafe"></span>
-          <span ng-bind-html="result.meta.original_object_urls.html | no_wsdl_no_external_link | unsafe"></span>
-        </span>
+        <span ng-bind-html="result.name |highlight_in_full_string:result.meta.highlight.name[0] |unsafe"></span>
       </h2>
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-4 col-md-2 col-lg-2">
-      <div class="municipality-logo" title="{{ result | municipality_name }}">
-        <span>{{ result | municipality_name_short }}</span>
-      </div>
-    </div>
-    <div class="col-xs-8 col-md-10 col-lg-10">
-      <h3>{{ result.start_date |format_date }}</h3>
-      <h3>{{ result.start_date |format_time }}</h3>
-      <ul class="list-unstyled">
-        <li><em><a ng-click="filter_on_classification($event)">{{ result.classification }}</a></em></il>
-        <li>{{ result.organisation.name }}</li>
-        <li>
-          <a href="{{ base_json_url }}/{{ result.meta.collection }}/{{ result.meta._type }}/{{ result.id }}" target="_blank">
-            <img src="images/json.svg" title="Rauwe JSON data voor dit item" width="16" height="16" class="pull-right">
-          </a>
-        </li>
-      </ul>
+    <div class="col-xs-12">
+      <span class="btn btn-xs btn-default"><i class="fa fa-map-marker"></i> {{ result | municipality_name }}</span>
+      <span class="btn btn-xs btn-default"><i class="fa fa-calendar-o"></i> {{ result.start_date |format_date }}</span>
+      <span class="btn btn-xs btn-default"><i class="fa fa-clock-o"></i> {{ result.start_date |format_time }}</span>
+      <a ng-click="filter_on_classification($event)" class="btn btn-xs btn-default"><i class="fa fa-briefcase"></i> {{ result.classification }}</a>
+      <span ng-if="result.organisation.name" href="#" class="btn btn-xs btn-default"><i class="fa fa-sitemap"></i> {{ result.organisation.name }}</span>
+
+      <a href="{{ base_json_url }}/{{ result.meta.collection }}/{{ result.meta._type }}/{{ result.id }}" target="_blank" class="btn btn-xs btn-default pull-right">
+        <img src="images/json.svg" title="Rauwe JSON data voor dit item" width="12" height="12"> Data
+      </a>
     </div>
   </div>
   <div class="row">
