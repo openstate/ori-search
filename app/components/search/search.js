@@ -611,7 +611,8 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
 
 
   $scope.sidebar_open = $scope.sidebar_visible();
-
+  OptionsService.set_internal_option('sidebar_visible',$scope.sidebar_open);
+  
   $scope.clear_highlight = function(val) {
     return val.replace('<em>', '').replace('</em>', '');
   };
