@@ -603,10 +603,14 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
   }
 
   $scope.sidebar_visible = function() {
+    console.log('checking if sidebar visible ..');
     var is_cog_visible = $('#button-cog span.glyphicon').is(':visible');
     var is_sidebar_visible = OptionsService.get_internal_option('sidebar_visible');
     return $scope.desktop || (!is_cog_visible || is_sidebar_visible);
   };
+
+
+  $scope.sidebar_open = $scope.sidebar_visible();
 
   $scope.clear_highlight = function(val) {
     return val.replace('<em>', '').replace('</em>', '');
@@ -744,4 +748,20 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     });
     $scope.updateOptions();
   };
+
+  $scope.showsidebar = function (){
+			// StateService.sidebarOpen = $scope.sidebar_visible();
+			// StateService.notifySidebarOpenobserverCallback();
+      console.log('cogclicked!');
+      $scope.sidebar_open = true;
+      console.log($scope.sidebar_open);
+      OptionsService.set_internal_option('sidebar_visible', !OptionsService.get_internal_option('sidebar_visible'));
+	};
+
+  $scope.is_sidebar_open = function() {
+    console.log('checking if sidebar is open ...');
+    //console.log($scope.sidebar_open);
+    //return $scope.sidebar_open;
+    return OptionsService.get_internal_option('sidebar_visible');
+  }
 }]);

@@ -74,10 +74,13 @@
     <div id="wrapper" class="container">
       <form class="form-inline" role="search" ng-controller="SearchCtrl" style="margin-bottom: 20px;">
       <div class="row">
-        <div class="col-xs-10">
+        <div class="col-xs-7">
           <input type="text" class="form-control" name="q" ng-model="query" placeholder="Zoek iets, bv. Amsterdam" style="width: 100%;">
         </div>
-        <div class="col-xs-2">
+        <div class="col-xs-5">
+          <button type="button" id="button-cog" class="btn btn-default pull-right" ng-show="true" ng-click="showsidebar()" style="padding: 6px 10px; margin-left: 10px;">
+             <span class="glyphicon glyphicon-cog white"></span>
+           </button>
           <button type="submit"  ng-click="search(q)" class="btn btn-default pull-right">Zoeken</button>
         </div>
       </div>

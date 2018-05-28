@@ -3,9 +3,9 @@
   <li role="presentation"><a href="#/c/{{ municipality }}">Gemeenteraad</a></li>
 </ul>
 
-<div class="row">
-  <div id="sidebar" class="col-md-4 col-xs-12">
-    <div class="sidebar-wrapper" ng-show="sidebar_visible()">
+<div class="row" ng-controller="SearchCtrl">
+  <div id="sidebar" class="col-md-4 col-xs-12 sidebar-offcanvas" ng-show="is_sidebar_open()">
+    <div class="sidebar-wrapper">
       <div class="sidebar-block">
         <h2>Filters</h2>
       </div>
