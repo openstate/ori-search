@@ -7,7 +7,11 @@
   <div id="sidebar" class="col-md-4 col-xs-12 sidebar-offcanvas" ng-show="is_sidebar_open()">
     <div class="sidebar-wrapper">
       <div class="sidebar-block">
-        <h2>Filters</h2>
+        <h2 class="pull-left">Filters</h2>
+        <button type="button" class="btn btn-default pull-right" ng-click="showsidebar()" style="margin-top: 20px; margin-left: 10px;">
+            X
+        </button>
+        <div class="clearfix"></div>
       </div>
       <div class="sidebar-block" ng-if="!single_mode">
         <h3>Gemeenten</h3>
