@@ -612,7 +612,7 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
 
   $scope.sidebar_open = $scope.sidebar_visible();
   OptionsService.set_internal_option('sidebar_visible',$scope.sidebar_open);
-  
+
   $scope.clear_highlight = function(val) {
     return val.replace('<em>', '').replace('</em>', '');
   };
@@ -764,5 +764,9 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     //console.log($scope.sidebar_open);
     //return $scope.sidebar_open;
     return OptionsService.get_internal_option('sidebar_visible');
+  }
+
+  $scope.is_frontpage = function() {
+    return $location.path() == '/';
   }
 }]);

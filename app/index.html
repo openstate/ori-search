@@ -72,18 +72,12 @@
 
   <article>
     <div id="wrapper" class="container">
-      <form class="form-inline" role="search" ng-controller="SearchCtrl" style="margin-bottom: 20px;">
-      <div class="row">
-        <div class="col-xs-7">
-          <input type="text" class="form-control" name="q" ng-model="query" placeholder="Zoek iets, bv. Amsterdam" style="width: 100%;">
-        </div>
-        <div class="col-xs-5">
+      <form class="form-inline" role="search" ng-controller="SearchCtrl" style="margin-bottom: 20px; text-align: center;">
+          <input type="text" class="form-control" name="q" ng-model="query" placeholder="Zoek iets, bv. Amsterdam" style="min-width: 250px;">
           <button type="button" id="button-cog" class="btn btn-default pull-right" ng-show="mobile" ng-click="showsidebar()" style="padding: 6px 10px; margin-left: 10px;">
              <span class="glyphicon glyphicon-cog white"></span>
            </button>
-          <button type="submit"  ng-click="search(q)" class="btn btn-default pull-right">Zoeken</button>
-        </div>
-      </div>
+          <button type="submit"  ng-click="search(q)" class="btn btn-default">Zoeken</button>
       </form>
       <div ng-view></div>
     </div>
