@@ -17,8 +17,14 @@ var defered_home_resolver = {
 
 angular.module('oriApp.home', ['ngRoute'])
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/', {
+  $routeProvider.
+  when('/', {
     templateUrl: 'components/home/home.html',
+    controller: 'HomeCtrl',
+    resolve: defered_home_resolver
+  }).
+  when('/list', {
+    templateUrl: 'components/home/list.html',
     controller: 'HomeCtrl',
     resolve: defered_home_resolver
   });
