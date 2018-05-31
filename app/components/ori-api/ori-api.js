@@ -79,7 +79,7 @@ angular.module('oriApp').factory("ORIAPIService", ['$http', function ($http) {
     }
 
     if (typeof(q) !== 'undefined') {
-      payload['data']['query'] = q;
+      payload['data']['query'] = q + '*';
     }
     return $http(payload);
   };
