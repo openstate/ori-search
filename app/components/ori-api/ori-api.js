@@ -62,8 +62,8 @@ angular.module('oriApp').factory("ORIAPIService", ['$http', function ($http) {
     });
   };
 
-  svc.governing_bodies = function(classifications) {
-    return $http({
+  svc.governing_bodies = function(classifications, q) {
+    payload = {
       url: base_url + "/search/organizations",
       method: "POST",
       data: {
@@ -76,7 +76,12 @@ angular.module('oriApp').factory("ORIAPIService", ['$http', function ($http) {
         "order": "asc",
         "size": 500
       }
-    });
+    }
+
+    if (typeof(q) !== 'undefined') {
+      payload['data']['query'] = q;
+    }
+    return $http(payload);
   };
 
   svc.organizations = function(slug) {

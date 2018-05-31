@@ -78,6 +78,22 @@
         </div>
       </div>
 
+      <div class="row" ng-show="should_show_governing_bodies()">
+        <div class="col-xs-12">
+          <h2>Overheden</h2>
+          <ul class="list-unstyled" ng-repeat="g in get_governing_bodies()['organizations']">
+            <li class="pull-left" style="margin-right: 10px;"><a href="#/g/{{ g.meta.collection }}" class="btn btn-xs btn-default ng-binding"><i class="fa fa-map-marker"></i> {{ g.name }}</a></li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>Resultaten</h2>
+        </div>
+      </div>
+
       <div ng-repeat="result in results">
         <div class="col-xs-12">
           <div class="result" ng-class="result.meta._type" ng-if="result.meta._type" ng-include="'components/search/' + result.meta._type + '.html'">

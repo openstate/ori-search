@@ -65,6 +65,10 @@ angular.module('oriApp.constants', ['ngRoute'])
     return municipalities;
   };
 
+  svc.get_governing_body_types = function() {
+    return governing_body_types;
+  };
+  
   svc.get_municipality_by_collection = function (name) {
     for (var muni in municipalities.organizations) {
       if (municipalities.organizations[muni].meta.collection.toLowerCase() == name.toLowerCase()) {

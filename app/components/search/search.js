@@ -276,10 +276,11 @@ angular.module('oriApp.search', ['ngRoute', 'chart.js', 'daterangepicker'])
   };
 })
 
-.factory("SearchService", ['ORIAPIService', 'ConstantsService', 'OptionsService',
-function (ORIAPIService, ConstantsService, OptionsService) {
+.factory("SearchService", ['ORIAPIService', 'ConstantsService', 'OptionsService', '$q',
+function (ORIAPIService, ConstantsService, OptionsService, $q) {
   var svc = {};
   var results = {};
+  var governing_bodies = {};
   var facets = {};
   var query;
   var page;
@@ -368,6 +369,20 @@ function (ORIAPIService, ConstantsService, OptionsService) {
     return classifications;
   };
 
+  svc.search_governing_bodies = function(query) {
+    console.log('searching governing bodies!');
+    var gb_types = Object.keys(ConstantsService.get_governing_body_types());
+    return ORIAPIService.governing_bodies(gb_types, query).then(function (data) {
+      governing_bodies = data.data;
+      console.log('Searched governing bodies :');
+      console.dir(governing_bodies);
+    });
+  };
+
+  svc.get_governing_bodies = function() {
+    return governing_bodies;
+  };
+
   svc.search = function(query, page, options) {
     svc.set_query(query);
     svc.set_page(page);
@@ -380,6 +395,7 @@ function (ORIAPIService, ConstantsService, OptionsService) {
     options = svc.get_options();
     console.log('Querying for ' + query + ' for page ' + page + ' with options:');
     console.dir(options);
+
     return ORIAPIService.simple_search(query, page, options).then(function (data) {
       var i = 0;
       console.log('Got data! :');
@@ -444,13 +460,18 @@ function (ORIAPIService, ConstantsService, OptionsService) {
   }
 
   svc.next_page = function() {
-    return svc.search(svc.get_query(), ++page, svc.get_options());
+    return $q.all([
+      svc.search_governing_bodies(svc.get_query()),
+      svc.search(svc.get_query(), ++page, svc.get_options())]);
   }
 
   svc.first_page = function() {
     svc.set_page(1);
     svc.set_results({});
-    return svc.search(svc.get_query(), svc.get_page(), svc.get_options());
+    console.log('doing first page search!');
+    return $q.all([
+      svc.search_governing_bodies(svc.get_query()),
+      svc.search(svc.get_query(), svc.get_page(), svc.get_options())]);
   };
 
   return svc;
@@ -479,6 +500,7 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
   $scope.doc_types = ConstantsService.get_doc_types();
   $scope.doc_types_full = [];
   $scope.results = {};
+  $scope.governing_bodies = SearchService.get_governing_bodies();
   $scope.meta = SearchService.get_meta();
   $scope.busy = true;
   $scope.facets = [];
@@ -542,6 +564,7 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     }
 
     $scope.results = SearchService.get_results();
+    $scope.governing_bodies = SearchService.get_governing_bodies();
     $scope.meta = SearchService.get_meta();
     $scope.options = SearchService.get_options();
     $scope.single_mode = OptionsService.get_internal_option('single_mode');
@@ -625,6 +648,7 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     SearchService.set_page(1);
     SearchService.set_results({});
     $scope.results = {};
+    $scope.governing_bodies = {};
 
     var start_path = "";
     if (OptionsService.get_internal_option('single_mode')) {
@@ -715,6 +739,9 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     SearchService.first_page().then(function (data) {
       console.log('Search service got some data!');
       $scope.results = SearchService.get_results();
+      console.log('Settomg governing bodies:');
+      console.dir(SearchService.get_governing_bodies());
+      $scope.governing_bodies = SearchService.get_governing_bodies();
       $scope.meta = SearchService.get_meta();
       console.dir($scope.results);
       $.each($scope.doc_types_full, function (idx, item) {
@@ -764,9 +791,21 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     //console.log($scope.sidebar_open);
     //return $scope.sidebar_open;
     return OptionsService.get_internal_option('sidebar_visible');
-  }
+  };
 
   $scope.is_frontpage = function() {
     return $location.path() == '/';
-  }
+  };
+
+  $scope.get_governing_bodies = function() {
+    return SearchService.get_governing_bodies();
+  };
+
+  $scope.should_show_governing_bodies = function() {
+    var gb = SearchService.get_governing_bodies();
+    return (
+      (typeof(gb) !== 'undefined') &&
+      (gb['meta']['total'] > 0) &&
+      !OptionsService.get_internal_option('single_mode'));
+    };
 }]);
