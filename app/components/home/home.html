@@ -1,3 +1,16 @@
+<div ng-controller="HomeCtrl">
 <p style="text-align: center; font-size: 19px;">
 Gebruik bovenstaand zoekveld om te zoeken naar stukken van {{ municipalities.meta.total }} overheden
 </p>
+
+<div style="text-align:center;">
+  <button class="btn btn-default" ng-click="ToggleShowAll(show_all)">Toon gemeenten</button>
+</div>
+
+<div ng-repeat="municipalities in chunked_municipalities" class="row municipalities-list" ng-show="ShouldShowAll()">
+  <div ng-repeat="m in municipalities" class="col-md-4 text-center home-item">
+    <a href="#/g/{{ m.meta.collection }}" class="btn btn-xs btn-default ng-binding"><i class="fa fa-map-marker"></i> {{ m.name }}</a>
+  </div>
+</div>
+
+</div>

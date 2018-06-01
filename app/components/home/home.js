@@ -43,8 +43,21 @@ function($scope, $location, ORIAPIService, ConstantsService, OptionsService, Sea
 
   $scope.municipalities = ConstantsService.get_municipalities();
   $scope.chunked_municipalities = _chunk($scope.municipalities.organizations, 3);
+  $scope.show_all = false;
   console.dir($scope.municipalities);
   OptionsService.set_internal_option('single_mode', false);
   OptionsService.set_internal_option('municipality', undefined);
   SearchService.set_query("");
+
+  $scope.ToggleShowAll = function (f) {
+    if (f) {
+      $scope.show_all = false;
+    } else {
+      $scope.show_all = true;
+    }
+  };
+
+  $scope.ShouldShowAll = function() {
+    return $scope.show_all;
+  };
 }]);
