@@ -41,8 +41,12 @@ function($scope, $location, ORIAPIService, ConstantsService, OptionsService, Sea
     return newArr;
   }
 
+  $scope.branding = ConstantsService.get_branding();
   $scope.municipalities = ConstantsService.get_municipalities();
-  $scope.chunked_municipalities = _chunk($scope.municipalities.organizations, 3);
+  $scope.filtered_municipalities = $scope.municipalities.organizations.filter(function (m) {
+    return ($scope.branding.governing_body_types.indexOf(m.classification) >= 0);
+  });
+  $scope.chunked_municipalities = _chunk($scope.filtered_municipalities, 3);
   $scope.show_all = false;
   console.dir($scope.municipalities);
   OptionsService.set_internal_option('single_mode', false);

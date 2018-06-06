@@ -29,17 +29,20 @@ angular.module('oriApp.constants', ['ngRoute'])
       'zoek.openraadsinformatie.nl': {
         'name': 'Open Raadsinformatie',
         'byline': 'Zoeken in stukken van de raad',
-        'logo': 'logo.svg'
+        'logo': 'logo.svg',
+        'governing_body_types': ['Municipality']
       },
       'zoek.openstateninformatie.nl': {
         'name': 'Open Staten Informatie',
         'byline': 'Zoeken in stukken van de provincie',
-        'logo': 'logo.svg'
+        'logo': 'logo.svg',
+        'governing_body_types': ['Province']
       },
       'localhost': {
         'name': 'Open Blah Informatie',
         'byline': 'Zoeken in stukken van de blah',
-        'logo': 'logo.svg'
+        'logo': 'logo.svg',
+        'governing_body_types': ['Province']
       },
   };
 
