@@ -23,7 +23,31 @@ angular.module('oriApp.constants', ['ngRoute'])
     "Municipality": 'Gemeente',
     "Province": 'Provincie'
   };
+
+  var hostname = window.location.hostname;
+  var branding = {
+      'zoek.openraadsinformatie.nl': {
+        'name': 'Open Raadsinformatie',
+        'byline': 'Zoeken in stukken van de raad',
+        'logo': 'logo.svg'
+      },
+      'zoek.openstateninformatie.nl': {
+        'name': 'Open Staten Informatie',
+        'byline': 'Zoeken in stukken van de provincie',
+        'logo': 'logo.svg'
+      },
+      'localhost': {
+        'name': 'Open Blah Informatie',
+        'byline': 'Zoeken in stukken van de blah',
+        'logo': 'logo.svg'
+      },
+  };
+
   var start_year = 2006;
+
+  svc.get_branding = function() {
+    return branding[hostname];
+  }
 
   svc.get_years = function() {
     var years = [];
