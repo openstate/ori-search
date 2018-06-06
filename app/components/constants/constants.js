@@ -2,8 +2,9 @@
 
 angular.module('oriApp.constants', ['ngRoute'])
 
-.run(['ConstantsService', function (ConstantsService) {
+.run(['ConstantsService', '$location', '$rootScope', function (ConstantsService, $location, $rootScope) {
   console.log('now in the run block of the constants module!');
+  $rootScope.title = 'Blah';
   ConstantsService.init();
 }])
 
@@ -68,7 +69,7 @@ angular.module('oriApp.constants', ['ngRoute'])
   svc.get_governing_body_types = function() {
     return governing_body_types;
   };
-  
+
   svc.get_municipality_by_collection = function (name) {
     for (var muni in municipalities.organizations) {
       if (municipalities.organizations[muni].meta.collection.toLowerCase() == name.toLowerCase()) {

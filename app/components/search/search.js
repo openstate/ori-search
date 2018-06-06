@@ -803,9 +803,13 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
 
   $scope.should_show_governing_bodies = function() {
     var gb = SearchService.get_governing_bodies();
+    var total = 0;
+    if (typeof(gb['meta']) !== 'undefined') {
+      total = (gb['meta']['total'] || 0);
+    }
     return (
       (typeof(gb) !== 'undefined') &&
-      (gb['meta']['total'] > 0) &&
+      (total > 0) &&
       !OptionsService.get_internal_option('single_mode'));
     };
 }]);
