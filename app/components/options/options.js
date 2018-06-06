@@ -33,7 +33,7 @@ angular.module('oriApp.options', ['ngRoute'])
     var x = new Date();
     options_obj = {
       filters: {
-        collection: {"terms": ConstantsService.get_municipalities().organizations.map(function (o) { return o.meta.collection; })},
+        collection: {"terms": ConstantsService.get_branded_governing_bodies().map(function (o) { return o.meta.collection; })},
         types: {"terms": ConstantsService.get_doc_types_as_keys() },
         classification: {"terms": ConstantsService.get_classifications() },
         start_date: {"from": "2006-01-01T00:00:00Z", "to": x.toISOString()}

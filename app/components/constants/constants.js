@@ -93,6 +93,12 @@ angular.module('oriApp.constants', ['ngRoute'])
     return municipalities;
   };
 
+  svc.get_branded_governing_bodies = function() {
+    var gb_types = svc.get_branding()['governing_body_types'];
+    return svc.get_municipalities().organizations.filter(function (m) {
+      return (gb_types.indexOf(m.classification) >= 0);
+    });
+  }
   svc.get_governing_body_types = function() {
     return governing_body_types;
   };
