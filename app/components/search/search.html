@@ -1,6 +1,6 @@
 <ul class="nav nav-tabs" ng-if="single_mode">
   <li role="presentation" class="active"><a href="#/g/{{ municipality }}/">Stukken</a></li>
-  <li role="presentation"><a href="#/c/{{ municipality }}">Gemeenteraad</a></li>
+  <li role="presentation"><a href="#/c/{{ municipality }}">Leden</a></li>
 </ul>
 
 <div class="row" ng-controller="SearchCtrl">
@@ -14,7 +14,7 @@
         <div class="clearfix"></div>
       </div>
       <div class="sidebar-block" ng-if="!single_mode">
-        <h3>Gemeenten</h3>
+        <h3>Overheden</h3>
         <ul class="list-group">
           <li ng-repeat="municipality in municipalities_full" class="list-group-item">
             <span class="badge">{{ municipality.count }}</span>
