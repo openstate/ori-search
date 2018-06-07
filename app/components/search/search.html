@@ -15,16 +15,29 @@
       </div>
       <div class="sidebar-block" ng-if="!single_mode">
         <h3>Overheden</h3>
-        <div ng-repeat="(classification, label) in get_governing_body_types()">
-          <h4>{{ label }}</h4>
-          <ul class="list-group">
-            <li ng-repeat="municipality in municipalities_full" ng-if="municipality.classification == classification" class="list-group-item">
-              <span class="badge">{{ municipality.count }}</span>
-              <input type="checkbox" value="" id="{{ municipality.collection }}" data-toggle="checkbox" ng-model="municipality.active" ng-change="updateOptions()">
-              <label for="{{ municipality.collection }}">{{ municipality.name }}</label>
-            </li>
-          </ul>
-        </div>
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          <div ng-repeat="(classification, label) in get_governing_body_types()" class="panel panel-default">
+            <div class="panel-heading" role="tab" id="heading-{{ classification }}">
+              <h4 class="panel-title">
+                <a href="javascript:;" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapse-{{ classification }}" aria-expanded="true" aria-controls="collapse-{{ classification }}">
+                  {{ label }}
+                </a>
+              </h4>
+            </div>
+
+            <div id="collapse-{{ classification }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-{{ classification }}">
+              <div class="panel-body">
+                <ul class="list-group">
+                  <li ng-repeat="municipality in municipalities_full" ng-if="municipality.classification == classification" class="list-group-item">
+                    <span class="badge">{{ municipality.count }}</span>
+                    <input type="checkbox" value="" id="{{ municipality.collection }}" data-toggle="checkbox" ng-model="municipality.active" ng-change="updateOptions()">
+                    <label for="{{ municipality.collection }}">{{ municipality.name }}</label>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div> <!-- panel-group -->
       </div>
 
       <div class="sidebar-block">

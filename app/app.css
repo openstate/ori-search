@@ -158,3 +158,8 @@
   width: 300px;
   margin: 5px;
 }
+
+.panel-title a {
+  width: 100%;
+  display: inline-block;
+}
