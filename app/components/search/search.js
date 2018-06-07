@@ -811,5 +811,9 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
       (typeof(gb) !== 'undefined') &&
       (total > 0) &&
       !OptionsService.get_internal_option('single_mode'));
-    };
+  };
+
+  $scope.get_governing_body_types = function() {
+    return ConstantsService.get_governing_body_types();
+  }
 }]);

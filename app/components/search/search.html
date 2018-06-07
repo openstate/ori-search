@@ -15,13 +15,16 @@
       </div>
       <div class="sidebar-block" ng-if="!single_mode">
         <h3>Overheden</h3>
-        <ul class="list-group">
-          <li ng-repeat="municipality in municipalities_full" class="list-group-item">
-            <span class="badge">{{ municipality.count }}</span>
-            <input type="checkbox" value="" id="{{ municipality.collection }}" data-toggle="checkbox" ng-model="municipality.active" ng-change="updateOptions()">
-            <label for="{{ municipality.collection }}">{{ municipality.name }}</label>
-          </li>
-        </ul>
+        <div ng-repeat="(classification, label) in get_governing_body_types()">
+          <h4>{{ label }}</h4>
+          <ul class="list-group">
+            <li ng-repeat="municipality in municipalities_full" ng-if="municipality.classification == classification" class="list-group-item">
+              <span class="badge">{{ municipality.count }}</span>
+              <input type="checkbox" value="" id="{{ municipality.collection }}" data-toggle="checkbox" ng-model="municipality.active" ng-change="updateOptions()">
+              <label for="{{ municipality.collection }}">{{ municipality.name }}</label>
+            </li>
+          </ul>
+        </div>
       </div>
 
       <div class="sidebar-block">
