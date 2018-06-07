@@ -814,6 +814,17 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
   };
 
   $scope.get_governing_body_types = function() {
-    return ConstantsService.get_governing_body_types();
+    var gb_types = ConstantsService.get_branding()['governing_body_types'];
+    var all_gb_types = ConstantsService.get_governing_body_types();
+
+    var sorted_gb_types = gb_types.concat(Object.keys(all_gb_types).filter(function (i) {
+      return (gb_types.indexOf(i) < 0);
+    }));
+
+    var result = {};
+    sorted_gb_types.forEach(function (k) {
+      result[k] = all_gb_types[k];
+    });
+    return result;
   }
 }]);

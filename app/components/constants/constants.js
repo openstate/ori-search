@@ -42,7 +42,7 @@ angular.module('oriApp.constants', ['ngRoute'])
         'name': 'Open Blah Informatie',
         'byline': 'Zoeken in stukken van de blah',
         'logo': 'logo.svg',
-        'governing_body_types': ['Province']
+        'governing_body_types': ['Municipality', 'Province']
       },
   };
 
