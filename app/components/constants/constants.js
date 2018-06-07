@@ -28,13 +28,13 @@ angular.module('oriApp.constants', ['ngRoute'])
   var branding = {
       'zoek.openraadsinformatie.nl': {
         'name': 'Open Raadsinformatie',
-        'byline': 'Zoeken in stukken van de raad',
+        'byline': 'Zoeken in stukken van de gemeenteraad',
         'logo': 'logo.svg',
         'governing_body_types': ['Municipality']
       },
       'zoek.openstateninformatie.nl': {
-        'name': 'Open Staten Informatie',
-        'byline': 'Zoeken in stukken van de provincie',
+        'name': 'Open Stateninformatie',
+        'byline': 'Zoeken in stukken van de provinciale staten',
         'logo': 'logo.svg',
         'governing_body_types': ['Province']
       },

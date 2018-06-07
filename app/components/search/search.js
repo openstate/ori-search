@@ -826,5 +826,17 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
       result[k] = all_gb_types[k];
     });
     return result;
-  }
+  };
+
+  $scope.toggle_governing_body_types = function(classification) {
+    console.log('Should check governing bodies with ' + classification + ' now !');
+    for (var c in $scope.municipalities_full) {
+      console.dir($scope.municipalities_full[c]);
+      if ($scope.municipalities_full[c].classification == classification) {
+        $scope.municipalities_full[c].active = !$scope.municipalities_full[c].active;
+      }
+    }
+    $scope.updateOptions();
+
+  };
 }]);

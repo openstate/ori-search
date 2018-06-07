@@ -27,6 +27,9 @@
 
             <div id="collapse-{{ classification }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-{{ classification }}">
               <div class="panel-body">
+                <button type="button" class="btn btn-default pull-right" ng-click="toggle_governing_body_types(classification)">Alles aan/uit</button>
+                <div class="clearfix"></div>
+                <p></p>
                 <ul class="list-group">
                   <li ng-repeat="municipality in municipalities_full" ng-if="municipality.classification == classification" class="list-group-item">
                     <span class="badge">{{ municipality.count }}</span>
