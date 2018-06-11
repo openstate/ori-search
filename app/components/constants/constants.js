@@ -30,19 +30,22 @@ angular.module('oriApp.constants', ['ngRoute'])
         'name': 'Open Raadsinformatie',
         'byline': 'Zoeken in stukken van de gemeenteraad',
         'logo': 'logo.svg',
-        'governing_body_types': ['Municipality']
+        'governing_body_types': ['Municipality'],
+        'footer': 'footer.html'
       },
       'zoek.openstateninformatie.nl': {
         'name': 'Open Stateninformatie',
         'byline': 'Zoeken in stukken van de provinciale staten',
         'logo': 'logo.svg',
-        'governing_body_types': ['Province']
+        'governing_body_types': ['Province'],
+        'footer': 'footer-provinces.html'
       },
       'localhost': {
         'name': 'Open Blah Informatie',
         'byline': 'Zoeken in stukken van de blah',
         'logo': 'logo.svg',
-        'governing_body_types': ['Municipality', 'Province']
+        'governing_body_types': ['Municipality', 'Province'],
+        'footer': 'footer-provinces.html'
       },
   };
 
