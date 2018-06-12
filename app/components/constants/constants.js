@@ -36,14 +36,14 @@ angular.module('oriApp.constants', ['ngRoute'])
       'zoek.openstateninformatie.nl': {
         'name': 'Open Stateninformatie',
         'byline': 'Zoeken in stukken van de provinciale staten',
-        'logo': 'logo.svg',
+        'logo': 'logo-provinces.svg',
         'governing_body_types': ['Province'],
         'footer': 'footer-provinces.html'
       },
       'localhost': {
         'name': 'Open Blah Informatie',
         'byline': 'Zoeken in stukken van de blah',
-        'logo': 'logo.svg',
+        'logo': 'logo-provinces.svg',
         'governing_body_types': ['Municipality', 'Province'],
         'footer': 'footer-provinces.html'
       },
