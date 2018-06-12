@@ -23,7 +23,7 @@
     <div class="col-xs-12">
       <p><strong>Indiener:</strong> {{ result.creator.name }}</p>
       <p><strong>Resultaat:</strong> {{ result.result }}<p>
-      <p>{{ result.text }}</p>
+      <p style="white-space: pre;">{{ result.text }}</p>
 
       <ul ng-repeat="source in result.sources" class="list-unstyled attachments">
         <li>
