@@ -47,7 +47,7 @@ function($scope, $location, ORIAPIService, ConstantsService, OptionsService, Sea
     return ($scope.branding.governing_body_types.indexOf(m.classification) >= 0);
   });
   $scope.chunked_municipalities = _chunk($scope.filtered_municipalities, 3);
-  $scope.show_all = false;
+  $scope.show_all = ($scope.filtered_municipalities.length < 20);
   console.dir($scope.municipalities);
   OptionsService.set_internal_option('single_mode', false);
   OptionsService.set_internal_option('municipality', undefined);

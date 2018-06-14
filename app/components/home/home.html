@@ -3,7 +3,7 @@
 Gebruik bovenstaand zoekveld om te zoeken naar stukken van {{ filtered_municipalities.length }} overheden
 </p>
 
-<div style="text-align:center;">
+<div style="text-align:center;" ng-show="!ShouldShowAll()">
   <button class="btn btn-default" ng-click="ToggleShowAll(show_all)">Toon overheden</button>
 </div>
 
