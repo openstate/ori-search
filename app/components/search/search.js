@@ -172,7 +172,7 @@ angular.module('oriApp.search', ['ngRoute', 'chart.js', 'daterangepicker'])
   return function(val) {
     if (val) {
       var val_as_moment = moment(val);
-      return val_as_moment.format('hh:mm');
+      return val_as_moment.format('H:mm');
     }
   };
 })
