@@ -171,7 +171,7 @@ angular.module('oriApp.search', ['ngRoute', 'chart.js', 'daterangepicker'])
 .filter('format_time', function() {
   return function(val) {
     if (val) {
-      var val_as_moment = moment(val);
+      var val_as_moment = moment.utc(val);
       return val_as_moment.format('H:mm');
     }
   };
