@@ -154,6 +154,13 @@
   }
 }
 
+@media screen and (max-width: 1200px) and (min-width: 1000px) {
+  .sidebar-offcanvas {
+    position: relative;
+    top: 0;
+  }
+}
+
 .municipalities-list a {
   width: 300px;
   margin: 5px;
