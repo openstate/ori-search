@@ -770,7 +770,7 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
   $scope.filter_on_classification = function(ev) {
     console.log('A classification was clicked:');
     console.dir($(ev.target).text());
-    var selected_classification = $(ev.target).text();
+    var selected_classification = $(ev.target).text().trim();
     $scope.classifications_full.forEach(function (c) {
       c.active = (c.term == selected_classification);
     });
