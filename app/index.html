@@ -74,7 +74,7 @@
     <div id="wrapper" class="container">
       <form class="form-inline" role="search" ng-controller="SearchCtrl" style="margin-bottom: 20px; text-align: center;">
           <input type="text" class="form-control" name="q" ng-model="query" placeholder="Zoek iets, bv. Amsterdam" style="min-width: 250px;">
-          <button type="button" id="button-cog" class="btn btn-default pull-right" ng-show="mobile" ng-click="showsidebar()" style="padding: 6px 10px; margin-left: 10px;">
+          <button type="button" id="button-cog" class="btn btn-default pull-right" ng-show="should_show_cog()" ng-click="showsidebar()" style="padding: 6px 10px; margin-left: 10px;">
              <span class="glyphicon glyphicon-cog white"></span>
            </button>
           <button type="submit"  ng-click="search(q)" class="btn btn-default">Zoeken</button>

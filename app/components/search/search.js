@@ -813,6 +813,10 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
       !OptionsService.get_internal_option('single_mode'));
   };
 
+  $scope.should_show_cog = function() {
+    return ($scope.mobile && ($location.path() != '/'));
+  }
+
   $scope.get_governing_body_types = function() {
     var gb_types = ConstantsService.get_branding()['governing_body_types'];
     var all_gb_types = ConstantsService.get_governing_body_types();
