@@ -82,16 +82,11 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <form class="form-horizontal">
             <label class="control-label col-xs-12">Sorteren op:</label>
-            <div class="col-xs-6">
-              <select ng-model="sort" name="sort" class="form-control" ng-change="updateOptions()">
-                <option value="_score">Relevantie</option>
-                <option value="start_date">Datum</option>
-              </select>
-            </div>
-            <div class="col-xs-6">
-              <select ng-model="order" name="order" class="form-control" ng-change="updateOptions()">
-                <option value="desc">Aflopend</option>
-                <option value="asc">Oplopend</option>
+            <div class="col-xs-12">
+              <select ng-model="sort_and_order" name="sort_and_order" class="form-control" ng-change="updateOptions()">
+                <option value="_score|desc">Relevantie</option>
+                <option value="start_date|desc">Datum (Nieuwste eerst)</option>
+                <option value="start_date|asc">Datum (Oudste eerst)</option>
               </select>
             </div>
           </form>

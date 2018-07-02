@@ -575,6 +575,7 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     console.dir(OptionsService.get_options());
     $scope.sort = OptionsService.get_option('sort');
     $scope.order = OptionsService.get_option('order');
+    $scope.sort_and_order = $scope.sort + '|' + $scope.order;
 
     console.log('classifications:');
     console.dir($scope.classifications);
@@ -731,6 +732,9 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
       OptionsService.set_facet_option('start_date', 'interval', 'year');
     }
 
+    var sort_parts = $scope.sort_and_order.split('|');
+    $scope.sort = sort_parts[0];
+    $scope.order = sort_parts[1];
     OptionsService.set_option('sort', $scope.sort);
     OptionsService.set_option('order', $scope.order);
     console.log('Options after adjustment of filters:');
