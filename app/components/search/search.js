@@ -781,6 +781,19 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
     $scope.updateOptions();
   };
 
+  $scope.filter_on_municipality = function(ev) {
+    console.log('Should filter on a muni now!');
+    if (!OptionsService.get_internal_option('single_mode')) {
+      console.log('A municipality was clicked:');
+      console.dir($(ev.target).text().trim());
+      var selected_municipality = $(ev.target).text().trim();
+      $scope.municipalities_full.forEach(function (m) {
+        m.active = (m.name == selected_municipality);
+      });
+      $scope.updateOptions();
+    }
+  };
+
   $scope.showsidebar = function (){
 			// StateService.sidebarOpen = $scope.sidebar_visible();
 			// StateService.notifySidebarOpenobserverCallback();
