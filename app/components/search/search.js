@@ -690,8 +690,12 @@ function($scope, $location, ORIAPIService, SearchService, ConstantsService, Opti
 
   $scope.toggle_classifications = function() {
     console.log('Deselect all clicked!');
+    var cur_state = true;
     for (var c in $scope.classifications_full) {
-      $scope.classifications_full[c].active = !$scope.classifications_full[c].active;
+      cur_state = cur_state && $scope.classifications_full[c].active;
+    }
+    for (var c in $scope.classifications_full) {
+      $scope.classifications_full[c].active = !cur_state;
     }
     $scope.updateOptions();
   };
