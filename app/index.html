@@ -38,6 +38,7 @@
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             Menu
+            <span ng-controller="SearchCtrl" ng-show="loading" us-spinner="{radius:5, width:2, length: 8, position: relative, left: '-25px', top: '26px'}"></span>
           </button>
           <a id="small-brand" class="navbar-brand visible-xs-inline" href="#/"><img src="images/logo.svg"></a>
           <a id="large-brand" class="navbar-brand hidden-xs hidden" href="#/"><img src="images/logo.svg"></a>
