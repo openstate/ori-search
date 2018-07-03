@@ -66,6 +66,33 @@ var defered_resolver = {
 
 angular.module('oriApp.search', ['ngRoute', 'chart.js', 'daterangepicker'])
 
+.factory('httpInterceptor', ['$q', '$rootScope',
+    function ($q, $rootScope) {
+        var loadingCount = 0;
+
+        return {
+            request: function (config) {
+                if(++loadingCount === 1) $rootScope.$broadcast('loading:progress');
+                return config || $q.when(config);
+            },
+
+            response: function (response) {
+                if(--loadingCount === 0) $rootScope.$broadcast('loading:finish');
+                return response || $q.when(response);
+            },
+
+            responseError: function (response) {
+                if(--loadingCount === 0) $rootScope.$broadcast('loading:finish');
+                return $q.reject(response);
+            }
+        };
+    }
+])
+
+.config(['$httpProvider', function ($httpProvider) {
+    $httpProvider.interceptors.push('httpInterceptor');
+}])
+
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/search', {
     templateUrl: 'components/search/search.html',
@@ -477,8 +504,22 @@ function (ORIAPIService, ConstantsService, OptionsService, $q) {
   return svc;
 }])
 
-.controller('SearchCtrl', ['$scope', '$location', 'ORIAPIService', 'SearchService', 'ConstantsService', 'OptionsService', 'screenSize',
-function($scope, $location, ORIAPIService, SearchService, ConstantsService, OptionsService, screenSize) {
+.controller('SearchCtrl', ['$scope', '$location', 'ORIAPIService', 'SearchService', 'ConstantsService', 'OptionsService', 'screenSize', '$rootScope',
+function($scope, $location, ORIAPIService, SearchService, ConstantsService, OptionsService, screenSize, $rootScope) {
+  $scope.loading = false;
+
+  $rootScope.$on('loading:progress', function (){
+      // show loading gif
+      console.log('loading in progress');
+      $scope.loading = true;
+  });
+
+  $rootScope.$on('loading:finish', function (){
+      // hide loading gif
+      console.log('loading finished');
+      $scope.loading = false;
+  });
+
   $scope.query = SearchService.get_query();
   $scope.municipalities = ConstantsService.get_municipalities();
   $scope.options = SearchService.get_options();
