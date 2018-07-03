@@ -11,6 +11,7 @@ angular.module('oriApp', [
   'ui-rangeSlider',
   'chart.js',
   'daterangepicker',
+  'angularSpinner',
   'oriApp.constants',
   'oriApp.options',
   'oriApp.viernulvier',

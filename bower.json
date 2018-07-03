@@ -20,7 +20,8 @@
     "angular-chart.js": "~0.8.8",
     "angular-daterangepicker": "~0.2.2",
     "angular-media-queries": "~0.6.0",
-    "moment-timezone": "~0.5.17"
+    "moment-timezone": "~0.5.17",
+    "angular-spinner": "^1.0.1"
   },
   "resolutions": {
     "angular": "1.4.7"

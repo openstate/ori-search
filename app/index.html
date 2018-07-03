@@ -44,6 +44,7 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
+            <li ng-controller="SearchCtrl" ng-show="true"><span us-spinner="{radius:5, width:2, length: 8, position: relative, left: '-25px', top: '26px'}"></span></li>
             <li><a href="http://www.openraadsinformatie.nl/" target="_blank">Over <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></li>
             <li><a href="https://github.com/openstate/open-raadsinformatie" target="_blank">Github <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></li>
             <li><a href="http://docs.openraadsinformatie.nl/" target="_blank">API Docs <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></li>
@@ -102,6 +103,7 @@
   <script src="bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
   <script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
   <script src="bower_components/angular-daterangepicker/js/angular-daterangepicker.js"></script>
+  <script src="bower_components/angular-spinner/dist/angular-spinner.min.js"></script>
   <script src="app.js"></script>
   <script src="components/home/home.js"></script>
   <script src="components/version/version.js"></script>
