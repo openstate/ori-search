@@ -9,8 +9,8 @@
   <div class="row">
     <div class="col-xs-12">
       <a ng-click="filter_on_municipality($event)" class="btn btn-xs btn-default"><i class="fa fa-map-marker"></i> {{ result | municipality_name }}</a>
-      <span class="btn btn-xs btn-default"><i class="fa fa-calendar-o"></i> {{ result.start_date |format_date }}</span>
-      <span class="btn btn-xs btn-default"><i class="fa fa-clock-o"></i> {{ result.start_date |format_time }}</span>
+      <span class="btn btn-xs btn-default btn-nobtn"><i class="fa fa-calendar-o"></i> {{ result.start_date |format_date }}</span>
+      <span class="btn btn-xs btn-default btn-nobtn"><i class="fa fa-clock-o"></i> {{ result.start_date |format_time }}</span>
       <a ng-click="filter_on_classification($event)" class="btn btn-xs btn-default"><i class="fa fa-briefcase"></i> {{ result.classification }}</a>
       <span ng-if="result.organisation.name" href="#" class="btn btn-xs btn-default"><i class="fa fa-sitemap"></i> {{ result.organisation.name }}</span>
 

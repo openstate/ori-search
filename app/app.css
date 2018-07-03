@@ -49,6 +49,16 @@
   background-color: white;
 }
 
+.btn-nobtn {
+  touch-action: none !important;
+  cursor: default !important;
+}
+
+.btn-nobtn:hover {
+  background-color: inherit !important;
+  border-color: #ccc;
+}
+
 @media(max-width:767px){
   .result h2 {
     font-size: 15px;
