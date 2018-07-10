@@ -21,8 +21,8 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <p><strong>Indiener:</strong> {{ result.motion.creator.name }}</p>
-      <p>{{ result.motion.text }}</p>
+      <p><strong>Indiener:</strong> {{ result.motion.creator.name || result.creator.name }}</p>
+      <p>{{ result.motion.text || result.text }}</p>
       <p><strong>Resultaat:</strong> {{ result.result }}<p>
       <div class="progress">
         <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ result.count_options['yes']  }}"
