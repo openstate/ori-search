@@ -46,7 +46,7 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
             <li ng-controller="SearchCtrl" ng-show="loading"><span us-spinner="{radius:5, width:2, length: 8, position: relative, left: '-25px', top: '26px'}"></span></li>
-            <li><a href="http://www.openraadsinformatie.nl/" target="_blank">Over <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></li>
+            <li><a href="{{ branding.links.about || '' }}" target="_blank">Over <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></li>
             <li><a href="https://github.com/openstate/open-raadsinformatie" target="_blank">Github <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></li>
             <li><a href="http://docs.openraadsinformatie.nl/" target="_blank">API Docs <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></li>
             <li><a href="http://www.openstate.eu/contact/">Contact</a></li>

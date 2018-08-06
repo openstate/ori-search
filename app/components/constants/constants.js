@@ -31,21 +31,30 @@ angular.module('oriApp.constants', ['ngRoute'])
         'byline': 'Zoeken in stukken van de gemeenteraad',
         'logo': 'logo.svg',
         'governing_body_types': ['Municipality'],
-        'footer': 'footer.html'
+        'footer': 'footer.html',
+        'links': {
+          'about': 'http://www.openraadsinformatie.nl/'
+        }
       },
       'zoek.openstateninformatie.nl': {
         'name': 'Open Stateninformatie',
         'byline': 'Zoeken in stukken van de provinciale staten',
         'logo': 'logo-provinces.svg',
         'governing_body_types': ['Province'],
-        'footer': 'footer-provinces.html'
+        'footer': 'footer-provinces.html',
+        'links': {
+          'about': 'https://www.noord-holland.nl/Actueel/Archief/2018/Juli_2018/Zoekmachine_maakt_volgen_provinciaal_bestuur_eenvoudiger' 
+        }
       },
       'localhost': {
         'name': 'Open Blah Informatie',
         'byline': 'Zoeken in stukken van de blah',
         'logo': 'logo-provinces.svg',
         'governing_body_types': ['Municipality', 'Province'],
-        'footer': 'footer-provinces.html'
+        'footer': 'footer-provinces.html',
+        'links': {
+          'about': 'http://www.openraadsinformatie.nl/'
+        }
       },
   };
 
