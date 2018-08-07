@@ -14,9 +14,19 @@
       <a ng-click="filter_on_classification($event)" class="btn btn-xs btn-default"><i class="fa fa-briefcase"></i> {{ result.classification }}</a>
       <span ng-if="result.organisation.name" href="#" class="btn btn-xs btn-default"><i class="fa fa-sitemap"></i> {{ result.organisation.name }}</span>
 
-      <a href="{{ base_json_url }}/{{ result.meta.collection }}/{{ result.meta._type }}/{{ result.id }}" target="_blank" class="btn btn-xs btn-default pull-right">
-        <img src="images/json.svg" title="Rauwe JSON data voor dit item" width="12" height="12"> Data
-      </a>
+      <!-- Single button -->
+      <div class="btn-group">
+        <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Meer <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a href="{{ base_json_url }}/{{ result.meta.collection }}/{{ result.meta._type }}/{{ result.id }}" target="_blank" class="">
+              <img src="images/json.svg" title="Rauwe JSON data voor dit item" width="12" height="12" style="margin-top: -3px;"> Data
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
   <div class="row">

@@ -309,8 +309,8 @@ angular.module('oriApp.search', ['ngRoute', 'chart.js', 'daterangepicker'])
         transclude: true,
         template: [
             '<div class="show-more-container"><ng-transclude></ng-transclude></div>',
-            '<a href="#" class="btn btn-default show-more-expand">Toon meer <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a>',
-            '<a href="#" class="btn btn-default show-more-collapse">Toon minder <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span></a>',
+            '<a href="#" class="btn btn-default show-more-expand">Toon alles <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a>',
+            '<a href="#" class="btn btn-default show-more-collapse">Toon begin <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span></a>',
         ].join(''),
         link: function(scope, element, attrs, controller) {
             var maxHeight = 45;
