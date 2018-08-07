@@ -21,50 +21,52 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <p><strong>Indiener:</strong> {{ result.motion.creator.name || result.creator.name }}</p>
-      <p>{{ result.motion.text || result.text }}</p>
-      <p><strong>Resultaat:</strong> {{ result.result }}<p>
-      <div class="progress">
-        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ result.count_options['yes']  }}"
-          aria-valuemin="0" aria-valuemax="100" style="width: {{ result.count_options['yes'] / (result.count_options['no'] + result.count_options['yes']) * 100 }}%;">
-          <span class="sr-only">{{ result.count_options['yes']  }} stemmen</span>
-        </div>
-        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{ result.count_options['no']  }}"
-          aria-valuemin="0" aria-valuemax="100" style="width: {{ result.count_options['no']  / (result.count_options['no'] + result.count_options['yes']) * 100 }}%;">
-          <span class="sr-only">{{ result.count_options['no']  }} stemmen</span>
-        </div>
-      </div>
-      <h3>Stemming per partij</h3>
-      <div class="row">
-        <div ng-repeat="option in result.party_votes_options">
-          <div class="col-xs-12 col-md-6">
-            <h4>{{ option |get_human_readable_vote_option }} ({{ result.party_votes[option].total }} stemmen)</h4>
-            <canvas id="doughnut-{{ result.id }}" class="chart chart-doughnut"
-              chart-data="result.party_votes[option].data" chart-labels="result.party_votes[option].labels">
-            </canvas>
+      <div show-more>
+        <p><strong>Indiener:</strong> {{ result.motion.creator.name || result.creator.name }}</p>
+        <p>{{ result.motion.text || result.text }}</p>
+        <p><strong>Resultaat:</strong> {{ result.result }}<p>
+        <div class="progress">
+          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ result.count_options['yes']  }}"
+            aria-valuemin="0" aria-valuemax="100" style="width: {{ result.count_options['yes'] / (result.count_options['no'] + result.count_options['yes']) * 100 }}%;">
+            <span class="sr-only">{{ result.count_options['yes']  }} stemmen</span>
+          </div>
+          <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{ result.count_options['no']  }}"
+            aria-valuemin="0" aria-valuemax="100" style="width: {{ result.count_options['no']  / (result.count_options['no'] + result.count_options['yes']) * 100 }}%;">
+            <span class="sr-only">{{ result.count_options['no']  }} stemmen</span>
           </div>
         </div>
+        <h3>Stemming per partij</h3>
+        <div class="row">
+          <div ng-repeat="option in result.party_votes_options">
+            <div class="col-xs-12 col-md-6">
+              <h4>{{ option |get_human_readable_vote_option }} ({{ result.party_votes[option].total }} stemmen)</h4>
+              <canvas id="doughnut-{{ result.id }}" class="chart chart-doughnut"
+                chart-data="result.party_votes[option].data" chart-labels="result.party_votes[option].labels">
+              </canvas>
+            </div>
+          </div>
+        </div>
+        <h3>Stemming per hoofd</h3>
+        <div ng-repeat="option in result.person_votes_options">
+          <h4>{{ option |get_human_readable_vote_option }} ({{ result.party_votes[option].total }} stemmen):</h4>
+          <p ng-repeat="(party, voters) in result.person_votes[option]">
+            <span ng-if="party != 'undefined'">
+              <strong>{{ party }}:</strong>{{ voters |get_list_of_voters }}
+            </span>
+          </p>
+        </div>
+        <ul ng-repeat="source in result.sources" class="list-unstyled attachments">
+          <li>
+            <a ng-show="source.url.indexOf('https://api.notubiz.nl/events') <= 0" href="{{ source.url}}" target="_blank">
+              <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>
+              {{ source.note || 'Document' }}
+            </a>
+            <ul ng-repeat="fragment in result.meta.highlight['sources.description']">
+              <li ng-if="(result.sources.length == 1) || (source.description.indexOf(clear_highlight(fragment)) > -1)"><span ng-bind-html="fragment |add_ellipses |unsafe"></span></li>
+            </ul>
+          </li>
+        </ul>
       </div>
-      <h3>Stemming per hoofd</h3>
-      <div ng-repeat="option in result.person_votes_options">
-        <h4>{{ option |get_human_readable_vote_option }} ({{ result.party_votes[option].total }} stemmen):</h4>
-        <p ng-repeat="(party, voters) in result.person_votes[option]">
-          <span ng-if="party != 'undefined'">
-            <strong>{{ party }}:</strong>{{ voters |get_list_of_voters }}
-          </span>
-        </p>
-      </div>
-      <ul ng-repeat="source in result.sources" class="list-unstyled attachments">
-        <li>
-          <a ng-show="source.url.indexOf('https://api.notubiz.nl/events') <= 0" href="{{ source.url}}" target="_blank">
-            <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>
-            {{ source.note || 'Document' }}
-          </a>
-          <ul ng-repeat="fragment in result.meta.highlight['sources.description']">
-            <li ng-if="(result.sources.length == 1) || (source.description.indexOf(clear_highlight(fragment)) > -1)"><span ng-bind-html="fragment |add_ellipses |unsafe"></span></li>
-          </ul>
-        </li>
-      </ul>
     </div>
   </div>
 </div>

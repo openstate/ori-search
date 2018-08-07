@@ -180,3 +180,22 @@
   width: 100%;
   display: inline-block;
 }
+
+.show-more-container {
+    overflow: hidden;
+}
+
+.show-more-collapse, .show-more-expand {
+    text-align: center;
+    display: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.show-more-expanded > .show-more-collapse {
+    display: inherit;
+}
+
+.show-more-collapsed > .show-more-expand {
+    display: inherit;
+}
