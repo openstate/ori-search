@@ -1,7 +1,6 @@
-angular.module('oriApp').factory("ORIAPIService", ['$http', function ($http) {
+angular.module('oriApp').factory("ORIAPIService", ['$http', 'BrandingService', function ($http, BrandingService) {
   var svc = {};
-  var base_url = 'http://api.openraadsinformatie.nl/v0';
-  //var base_url = 'http://localhost:5000/v0';
+  var base_url = BrandingService.get_branding()['api_base_url'];
 
   svc.base_url = base_url;
 

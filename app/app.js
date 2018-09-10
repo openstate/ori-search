@@ -12,6 +12,7 @@ angular.module('oriApp', [
   'chart.js',
   'daterangepicker',
   'angularSpinner',
+  'oriApp.branding',
   'oriApp.constants',
   'oriApp.options',
   'oriApp.viernulvier',
