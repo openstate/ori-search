@@ -8,18 +8,18 @@ angular.module('oriApp.branding', ['ngRoute'])
   var hostname = window.location.hostname;
   var branding = {
       'zoek.openraadsinformatie.nl': {
-        'api_base_url': 'http://api.openraadsinformatie.nl/v0',
+        'api_base_url': 'https://api.openraadsinformatie.nl/v0',
         'name': 'Open Raadsinformatie',
         'byline': 'Zoeken in stukken van de gemeenteraad',
         'logo': 'logo.svg',
         'governing_body_types': ['Municipality'],
         'footer': 'footer.html',
         'links': {
-          'about': 'http://www.openraadsinformatie.nl/'
+          'about': 'https://www.openraadsinformatie.nl/'
         }
       },
       'zoek.openstateninformatie.nl': {
-        'api_base_url': 'http://api.openraadsinformatie.nl/v0',
+        'api_base_url': 'https://api.openraadsinformatie.nl/v0',
         'name': 'Open Stateninformatie',
         'byline': 'Zoeken in stukken van de provinciale staten',
         'logo': 'logo-provinces.svg',
@@ -30,7 +30,7 @@ angular.module('oriApp.branding', ['ngRoute'])
         }
       },
       'localhost': {
-        'api_base_url': 'http://api.openraadsinformatie.nl/v0',
+        'api_base_url': 'https://api.openraadsinformatie.nl/v0',
         //'api_base_url': 'http://localhost:5000/v0',
         'name': 'Open Blah Informatie',
         'byline': 'Zoeken in stukken van de blah',
