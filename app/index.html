@@ -80,6 +80,9 @@
              <span class="glyphicon glyphicon-cog white"></span>
            </button>
           <button type="submit"  ng-click="search(q)" class="btn btn-default">Zoeken</button>
+          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
+              Help
+        </button>
       </form>
       <div ng-view></div>
     </div>
@@ -87,6 +90,31 @@
 
   <div ng-include="branding.footer || 'footer-clean.html'">
   </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Hulp bij zoeken</h4>
+        </div>
+        <div class="modal-body">
+          <p>Bij het zoeken kan je een speciale opdrachten meegeven om je zoekopdracht te verfijnen. Deze zijn de volgende:</p>
+          <ul>
+          <li>Met + doe je een boolean EN (dit is standaard)<br><em>Voorbeeld:</em> een aanbesteding</li>
+          <li>Met | doe je een boolean OF<br><em>Voorbeeld:</em> fiets | fietsen</li>
+          <li>Met - zeg je dat een woord <strong>niet</strong> mag voorkomen.<br><em>Voorbeeld:</em> fiets -fietspad</li>
+          <li>Met " kan je zoeken naar een frase.<br><em>Voorbeeld:</em> "het provinciehuis"</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Sluiten</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
