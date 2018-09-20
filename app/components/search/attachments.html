@@ -1,4 +1,4 @@
-<ul ng-repeat="source in result.sources" class="list-unstyled attachments">
+<ul ng-repeat="source in result.sources |unique:'url'" class="list-unstyled attachments">
   <li>
     <a ng-show="source.url.indexOf('https://api.notubiz.nl/a') < 0" href="{{ source.url}}" target="_blank">
       <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>
@@ -11,7 +11,7 @@
     </ul>
   </li>
 </ul>
-<ul ng-repeat="source in result.media_urls" class="list-unstyled attachments">
+<ul ng-repeat="source in result.media_urls |unique:'url'" class="list-unstyled attachments">
   <li>
     <a ng-hide="source.url.indexOf('https://api.notubiz.nl/a') < 0" href="{{ source.url}}" target="_blank">
       <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>
