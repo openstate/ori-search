@@ -35,7 +35,7 @@ angular.module('oriApp.branding', ['ngRoute'])
         'name': 'Open Blah Informatie',
         'byline': 'Zoeken in stukken van de blah',
         'logo': 'logo-provinces.svg',
-        'governing_body_types': ['Province'],
+        'governing_body_types': ['Province', 'Municipality'],
         'footer': 'footer-provinces.html',
         'links': {
           'about': 'http://www.openstate.eu/'
