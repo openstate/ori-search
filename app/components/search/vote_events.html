@@ -65,28 +65,8 @@
             </span>
           </p>
         </div>
-        <ul ng-repeat="source in result.sources" class="list-unstyled attachments">
-          <li>
-            <a ng-show="source.url.indexOf('https://api.notubiz.nl/events') <= 0" href="{{ source.url}}" target="_blank">
-              <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>
-              {{ source.note || 'Document' }}
-            </a>
-            <ul ng-repeat="fragment in result.meta.highlight['sources.description']">
-              <li ng-if="(result.sources.length == 1) || (source.description.indexOf(clear_highlight(fragment)) > -1)"><span ng-bind-html="fragment |add_ellipses |unsafe"></span></li>
-            </ul>
-          </li>
-        </ul>
-        <ul ng-repeat="source in result.media_urls" class="list-unstyled attachments">
-          <li>
-            <a ng-show="source.url.indexOf('https://api.notubiz.nl/events') <= 0" href="{{ source.url}}" target="_blank">
-              <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>
-              {{ source.note || 'Document' }}
-            </a>
-            <ul ng-repeat="fragment in result.meta.highlight['sources.description']">
-              <li ng-if="(result.media_urls.length == 1) || (source.description.indexOf(clear_highlight(fragment)) > -1)"><span ng-bind-html="fragment |add_ellipses |unsafe"></span></li>
-            </ul>
-          </li>
-        </ul>
+        <div ng-include="'components/search/attachments.html'">
+        </div>
       </div>
     </div>
   </div>

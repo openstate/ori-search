@@ -30,10 +30,10 @@ angular.module('oriApp.branding', ['ngRoute'])
         }
       },
       'localhost': {
-        //'api_base_url': 'https://api.openraadsinformatie.nl/v0',
-        'api_base_url': 'http://localhost:5000/v0',
+        'api_base_url': 'https://api.openraadsinformatie.nl/v0',
+        //'api_base_url': 'http://localhost:5000/v0',
         'name': 'Open Blah Informatie',
-        'byline': 'Zoeken in stukken van de provinciale staten',
+        'byline': 'Zoeken in stukken van de blah',
         'logo': 'logo-provinces.svg',
         'governing_body_types': ['Province'],
         'footer': 'footer-provinces.html',
