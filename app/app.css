@@ -199,3 +199,15 @@
 .show-more-collapsed > .show-more-expand {
     display: inherit;
 }
+
+.panel-title a span {
+  float: right;
+}
+
+.panel-title a[aria-expanded="false"] span:after {
+  content: ' \2193';
+}
+
+.panel-title a[aria-expanded="true"] span:after {
+  content: ' \2191';
+}
