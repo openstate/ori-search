@@ -211,3 +211,15 @@
 .panel-title a[aria-expanded="true"] span:after {
   content: ' \2191';
 }
+
+.footer-item {
+    display: inline;
+    padding: 30px 0;
+    margin-left: 2%;
+    margin-right: 2%;
+    width: 21%;
+}
+
+.footer-item img {
+  max-height: 100px;
+}
