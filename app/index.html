@@ -25,7 +25,7 @@
   <meta name="theme-color" content="#ffffff">
 
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
-  
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-32274817-18"></script>
   <script>
@@ -94,6 +94,13 @@
               Help
         </button>
       </form>
+
+      <div class="alert alert-warning" role="alert">
+        <p class="text-center">
+        <a href="#" data-toggle="modal" data-target="#apiModal">Er is een nieuwe versie van de zoekmachine en API beschikbaar! Klik voor meer informatie</a>
+      </p>
+      </div>
+
       <div ng-view></div>
     </div>
   </article>
@@ -116,6 +123,32 @@
           <li>Met | doe je een boolean OF<br><em>Voorbeeld:</em> fiets | fietsen</li>
           <li>Met - zeg je dat een woord <strong>niet</strong> mag voorkomen.<br><em>Voorbeeld:</em> fiets -fietspad</li>
           <li>Met " kan je zoeken naar een frase.<br><em>Voorbeeld:</em> "het provinciehuis"</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Sluiten</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="apiModal" tabindex="-1" role="dialog" aria-labelledby="apiModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="apiModalLabel">Nieuwe versie Open Raadsinformatie API</h4>
+        </div>
+        <div class="modal-body">
+          <p>
+            Er is een nieuwe versie van zowel de <a href="https://github.com/ontola/ori-search/blob/master/docs.md" target="_blank">API</a> (Aangeduid als v1) als <a href="https://ori.argu.co/" target="_blank">de zoekmachine</a> gemaakt die meer mogelijkheden bieden. Als gevolg daarvan zullen de
+            huidige versies van de API en de zoekmachine binnenkort uit de lucht gehaald worden. Het tijdspad ziet er als volgt uit:
+          </p>
+          <ul>
+    <li><b>vrijdag 29 november 2020 23:59:59 GMT:</b> de HTTP Status zal op 207 Multi-Status worden gezet (buiten de HTTP status zal de API blijven functioneren)</li>
+    <li><b>vrijdag 20 december 2019 14:59:59 GMT:</b> de API verwijst d.m.v. HTTP Status 301 Moved Permanently naar v1 (de v0 API zal niet meer te bereiken zijn) en de zoekmachine zal redirecten naar de nieuwe versie.</li>
+    <li><b>dinsdag 31 januari 2020 24:59:59 GMT:</b> de v0 API zal antwoorden met HTTP Status 410 Gone</li>
           </ul>
         </div>
         <div class="modal-footer">
