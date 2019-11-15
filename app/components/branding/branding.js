@@ -44,6 +44,7 @@ angular.module('oriApp.branding', ['ngRoute'])
   };
 
   svc.get_branding = function() {
+    console.log('Getting branding for ' + hostname);
     return branding[hostname];
   }
 
