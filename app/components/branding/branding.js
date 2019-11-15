@@ -7,7 +7,7 @@ angular.module('oriApp.branding', ['ngRoute'])
 
   var hostname = window.location.hostname;
   var branding = {
-      'zoek.openraadsinformatie.nl': {
+      'zoekv0.openraadsinformatie.nl': {
         'api_base_url': 'https://api.openraadsinformatie.nl/v0',
         'name': 'Open Raadsinformatie',
         'byline': 'Zoeken in stukken van de gemeenteraad',
